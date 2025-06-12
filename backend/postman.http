@@ -1,0 +1,15 @@
+POST http://localhost:4005/contactInquiry
+Content-Type: application/json
+
+{
+  "fullName": "Gangadhar Lothula",
+  "email": "gangafullstack963@gmail.com",
+  "phone": "+91-9876543210",
+  "company": "Tech Vision Pvt Ltd",
+  "service": "Website Development",
+  "budget": "₹50,000 - ₹1,00,000",
+  "description": "We need a dynamic website with admin panel, payment gateway, and booking system.",
+  "contactTime": "Afternoon"
+}
+###
+GET http://localhost:4005/contactInquiries

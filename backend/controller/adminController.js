@@ -1,4 +1,4 @@
-const Admin = require('../models/admin');
+const Admin = require('../models/contactInquirySchema');
 const bcrypt = require('bcrypt');
 const { generateToken, validateCredentials } = require("../middelware/adminMiddleware");
 
