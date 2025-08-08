@@ -7,7 +7,7 @@ const cors = require("cors");
 // const server = http.createServer(app);
 // setupSocket(server);
 
-const authRoutes=require("./routes/route")
+const allUsersRoutes = require('./routes/allUsersRoutes');
 
 
 // Connect to the database
@@ -23,8 +23,8 @@ app.use(cors({
 
 
 
-// Routes
-app.use('/', authRoutes);
+// All user routes
+app.use('/api/users', allUsersRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 4005;
