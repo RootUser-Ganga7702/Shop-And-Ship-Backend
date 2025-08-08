@@ -2,22 +2,22 @@ POST http://localhost:4005/api/users/register-admin
 Content-Type: application/json
 
 {
-    "name": "admin",
-    "email": "admin@gmail.com",
+    "name": "Ganga",
+    "email": "gangafullstack963@gmail.com",
     "phone": "7702441016",
-    "password": "admin@123",
-    "role": "admin"
+    "password": "ganga@123",
+    "role": "africaTransitAdmin"
 }
-
 ###
 
 
-POST http://localhost:4005/api/users/login
+POST http://localhost:4005/api/users/admin-login
 Content-Type: application/json
 
 {
-    "email": "admin@admin.com",
-    "password": "admin"
+    "email": "gangafullstack963@gmail.com",
+    "password": "ganga@123",
+    "role": "africaTransitAdmin"
 }
 
 ###
