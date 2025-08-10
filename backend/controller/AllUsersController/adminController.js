@@ -66,7 +66,7 @@ exports.adminLogin = async (req, res) => {
       }
       // Generate token and respond
       const token = generateToken(user);
-      res.status(200).json({ responseCode: 200, token, message: 'Admin logged in successfully' });
+      res.status(200).json({ responseCode: 200, token, message: 'Admin logged in successfully', user });
     }else if (role === 'indiaAdmin'){
       const user = await validateCredentials(email, password,role);
       if (!user) {
@@ -74,7 +74,7 @@ exports.adminLogin = async (req, res) => {
       }
       // Generate token and respond
       const token = generateToken(user);
-      res.status(200).json({ responseCode: 200, token, message: 'India Admin logged in successfully' });
+      res.status(200).json({ responseCode: 200, token, message: 'India Admin logged in successfully',user });
     }else if (role === 'africaTransitAdmin'){
       const user = await validateCredentials(email, password,role);
       if (!user) {
@@ -82,7 +82,7 @@ exports.adminLogin = async (req, res) => {
       }
       // Generate token and respond
       const token = generateToken(user);
-      res.status(200).json({ responseCode: 200, token, message: 'Africa Admin logged in successfully' });
+      res.status(200).json({ responseCode: 200, token, message: 'Africa Admin logged in successfully',user });
     }
   } catch (error) {
     console.error('Error:', error);
