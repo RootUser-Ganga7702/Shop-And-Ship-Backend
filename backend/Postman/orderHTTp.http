@@ -1,0 +1,16 @@
+POST http://localhost:4005/api/orders/order-recive
+Content-Type: application/json
+
+{
+  "orderId": "1234567890",
+  "name": "John Doe",
+  "barcode": "1234567890",
+  "phone": "1234567890",
+  "address": "123 Main St",
+  "pincode": "123456",
+  "country": "USA",
+  "state": "California",
+  "city": "San Francisco"
+}
+
+###PATH:backend\routes\orderReciveRoutes.js
