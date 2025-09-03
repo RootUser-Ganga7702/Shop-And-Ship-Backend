@@ -10,7 +10,8 @@ const orderReciveSchema = new mongoose.Schema({
   country : { type: String },
   state : { type: String },
   city : { type: String },
-  indiaOrderStatus : { type: String, default: "pending", enum: ['pending', 'inTransit', 'delivered'] }
+  indiaOrderStatus : { type: String, default: "pending", enum: ['pending', 'inTransit', 'delivered'] },
+  dateTime : { type: Date, default: Date.now },
 }, { timestamps: true });
 
 const OrdersRecive = mongoose.model('OrdersRecive', orderReciveSchema);
