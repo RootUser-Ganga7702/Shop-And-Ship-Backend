@@ -49,6 +49,15 @@ exports.registerAdmin = async (req, res) => {
   }
 };
 
+exports.getAllInidaAdmins = async (req, res) => {
+  try {
+    const admins = await indiaAdmin.find();
+    res.status(200).json({ responseCode:200 ,message: "All India Admins", admins });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to get India Admins', message: error.message });
+  }
+}
+
 
 
 

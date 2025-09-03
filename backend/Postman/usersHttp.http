@@ -9,7 +9,8 @@ Content-Type: application/json
     "role": "africaTransitAdmin"
 }
 ###
-
+GET http://localhost:4005/api/users/get-all-india-admins
+###
 
 POST https://ready-backend-setup.onrender.com/api/users/admin-login
 Content-Type: application/json

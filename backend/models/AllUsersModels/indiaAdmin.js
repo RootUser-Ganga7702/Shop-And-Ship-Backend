@@ -6,6 +6,7 @@ const indiaAdminSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true, enum: ['indiaAdmin'] },
+  status: { type: String, default: "pending", enum: ['active', 'inactive', 'pending'] }
 }, { timestamps: true });
 
 const InidaAdmin = mongoose.model('IndiaAdmins', indiaAdminSchema);
