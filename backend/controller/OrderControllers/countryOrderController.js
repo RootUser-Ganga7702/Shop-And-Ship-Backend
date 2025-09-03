@@ -16,3 +16,12 @@ exports.createCountryOrder = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 }
+
+exports.getAllCountryOrders = async (req, res) => {
+  try {
+    const orders = await CountryOrder.find();
+    res.status(200).json({ message: 'Orders retrieved successfully', orders });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}
