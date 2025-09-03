@@ -1,9 +1,10 @@
 const express = require('express');
 const ordersReciveRoutes = express.Router();
 
-const { orderRecive } = require('../controller/OrderControllers/orderReciveController');
+const { orderRecive, getAllOrders } = require('../controller/OrderControllers/orderReciveController');
 
 ordersReciveRoutes.post('/order-recive', orderRecive);
+ordersReciveRoutes.get('/all-orders', getAllOrders);
 
 
 module.exports = ordersReciveRoutes;

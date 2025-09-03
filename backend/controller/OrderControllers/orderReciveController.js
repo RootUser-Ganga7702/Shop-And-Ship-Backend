@@ -23,3 +23,12 @@ exports.orderRecive = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 }
+
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await OrdersRecive.find();
+    res.status(200).json({ message: 'Orders fetched successfully', orders });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}

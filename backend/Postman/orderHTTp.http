@@ -1,4 +1,4 @@
-POST http://localhost:4005/api/orders/order-recive
+POST https://ready-backend-setup.onrender.com/api/orders/order-recive
 Content-Type: application/json
 
 {
