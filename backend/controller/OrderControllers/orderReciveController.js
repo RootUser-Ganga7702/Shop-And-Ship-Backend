@@ -10,7 +10,7 @@ exports.orderRecive = async (req, res) => {
     if (existingOrder) {
       return res.status(409).json({ message: 'Order already exists' });
     }
-    if (!orderId || !name || !barcode || !phone || !address || !pincode || !country || !state || !city) {
+    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city) {
       return res.status(400).json({ message: 'Please fill all the fields' });
     }
     const barcodeBase64 = await generateBarcodeBase64(`${orderId}`);

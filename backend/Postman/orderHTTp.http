@@ -13,4 +13,5 @@ Content-Type: application/json
   "city": "San Francisco"
 }
 
-###PATH:backend\routes\orderReciveRoutes.js
+###
+GET https://ready-backend-setup.onrender.com/api/orders/all-orders
