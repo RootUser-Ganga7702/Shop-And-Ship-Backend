@@ -8,6 +8,7 @@ const cors = require("cors");
 // setupSocket(server);
 
 const allUsersRoutes = require('./routes/allUsersRoutes');
+const ordersReciveRoutes = require('./routes/orderReciveRoutes');
 
 
 // Connect to the database
@@ -25,6 +26,7 @@ app.use(cors({
 
 // All user routes
 app.use('/api/users', allUsersRoutes);
+app.use('/api/orders', ordersReciveRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 4005;
