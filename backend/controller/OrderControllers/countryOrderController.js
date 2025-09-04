@@ -17,6 +17,26 @@ exports.createCountryOrder = async (req, res) => {
   }
 }
 
+exports.uploadReciptStatus = async (req, res) => {
+  try {
+    const { recipt, id } = req.body;
+    if(!recipt){
+      return res.status(400).json({ message: 'Please provide all required fields' });
+    }
+    const order = await CountryOrder.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    order.recipt = recipt;
+    order.status = 'inTransit';
+    await order.save();
+    res.status(200).json({ message: 'Order updated successfully', order });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}
+
 exports.getAllCountryOrders = async (req, res) => {
   try {
     const orders = await CountryOrder.find();

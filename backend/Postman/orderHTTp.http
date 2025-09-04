@@ -15,3 +15,23 @@ Content-Type: application/json
 
 ###
 GET https://ready-backend-setup.onrender.com/api/orders/all-orders
+
+###
+POST https://ready-backend-setup.onrender.com/api/orders/country-order
+Content-Type: application/json
+
+{
+  "countryName": "USA",
+  "countryCode": "US",
+  "numberOfOrders": 10,
+  "status": "pending"
+}
+
+###
+POST https://ready-backend-setup.onrender.com/api/orders/upload-recipt
+Content-Type: application/json
+
+{
+  "id" : "68b81b611167b47b922ee2e6",
+  "recipt": "image upload working"
+}
