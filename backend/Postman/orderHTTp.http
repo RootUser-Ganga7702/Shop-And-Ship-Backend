@@ -17,6 +17,9 @@ Content-Type: application/json
 GET https://ready-backend-setup.onrender.com/api/orders/all-orders
 
 ###
+GET https://ready-backend-setup.onrender.com/api/orders/all-country-orders
+
+###
 POST https://ready-backend-setup.onrender.com/api/orders/country-order
 Content-Type: application/json
 
@@ -35,3 +38,9 @@ Content-Type: application/json
   "id" : "68b81b611167b47b922ee2e6",
   "recipt": "image upload working"
 }
+
+###
+POST https://ready-backend-setup.onrender.com/upload
+Content-Type: multipart/form-data
+
+file: <path_to_file>

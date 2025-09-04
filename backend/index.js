@@ -7,6 +7,8 @@ const cors = require("cors");
 // const server = http.createServer(app);
 // setupSocket(server);
 
+const mainRoute = require('./routes/route');
+
 const allUsersRoutes = require('./routes/allUsersRoutes');
 const ordersReciveRoutes = require('./routes/orderReciveRoutes');
 
@@ -22,6 +24,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type"],
 }));
 
+app.use('/', mainRoute);
 
 
 // All user routes

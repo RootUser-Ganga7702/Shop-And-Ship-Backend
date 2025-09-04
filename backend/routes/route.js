@@ -1,20 +1,13 @@
 const express = require('express');
 const multer = require("multer");
 const router = express.Router();
-// const { uploadImage } = require('../middelware/uploadImages');
-
-// const { registerAdmin, adminLogin } = require('../controller/adminController');
-const { createContactInquiry, getContactInquiries } = require('../controller/contactController');
+const { uploadImage } = require('../middelware/uploadImages');
 
 
-// Admin registration and login routes
-// router.post('/adminRegister', registerAdmin);
-// router.post('/adminLogin', adminLogin);
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-// Contact inquiry route
-router.post('/contactInquiry', createContactInquiry);
-router.get('/contactInquiries', getContactInquiries);
-
-
+// 🔹 Image Upload Route (Render Compatible)
+router.post("/upload", upload.single("image"), uploadImage);
 
 module.exports = router;
