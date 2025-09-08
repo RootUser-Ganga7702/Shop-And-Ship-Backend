@@ -1,4 +1,4 @@
-POST https://ready-backend-setup.onrender.com/api/users/register-admin
+POST http://localhost:4005/api/users/register-admin
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 GET http://localhost:4005/api/users/get-all-india-admins
 ###
 
-POST https://ready-backend-setup.onrender.com/api/users/admin-login
+POST http://localhost:4005/api/users/admin-login
 Content-Type: application/json
 
 {

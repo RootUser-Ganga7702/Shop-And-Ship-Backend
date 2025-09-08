@@ -3,8 +3,8 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "0607nani@gmail.com",  // Your Gmail address
-        pass: "tzbn rqye rhuo ddop", // Your App Password (DO NOT share it publicly)
+        user: "gangadharalothula7702@gmail.com",  // Your Gmail address
+        pass: "xmzm eacn kbax gbgf", // Your App Password (DO NOT share it publicly)
     },
     tls: {
     rejectUnauthorized: false,  // <-- THIS LINE allows self-signed certs

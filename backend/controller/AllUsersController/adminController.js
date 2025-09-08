@@ -58,6 +58,15 @@ exports.getAllInidaAdmins = async (req, res) => {
   }
 }
 
+exports.getAllAfricaTransitAdmins = async (req, res) => {
+  try {
+    const admins = await AfricaTransitAdmin.find();
+    res.status(200).json({ responseCode:200 ,message: "All Africa Transit Admins", admins });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to get Africa Transit Admins', message: error.message });
+  }
+}
+
 
 
 
