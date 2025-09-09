@@ -10,7 +10,8 @@ Content-Type: application/json
   "pincode": "123456",
   "country": "USA",
   "state": "California",
-  "city": "San Francisco"
+  "city": "San Francisco",
+  "weight": "1 kg"
 }
 
 ###
