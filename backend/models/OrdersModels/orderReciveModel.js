@@ -11,6 +11,9 @@ const orderReciveSchema = new mongoose.Schema({
   state : { type: String },
   city : { type: String },
   indiaOrderStatus : { type: String, default: "pending", enum: ['pending', 'inTransit', 'delivered'] },
+  weight : { type: String },
+  affectToBag : { type: String },
+  inBag : {type : Boolean, default: false},
   dateTime : { type: Date, default: Date.now },
 }, { timestamps: true });
 

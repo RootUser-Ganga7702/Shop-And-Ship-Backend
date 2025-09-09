@@ -34,8 +34,11 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:4005/api/users/login
+POST http://localhost:4005/api/users/update-admins-status
 Content-Type: application/json
 
 {
+    "id":"6895d29e5413053f4b4f2660",
+    "status":"active",
+    "role":"indiaAdmin"
 }

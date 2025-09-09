@@ -67,6 +67,29 @@ exports.getAllAfricaTransitAdmins = async (req, res) => {
   }
 }
 
+exports.updateAdminsStatus = async (req, res) => {
+  try {
+    const { id, status, role } = req.body;
+    if( !id || !status || !role){
+      return res.status(200).json({ responseCode: 401, message: 'Please fill all fields' });
+    }
+    if (role === 'indiaAdmin'){
+      const admin = await indiaAdmin.findByIdAndUpdate(id, { status });
+      if (!admin) {
+        return res.status(200).json({ responseCode: 401, message: 'India Admin not found' });
+      }
+    }
+    if (role === 'africaTransitAdmin'){
+      const admin = await AfricaTransitAdmin.findByIdAndUpdate(id, { status });
+      if (!admin) {
+        return res.status(200).json({ responseCode: 401, message: 'Africa Transit Admin not found' });
+      }
+    }
+    res.status(200).json({ responseCode:200 ,message: 'Admin status updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update admin status', message: error.message });
+  }
+}
 
 
 

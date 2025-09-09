@@ -3,19 +3,19 @@ const { generateBarcodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.orderRecive = async (req, res) => {
   try {
-    const { orderId, name, barcode, phone, address, pincode, country, state, city } = req.body;
+    const { orderId, name, phone, address, pincode, country, state, city, weight } = req.body;
 
     // Check if the order already exists
     const existingOrder = await OrdersRecive.findOne({ orderId });
     if (existingOrder) {
       return res.status(409).json({ message: 'Order already exists' });
     }
-    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city) {
+    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city || !weight) {
       return res.status(400).json({ message: 'Please fill all the fields' });
     }
     const barcodeBase64 = await generateBarcodeBase64(`${orderId}`);
     // Create a new order
-    const newOrder = new OrdersRecive({ orderId, name, barcode : barcodeBase64, phone, address, pincode, country, state, city })
+    const newOrder = new OrdersRecive({ orderId, name, barcode : barcodeBase64, phone, address, pincode, country, state, city, weight });
     await newOrder.save();
 
     res.status(201).json({ message: 'Order created successfully', order: newOrder });
