@@ -32,3 +32,14 @@ exports.getAllOrders = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 }
+
+exports.getCountryOrders = async (req, res) => {
+  try {
+    const { country } = req.body;
+    // inBag : false orders only send
+    const orders = await OrdersRecive.find({ country, inBag: false });
+    res.status(200).json({ message: 'Orders fetched successfully', orders });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}

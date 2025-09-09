@@ -4,7 +4,6 @@ Content-Type: application/json
 {
   "orderId": "1234567890",
   "name": "John Doe",
-  "barcode": "1234567890",
   "phone": "1234567890",
   "address": "123 Main St",
   "pincode": "123456",
@@ -45,3 +44,10 @@ POST https://ready-backend-setup.onrender.com/upload
 Content-Type: multipart/form-data
 
 file: <path_to_file>
+###
+POST https://ready-backend-setup.onrender.com/api/orders/country-orders
+Content-Type: application/json
+
+{
+  "country": "India"
+}
