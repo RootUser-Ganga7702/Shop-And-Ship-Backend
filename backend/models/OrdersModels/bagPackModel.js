@@ -16,7 +16,7 @@ const parcelBagPackSchema = new mongoose.Schema({
   status: { type: String, default: "pending", enum: ["pending", "inTransit", "delivered"] },
   qrCode: { type :String },
   full : {type : Boolean, default: false},
-  orderIdList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
+  orderIdList: [{ type: mongoose.Schema.Types.ObjectId, ref: "OrdersRecive" }],
   dateTime: { type: Date, default: Date.now }
 }, { timestamps: true });
 

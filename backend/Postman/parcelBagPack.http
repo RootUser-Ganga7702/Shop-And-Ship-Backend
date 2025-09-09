@@ -5,7 +5,7 @@ Content-Type: application/json
     "country":"India",
     "numberOfParcel": 10,
     "totalWeight": 28,
-    "orderIdList": ["1234567880", "1234567880"]
+    "orderIdList": ["68bfc515664c0b1733e15bb0", "68bfc51e664c0b1733e15bb3"]
 }
 ###
 GET https://ready-backend-setup.onrender.com/api/parcelBagPack/getAllBagPack
