@@ -29,3 +29,19 @@ exports.createBagPack = async (req, res) => {
         })
     }
 }
+
+exports.getAllBagPack = async (req, res) => {
+    try {
+        const bagPacks = await BagPack.find();
+        res.status(200).json({
+            success: true,
+            message: 'BagPack fetched successfully',
+            bagPacks
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}

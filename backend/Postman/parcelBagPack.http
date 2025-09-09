@@ -1,4 +1,4 @@
-POST http://localhost:4005/api/parcelBagPack/createBagPack
+POST https://ready-backend-setup.onrender.com/api/parcelBagPack/createBagPack
 Content-Type: application/json
 
 {
@@ -6,3 +6,5 @@ Content-Type: application/json
     "numberOfParcel": 10,
     "totalWeight": 28
 }
+###
+GET https://ready-backend-setup.onrender.com/api/parcelBagPack/getAllBagPack
