@@ -22,7 +22,7 @@ exports.createBagPack = async (req, res) => {
         // update the status in OrdersRecive model based on orderIdList Id
         for (let i = 0; i < bagPack.orderIdList.length; i++) {
             const orderId = bagPack.orderIdList[i];
-            await OrdersRecive.findByIdAndUpdate(orderId, { inBag: true, bagPackId: bagPack._id }, { new: true });
+            await OrdersRecive.findByIdAndUpdate(orderId, { inBag: true, bagPackId: bagPack._id, indiaOrderStatus: "inTransit"}, { new: true });
         }
         res.status(200).json({
             success: true,
