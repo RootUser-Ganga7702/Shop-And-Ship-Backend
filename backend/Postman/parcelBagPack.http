@@ -1,0 +1,8 @@
+POST http://localhost:4005/api/parcelBagPack/createBagPack
+Content-Type: application/json
+
+{
+    "country":"India",
+    "numberOfParcel": 10,
+    "totalWeight": 28
+}
