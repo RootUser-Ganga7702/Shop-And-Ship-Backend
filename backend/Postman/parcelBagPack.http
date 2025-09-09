@@ -4,7 +4,8 @@ Content-Type: application/json
 {
     "country":"India",
     "numberOfParcel": 10,
-    "totalWeight": 28
+    "totalWeight": 28,
+    
 }
 ###
 GET https://ready-backend-setup.onrender.com/api/parcelBagPack/getAllBagPack
