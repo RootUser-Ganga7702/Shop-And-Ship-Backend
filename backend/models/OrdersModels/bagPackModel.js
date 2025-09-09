@@ -11,12 +11,12 @@ const Counter = mongoose.model("Counter", counterSchema);
 const parcelBagPackSchema = new mongoose.Schema({
   customId: { type: String, unique: true },   // Custom ID like PKG001
   country: { type :String },
-  numberOfParcel: { type: Number},
   totalWeight: { type: Number, required: true, max: 30 },
   status: { type: String, default: "pending", enum: ["pending", "inTransit", "delivered"] },
   qrCode: { type :String },
   full : {type : Boolean, default: false},
   orderIdList: [{ type: mongoose.Schema.Types.ObjectId, ref: "OrdersRecive" }],
+  numberOfParcel: { type: Number },
   dateTime: { type: Date, default: Date.now }
 }, { timestamps: true });
 
