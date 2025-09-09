@@ -1,11 +1,11 @@
-POST https://ready-backend-setup.onrender.com/api/parcelBagPack/createBagPack
+POST http://localhost:4005/api/parcelBagPack/createBagPack
 Content-Type: application/json
 
 {
     "country":"India",
     "numberOfParcel": 10,
     "totalWeight": 28,
-    
+    "orderIdList": ["1234567880", "1234567880"]
 }
 ###
 GET https://ready-backend-setup.onrender.com/api/parcelBagPack/getAllBagPack

@@ -3,7 +3,7 @@ const { generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.createBagPack = async (req, res) => {
     try {
-        const { country, numberOfParcel, totalWeight } = req.body;
+        const { country, numberOfParcel, totalWeight, orderIdList } = req.body;
         if(!country || !numberOfParcel || !totalWeight){
             res.status(400).json({
                 success: false,
@@ -13,7 +13,8 @@ exports.createBagPack = async (req, res) => {
         const bagPack = new BagPack({
             country,
             numberOfParcel,
-            totalWeight
+            totalWeight,
+            orderIdList
         })
         await bagPack.save();
         bagPack.qrCode = await generateQRCodeBase64(bagPack.customId);
