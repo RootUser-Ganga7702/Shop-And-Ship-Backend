@@ -1,4 +1,5 @@
 const BagPack = require('../../models/OrdersModels/bagPackModel');
+const OrdersRecive = require('../../models/OrdersModels/orderReciveModel');
 const { generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.createBagPack = async (req, res) => {
@@ -18,6 +19,11 @@ exports.createBagPack = async (req, res) => {
         })
         await bagPack.save();
         bagPack.qrCode = await generateQRCodeBase64(bagPack.customId);
+        // update the status in OrdersRecive model based on orderIdList Id
+        for (let i = 0; i < bagPack.orderIdList.length; i++) {
+            const orderId = bagPack.orderIdList[i];
+            await OrdersRecive.findByIdAndUpdate(orderId, { inBag: true, bagPackId: bagPack._id }, { new: true });
+        }
         res.status(200).json({
             success: true,
             message: 'BagPack created successfully',
