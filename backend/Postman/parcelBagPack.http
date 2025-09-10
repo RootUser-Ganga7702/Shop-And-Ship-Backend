@@ -9,3 +9,11 @@ Content-Type: application/json
 }
 ###
 GET https://ready-backend-setup.onrender.com/api/parcelBagPack/getAllBagPack
+
+###
+POST http://localhost:4005/api/parcelBagPack/getCountryBagPacks
+Content-Type: application/json
+
+{
+    "country":"Somalia"
+}

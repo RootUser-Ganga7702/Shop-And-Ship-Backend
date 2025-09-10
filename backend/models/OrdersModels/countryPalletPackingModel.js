@@ -14,6 +14,7 @@ const countryPalletPackingSchema = new mongoose.Schema({
   airCompany: { type: String },
   numberOfOrders: { type: Number },
   numberOfBags: { type: Number },
+  bagPackIdList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ParcelBagPack' }],
   totalWeight: { type: Number, max: 100 },
   qrCode: { type: String },
   recipt: { type: String },
