@@ -56,7 +56,7 @@ exports.getAllBagPack = async (req, res) => {
 exports.getCountryBagPack = async (req, res) => {
     try {
         const { country } = req.body;
-        const bagPacks = await BagPack.find({ country });
+        const bagPacks = await BagPack.find({ country, inPallet: false });
         res.status(200).json({
             success: true,
             message: 'BagPack fetched successfully',

@@ -15,6 +15,7 @@ const parcelBagPackSchema = new mongoose.Schema({
   status: { type: String, default: "pending", enum: ["pending", "inTransit", "delivered"] },
   qrCode: { type :String },
   full : {type : Boolean, default: false},
+  inPallet: {type : Boolean, default: false},
   orderIdList: [{ type: mongoose.Schema.Types.ObjectId, ref: "OrdersRecive" }],
   numberOfParcel: { type: Number },
   dateTime: { type: Date, default: Date.now }
