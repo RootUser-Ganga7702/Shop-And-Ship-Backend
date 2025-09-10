@@ -32,6 +32,15 @@ exports.createPalletPacking = async (req, res) => {
   }
 }
 
+exports.getAllPalletPacking = async (req, res) => {
+  try {
+    const pallets = await PalletPacking.find();
+    res.status(200).json({ message: 'Pallets retrieved successfully', pallets });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}
+
 // exports.uploadReciptStatus = async (req, res) => {
 //   try {
 //     const { recipt, id } = req.body;
