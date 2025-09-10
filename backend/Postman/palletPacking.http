@@ -12,3 +12,4 @@ Content-Type: application/json
 }
 
 ###
+GET https://ready-backend-setup.onrender.com/api/palletPacking/getAllPalletPacking
