@@ -1,5 +1,6 @@
 const PalletPacking = require('../../models/OrdersModels/countryPalletPackingModel');
 const BagPack = require('../../models/OrdersModels/bagPackModel');
+const RecivedOrders = require('../../models/OrdersModels/orderReciveModel');
 const { generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.createPalletPacking = async (req, res) => {
@@ -19,6 +20,7 @@ exports.createPalletPacking = async (req, res) => {
     bagPacks.forEach((bagPack) => {
       bagPack.inPallet = true;
       bagPack.status = 'inPallet'
+      
       bagPack.save();
     })
 

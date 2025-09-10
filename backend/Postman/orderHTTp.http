@@ -51,3 +51,20 @@ Content-Type: application/json
 {
   "country": "India"
 }
+
+###
+POST http://localhost:4005/api/orders/edit-order
+Content-Type: application/json
+
+{
+  "orderId": "1234567777",
+  "name": "Ganga Doe",
+  "phone": "1234567890",
+  "address": "123 Main St",
+  "pincode": "123456",
+  "country": "USA",
+  "state": "California",
+  "city": "San Francisco",
+  "weight": "1 kg",
+  "orderAmount": 299
+}

@@ -24,6 +24,26 @@ exports.orderRecive = async (req, res) => {
   }
 }
 
+exports.editOrder = async (req, res) => {
+  try {
+    const { orderId, name, phone, address, pincode, country, state, city, weight, orderAmount } = req.body;
+
+    // Check if the order already exists
+    const existingOrder = await OrdersRecive.findOne({ orderId });
+    if (!existingOrder) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city || !weight || !orderAmount) {
+      return res.status(400).json({ message: 'Please fill all the fields' });
+    }
+    // Create a new order
+    const updatedOrder = await OrdersRecive.findOneAndUpdate({ orderId }, { name, phone, address, pincode, country, state, city, weight, orderAmount }, { new: true });
+    res.status(200).json({ message: 'Order updated successfully', order: updatedOrder });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}
+
 exports.getAllOrders = async (req, res) => {
   try {
     const orders = await OrdersRecive.find();
