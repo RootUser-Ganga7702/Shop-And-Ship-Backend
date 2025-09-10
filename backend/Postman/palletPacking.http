@@ -1,0 +1,14 @@
+POST http://localhost:4005/api/palletPacking/createPalletPacking
+Content-Type: application/json
+
+{
+    "countryName": "Somalia",
+    "countryCode": "5f8e8e8e8e8e8e8e8e8e8e8e8",
+    "numberOfOrders": 10,
+    "numberOfBags": 100,
+    "totalWeight":89,
+    "airCompany":"AirIndia",
+    "bagPackIdList": ["5f8e8e8e8e8e8e8e8e8e8e8e8"]
+}
+
+###

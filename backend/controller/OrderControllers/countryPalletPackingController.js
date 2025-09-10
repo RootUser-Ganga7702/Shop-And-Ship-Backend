@@ -1,4 +1,5 @@
 const PalletPacking = require('../../models/OrdersModels/countryPalletPackingModel');
+const BagPack = require('../../models/OrdersModels/bagPackModel');
 const { generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.createPalletPacking = async (req, res) => {
@@ -10,9 +11,19 @@ exports.createPalletPacking = async (req, res) => {
     if (bagPackIdList.length === 0) {
       return res.status(400).json({ message: 'Please provide at least one bag pack id' });
     }
+    // find backpacks by given id's list and update the inPallet is true
+    const bagPacks = await BagPack.find({ _id: { $in: bagPackIdList } });
+    if (bagPacks.length !== bagPackIdList.length) {
+      return res.status(400).json({ message: 'One or more bag packs not found' });
+    }
+    bagPacks.forEach((bagPack) => {
+      bagPack.inPallet = true;
+      bagPack.save();
+    })
+
     const code = countryCode + Date.now();
     const qrCode = await generateQRCodeBase64(code);
-    const newPallet = new PalletPacking({ countryName, countryCode, numberOfOrders, numberOfBags, totalWeight, qrCode, airCompany, bagPackIdList });
+    const newPallet = new PalletPacking({ countryName, countryCode, numberOfOrders, numberOfBags:bagPackIdList.length , totalWeight, qrCode, airCompany, bagPackIdList });
     await newPallet.save();
     res.status(201).json({ message: 'Pallet created successfully', pallet: newPallet });
   } catch (error) {
