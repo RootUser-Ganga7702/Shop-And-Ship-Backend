@@ -40,6 +40,7 @@ exports.createBagPack = async (req, res) => {
     }
 }
 
+
 exports.getAllBagPack = async (req, res) => {
     try {
         const bagPacks = await BagPack.find();
