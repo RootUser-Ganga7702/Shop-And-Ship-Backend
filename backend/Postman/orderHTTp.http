@@ -53,12 +53,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:4005/api/orders/edit-order
+POST https://ready-backend-setup.onrender.com/api/orders/edit-order
 Content-Type: application/json
 
 {
   "orderId": "1234567777",
-  "name": "Ganga Doe",
+  "name": "Ganga Server",
   "phone": "1234567890",
   "address": "123 Main St",
   "pincode": "123456",
@@ -67,4 +67,12 @@ Content-Type: application/json
   "city": "San Francisco",
   "weight": "1 kg",
   "orderAmount": 299
+}
+
+###
+POST http://localhost:4005/api/orders/delete-order
+Content-Type: application/json
+
+{
+  "orderId": "1234567890"
 }

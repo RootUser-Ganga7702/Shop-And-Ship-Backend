@@ -63,3 +63,16 @@ exports.getCountryOrders = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 }
+
+exports.deleteOrder = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    const deletedOrder = await OrdersRecive.findOneAndDelete({ orderId });
+    if (!deletedOrder) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.status(200).json({ message: 'Order deleted successfully', order: deletedOrder });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}
