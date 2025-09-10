@@ -4,8 +4,8 @@ const { generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.createBagPack = async (req, res) => {
     try {
-        const { country, numberOfParcel, totalWeight, orderIdList } = req.body;
-        if(!country || !numberOfParcel || !totalWeight){
+        const { country, numberOfParcel, totalWeight, orderIdList, totalBagOrdersAmount } = req.body;
+        if(!country || !numberOfParcel || !totalWeight || !totalBagOrdersAmount){
             res.status(400).json({
                 success: false,
                 message: 'Please provide all required fields'
@@ -18,7 +18,8 @@ exports.createBagPack = async (req, res) => {
             numberOfParcel,
             totalWeight,
             orderIdList,
-            qrCode: newQrCode
+            qrCode: newQrCode,
+            totalBagOrdersAmount
         })
         await bagPack.save();
         // update the status in OrdersRecive model based on orderIdList Id

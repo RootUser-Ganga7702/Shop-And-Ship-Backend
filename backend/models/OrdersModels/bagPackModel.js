@@ -17,6 +17,7 @@ const parcelBagPackSchema = new mongoose.Schema({
   full : {type : Boolean, default: false},
   inPallet: {type : Boolean, default: false},
   orderIdList: [{ type: mongoose.Schema.Types.ObjectId, ref: "OrdersRecive" }],
+  totalBagOrdersAmount: { type: Number },
   numberOfParcel: { type: Number },
   dateTime: { type: Date, default: Date.now }
 }, { timestamps: true });

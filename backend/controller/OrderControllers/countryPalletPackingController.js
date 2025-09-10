@@ -4,8 +4,8 @@ const { generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.createPalletPacking = async (req, res) => {
   try {
-    const { countryName, countryCode, numberOfOrders, numberOfBags, totalWeight, airCompany, bagPackIdList } = req.body;
-    if(!countryName || !countryCode || !numberOfBags || !numberOfOrders || !totalWeight || !airCompany){
+    const { countryName, countryCode, numberOfOrders, numberOfBags, totalWeight, airCompany, bagPackIdList, totalAmountOfPallet } = req.body;
+    if(!countryName || !countryCode || !numberOfBags || !numberOfOrders || !totalWeight || !airCompany || !totalAmountOfPallet){
       return res.status(400).json({ message: 'Please provide all required fields' });
     }
     if (bagPackIdList.length === 0) {
@@ -24,7 +24,7 @@ exports.createPalletPacking = async (req, res) => {
 
     const code = countryCode + Date.now();
     const qrCode = await generateQRCodeBase64(code);
-    const newPallet = new PalletPacking({ countryName, countryCode, numberOfOrders, numberOfBags:bagPackIdList.length , totalWeight, qrCode, airCompany, bagPackIdList });
+    const newPallet = new PalletPacking({ countryName, countryCode, numberOfOrders, numberOfBags:bagPackIdList.length , totalWeight, qrCode, airCompany, bagPackIdList, totalAmountOfPallet});
     await newPallet.save();
     res.status(201).json({ message: 'Pallet created successfully', pallet: newPallet });
   } catch (error) {
