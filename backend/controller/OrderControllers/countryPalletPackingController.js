@@ -18,7 +18,7 @@ exports.createPalletPacking = async (req, res) => {
     }
     bagPacks.forEach((bagPack) => {
       bagPack.inPallet = true;
-      bagPack.status = 'InPallet'
+      bagPack.status = 'inPallet'
       bagPack.save();
     })
 

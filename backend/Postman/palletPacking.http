@@ -1,5 +1,4 @@
-### POST http://localhost:4005/api/palletPacking/createPalletPacking 
-POST https://ready-backend-setup.onrender.com/api/palletPacking/createPalletPacking
+POST http://localhost:4005/api/palletPacking/createPalletPacking 
 Content-Type: application/json
 
 {
