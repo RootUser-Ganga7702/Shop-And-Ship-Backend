@@ -12,7 +12,7 @@ const parcelBagPackSchema = new mongoose.Schema({
   customId: { type: String, unique: true },   // Custom ID like PKG001
   country: { type :String },
   totalWeight: { type: Number, required: true, max: 30 },
-  status: { type: String, default: "pending", enum: ["pending", "inTransit", "delivered"] },
+  status: { type: String, default: "pending", enum: ["pending", "inPallet", "delivered"] },
   qrCode: { type :String },
   full : {type : Boolean, default: false},
   inPallet: {type : Boolean, default: false},
