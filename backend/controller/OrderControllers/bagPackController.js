@@ -11,14 +11,16 @@ exports.createBagPack = async (req, res) => {
                 message: 'Please provide all required fields'
             })
         }
+        const qrId = country + Date.now();
+        const newQrCode = await generateQRCodeBase64(qrId);
         const bagPack = new BagPack({
             country,
             numberOfParcel,
             totalWeight,
-            orderIdList
+            orderIdList,
+            qrCode: newQrCode
         })
         await bagPack.save();
-        bagPack.qrCode = await generateQRCodeBase64(bagPack.customId);
         // update the status in OrdersRecive model based on orderIdList Id
         for (let i = 0; i < bagPack.orderIdList.length; i++) {
             const orderId = bagPack.orderIdList[i];
