@@ -14,7 +14,7 @@ Content-Type: application/json
 ###
 GET https://ready-backend-setup.onrender.com/api/palletPacking/getAllPalletPacking
 ###
-POST https://ready-backend-setup.onrender.com/api/palletPacking/statusUpdatePallet
+POST http://localhost:4005/api/palletPacking/statusUpdatePallet
 Content-Type: application/json
 
 {
