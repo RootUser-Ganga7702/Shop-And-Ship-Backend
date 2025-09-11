@@ -2,15 +2,17 @@ const Country = require('../../models/CountryAndAirModels/countryModel');
 
 exports.createCountry = async (req, res) => {
   try {
-    const { countryName, countryImage, countryCode, discription } = req.body;
-    if (!countryName || !countryCode || !countryImage) {
+    const { countryName, image, countryCode, discription, latitude, longitude } = req.body;
+    if (!countryName || !countryCode || !image || !latitude || !longitude) {
       return res.status(400).json({ message: 'Please provide all required fields' });
     }
     const country = new Country({
       countryName,
-      countryImage,
+      image,
       countryCode,
-      discription
+      discription,
+      latitude,
+      longitude
     })
     await country.save();
     res.status(201).json({ message: 'Country created successfully', country });
@@ -30,12 +32,14 @@ exports.getCountries = async (req, res) => {
 
 exports.updateCountry = async (req, res) => {
   try {
-    const { id, countryName, countryImage, countryCode, discription } = req.body;
+    const { id, countryName, image, countryCode, discription, latitude, langitude } = req.body;
     const country = await Country.findByIdAndUpdate(id, {
       countryName,
-      countryImage,
+      image,
       countryCode,
-      discription
+      discription,
+      latitude,
+      langitude
     }, { new: true });
     if (!country) {
       return res.status(404).json({ message: 'Country not found' });
