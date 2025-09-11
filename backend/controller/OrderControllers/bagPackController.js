@@ -75,8 +75,8 @@ exports.getCountryBagPack = async (req, res) => {
 
 exports.bagStatusUpdate = async (req, res) => {
     try {
-        const { bagPackId, status } = req.body;
-        const bagPack = await BagPack.findByIdAndUpdate(bagPackId, { status }, { new: true });
+        const { id, status } = req.body;
+        const bagPack = await BagPack.findByIdAndUpdate(id, { status }, { new: true });
         res.status(200).json({
             success: true,
             message: 'BagPack status updated successfully',

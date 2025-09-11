@@ -17,3 +17,11 @@ Content-Type: application/json
 {
     "country":"Somalia"
 }
+###
+POST https://ready-backend-setup.onrender.com/api/parcelBagPack/bagStatusUpdate
+Content-Type: application/json
+
+{
+    "id":"68bffa7e8fb3cd3f3e74a946",
+    "status":"received"
+}
