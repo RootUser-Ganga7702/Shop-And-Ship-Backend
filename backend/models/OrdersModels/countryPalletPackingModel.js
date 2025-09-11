@@ -18,7 +18,7 @@ const countryPalletPackingSchema = new mongoose.Schema({
   totalWeight: { type: Number, max: 100 },
   qrCode: { type: String },
   recipt: { type: String },
-  status: { type: String, default: "pending", enum: ['pending', 'shipped','recieved', 'delivered'] },
+  status: { type: String, default: "pending", enum: ['pending', 'shipped','received', 'delivered'] },
   totalAmountOfPallet: { type: Number },
   dateTime: { type: Date, default: Date.now }
 }, { timestamps: true });
