@@ -1,10 +1,11 @@
 const express = require('express');
 const palletPackingRoutes = express.Router();
 
-const { createPalletPacking, getAllPalletPacking } = require('../controller/OrderControllers/countryPalletPackingController');
+const { createPalletPacking, getAllPalletPacking, statusUpdatePallet } = require('../controller/OrderControllers/countryPalletPackingController');
 
 palletPackingRoutes.post('/createPalletPacking', createPalletPacking);
 palletPackingRoutes.get('/getAllPalletPacking', getAllPalletPacking);
+palletPackingRoutes.post('/statusUpdatePallet', statusUpdatePallet);
 
 
 

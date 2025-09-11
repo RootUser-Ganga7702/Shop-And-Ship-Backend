@@ -13,3 +13,11 @@ Content-Type: application/json
 
 ###
 GET https://ready-backend-setup.onrender.com/api/palletPacking/getAllPalletPacking
+###
+POST https://ready-backend-setup.onrender.com/api/palletPacking/statusUpdatePallet
+Content-Type: application/json
+
+{
+    "id": "68c003328fb3cd3f3e74a97c",
+    "status": "received"
+}
