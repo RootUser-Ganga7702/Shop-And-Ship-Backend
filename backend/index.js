@@ -13,6 +13,7 @@ const allUsersRoutes = require('./routes/allUsersRoutes');
 const ordersReciveRoutes = require('./routes/orderReciveRoutes');
 const parcelBagPackRotes = require('./routes/parcelBagPackRoutes');
 const palletPackingRoutes = require('./routes/countryPalletPackingRoutes');
+const countriesRoutes = require('./routes/countryRoutes');
 
 
 // Connect to the database
@@ -34,6 +35,7 @@ app.use('/api/users', allUsersRoutes);
 app.use('/api/orders', ordersReciveRoutes);
 app.use('/api/parcelBagPack', parcelBagPackRotes);
 app.use('/api/palletPacking', palletPackingRoutes);
+app.use('/api/countries', countriesRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 4005;
