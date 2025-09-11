@@ -43,6 +43,25 @@ exports.getAllPalletPacking = async (req, res) => {
   }
 }
 
+exports.statusUpdatePallet = async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    if(!id || !status){
+      return res.status(400).json({ message: 'Please provide all required fields' });
+    }
+    const pallet = await PalletPacking.findById(id);
+    if (!pallet) {
+      return res.status(404).json({ message: 'Pallet not found' });
+    }
+    pallet.status = status;
+    await pallet.save();
+    res.status(200).json({ message: 'Pallet updated successfully', pallet });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+}
+
 // exports.uploadReciptStatus = async (req, res) => {
 //   try {
 //     const { recipt, id } = req.body;
