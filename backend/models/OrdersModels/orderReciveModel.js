@@ -15,6 +15,7 @@ const orderReciveSchema = new mongoose.Schema({
   bagPackId : { type: String },
   inBag : {type : Boolean, default: false},
   orderAmount : { type: Number },
+  platform : { type: String },
   dateTime : { type: Date, default: Date.now },
 }, { timestamps: true });
 

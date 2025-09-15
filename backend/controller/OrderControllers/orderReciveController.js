@@ -3,19 +3,19 @@ const { generateBarcodeBase64 } = require('../../middelware/barCodeGenarater');
 
 exports.orderRecive = async (req, res) => {
   try {
-    const { orderId, name, phone, address, pincode, country, state, city, weight, orderAmount } = req.body;
+    const { orderId, name, phone, address, pincode, country, state, city, weight, orderAmount, platform } = req.body;
 
     // Check if the order already exists
     const existingOrder = await OrdersRecive.findOne({ orderId });
     if (existingOrder) {
       return res.status(409).json({ message: 'Order already exists' });
     }
-    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city || !weight || !orderAmount) {
+    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city || !weight || !orderAmount || !platform) {
       return res.status(400).json({ message: 'Please fill all the fields' });
     }
     const barcodeBase64 = await generateBarcodeBase64(`${orderId}`);
     // Create a new order
-    const newOrder = new OrdersRecive({ orderId, name, barcode : barcodeBase64, phone, address, pincode, country, state, city, weight, orderAmount });
+    const newOrder = new OrdersRecive({ orderId, name, barcode : barcodeBase64, phone, address, pincode, country, state, city, weight, orderAmount, platform });
     await newOrder.save();
 
     res.status(201).json({ message: 'Order created successfully', order: newOrder });
@@ -26,18 +26,18 @@ exports.orderRecive = async (req, res) => {
 
 exports.editOrder = async (req, res) => {
   try {
-    const { orderId, name, phone, address, pincode, country, state, city, weight, orderAmount } = req.body;
+    const { orderId, name, phone, address, pincode, country, state, city, weight, orderAmount, platform } = req.body;
 
     // Check if the order already exists
     const existingOrder = await OrdersRecive.findOne({ orderId });
     if (!existingOrder) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city || !weight || !orderAmount) {
+    if (!orderId || !name || !phone || !address || !pincode || !country || !state || !city || !weight || !orderAmount || !platform) {
       return res.status(400).json({ message: 'Please fill all the fields' });
     }
     // Create a new order
-    const updatedOrder = await OrdersRecive.findOneAndUpdate({ orderId }, { name, phone, address, pincode, country, state, city, weight, orderAmount }, { new: true });
+    const updatedOrder = await OrdersRecive.findOneAndUpdate({ orderId }, { name, phone, address, pincode, country, state, city, weight, orderAmount, platform }, { new: true });
     res.status(200).json({ message: 'Order updated successfully', order: updatedOrder });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
