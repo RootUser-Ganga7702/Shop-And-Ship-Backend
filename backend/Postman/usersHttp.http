@@ -60,3 +60,11 @@ Content-Type: application/json
     "email": "gangafullstack963@gmail.com",
     "password": "ganga@123"
 }
+###
+POST http://localhost:4005/api/users/update-personal-user-active
+Content-Type: application/json
+
+{
+    "id":"68ca7b35c6d6c9945d867ff5",
+    "active":true
+}

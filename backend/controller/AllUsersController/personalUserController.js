@@ -1,7 +1,7 @@
 const PersonalUser = require("../../models/AllUsersModels/personalUser");
 const bcrypt = require('bcryptjs');
 const { generateToken, validateCredentials } = require("../../middelware/adminMiddleware");
-const { sendUserRegistrationConfirmationEmail } = require("../../middelware/nodeMailer");
+const { sendUserRegistrationConfirmationEmail, sendUserActivationEmail } = require("../../middelware/nodeMailer");
 
 
 exports.createPersonalUser = async (req, res) => {
@@ -19,7 +19,7 @@ exports.createPersonalUser = async (req, res) => {
             phone,
             role:'personalUser'
         });
-        const sendMail = await sendUserRegistrationConfirmationEmail(name, email,phone);
+        const sendMail = await sendUserRegistrationConfirmationEmail(name, email,phone,password);
         if (!sendMail) {
             return res.status(500).json({ message: "Error sending email" });
         }
@@ -30,11 +30,36 @@ exports.createPersonalUser = async (req, res) => {
     }
 }
 
+exports.updatePersonalUserActive = async (req, res) => {
+    try {
+        const { id, active} = req.body;
+        const user = await PersonalUser.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        user.active = active;
+        if (active === true) {
+            const sendMail = await sendUserActivationEmail(user.name, user.email, user.phone);
+            if (!sendMail) {
+                return res.status(500).json({ message: "Error sending email" });
+            }
+        }
+        await user.save();
+        res.status(200).json({ message: "User updated successfully", user });
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
+
 exports.loginPersonalUser = async (req, res) => {
     try {
         const { email, password } = req.body;
         const role = 'personalUser'
         const user = await validateCredentials(email, password,role);
+        if(user.active === false){
+            return res.status(200).json({ responseCode: 401, error: 'User is not active' });
+        }
       if (!user) {
         return res.status(200).json({ responseCode: 401, error: 'Invalid credentials or not an admin' });
       }
