@@ -42,3 +42,13 @@ Content-Type: application/json
     "status":"active",
     "role":"indiaAdmin"
 }
+###
+POST http://localhost:4005/api/users/create-personal-user
+Content-Type: application/json
+
+{
+    "name": "Ganga",
+    "email": "gangafullstack963@gmail.com",
+    "phone": "7702441016",
+    "password": "ganga@123"
+}
