@@ -52,3 +52,11 @@ Content-Type: application/json
     "phone": "7702441016",
     "password": "ganga@123"
 }
+###
+POST http://localhost:4005/api/users/login-personal-user
+Content-Type: application/json
+
+{
+    "email": "gangafullstack963@gmail.com",
+    "password": "ganga@123"
+}

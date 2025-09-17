@@ -2,7 +2,7 @@ const express = require('express');
 const allUsersRoutes = express.Router();
 
 const { registerAdmin, adminLogin, getAllInidaAdmins, getAllAfricaTransitAdmins, updateAdminsStatus } = require('../controller/AllUsersController/adminController');
-const { createPersonalUser } = require('../controller/AllUsersController/personalUserController');
+const { createPersonalUser, loginPersonalUser, getPersonalUser } = require('../controller/AllUsersController/personalUserController');
 
 
 allUsersRoutes.post('/register-admin', registerAdmin);
@@ -13,6 +13,8 @@ allUsersRoutes.post('/update-admins-status', updateAdminsStatus);
 
 
 allUsersRoutes.post('/create-personal-user', createPersonalUser);
+allUsersRoutes.post('/login-personal-user', loginPersonalUser);
+allUsersRoutes.get('/get-personal-user', getPersonalUser);
 
 
 module.exports = allUsersRoutes;
