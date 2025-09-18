@@ -6,6 +6,9 @@ const personalUser = new mongoose.Schema({
   phone: { type: String, required: true },
   password: { type: String, required: true },
   active: { type: Boolean, default: false },
+  address: { type: String },
+  state: { type: String },
+  city: { type: String },
   role: { type: String, required: true, enum: ['personalUser'] },
 }, { timestamps: true });
 

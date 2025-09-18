@@ -53,7 +53,7 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-POST http://localhost:4005/api/users/login-personal-user
+POST https://ready-backend-setup.onrender.com/api/users/login-personal-user
 Content-Type: application/json
 
 {
@@ -61,10 +61,13 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-POST http://localhost:4005/api/users/update-personal-user-active
+POST https://ready-backend-setup.onrender.com/api/users/update-personal-user-active
 Content-Type: application/json
 
 {
     "id":"68ca7b35c6d6c9945d867ff5",
     "active":true
 }
+
+###
+GET https://ready-backend-setup.onrender.com/api/users/get-personal-users

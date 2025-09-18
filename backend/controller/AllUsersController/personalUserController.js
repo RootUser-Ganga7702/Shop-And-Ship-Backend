@@ -6,7 +6,10 @@ const { sendUserRegistrationConfirmationEmail, sendUserActivationEmail, sendUser
 
 exports.createPersonalUser = async (req, res) => {
     try {
-        const { name, email, password, phone } = req.body;
+        const { name, email, password, phone, address, state, city } = req.body;
+        if (!name || !email || !password || !phone || !address || !state || !city) {
+            return res.status(400).json({ message: "Please provide all required fields" });
+        }
         const user = await PersonalUser.findOne({ email });
         if (user) {
             return res.status(400).json({ message: "User already exists" });
@@ -17,6 +20,9 @@ exports.createPersonalUser = async (req, res) => {
             email,
             password: hashedPassword,
             phone,
+            address,
+            state,
+            city,
             role:'personalUser'
         });
         const sendMail = await sendUserRegistrationConfirmationEmail(name, email,phone,password);
