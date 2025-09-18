@@ -16,6 +16,7 @@ const palletPackingRoutes = require('./routes/countryPalletPackingRoutes');
 const countriesRoutes = require('./routes/countryRoutes');
 const airFlightRoutes = require('./routes/airCompanyRoutes');
 const platformRoutes = require('./routes/platformRoutes');
+const personalPercelRoutes = require('./routes/personalPercelsRoute');
 
 
 // Connect to the database
@@ -40,6 +41,7 @@ app.use('/api/palletPacking', palletPackingRoutes);
 app.use('/api/countries', countriesRoutes);
 app.use('/api/flightCompany', airFlightRoutes);
 app.use('/api/platform', platformRoutes);
+app.use('/api/personalPercels', personalPercelRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 4005;

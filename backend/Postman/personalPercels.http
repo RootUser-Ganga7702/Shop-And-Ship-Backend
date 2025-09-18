@@ -1,0 +1,50 @@
+POST https://ready-backend-setup.onrender.com/api/personalPercels/createPersonalPercel
+Content-Type: application/json
+
+{
+  "vendorId": "VND123",
+  "customerName": "Ganga",
+  "customerPhone": "9876543210",
+  "customerEmail": "hayanganga@gmail.com",
+  "reciverName": "Gayaz",
+  "reciverPhone": "9123456780",
+  "reciverEmail": "md.gayazahmed95@gmail.com",
+  "reciverAddress": "123, MG Road, Sector 45",
+  "reciverPincode": "560102",
+  "reciverCountry": "India",
+  "reciverCity": "Bangalore",
+  "typeOfPercel": "Electronics",
+  "weight": 2.5,
+  "percelPrice": 450
+}
+
+###
+POST https://ready-backend-setup.onrender.com/api/personalPercels/editPersonalPercel
+Content-Type: application/json
+
+{
+  "id": "68cbf3be291420f0022a1ce0",
+  "customerName": "Hayan",
+  "customerPhone": "9876543210",
+  "customerEmail": "hayanganga@gmail.com",
+  "reciverName": "Gayaz",
+  "reciverPhone": "9123456780",
+  "reciverEmail": "md.gayazahmed95@gmail.com",
+  "reciverAddress": "123, MG Road, Sector 45",
+  "reciverPincode": "560102",
+  "reciverCountry": "India",
+  "reciverCity": "Bangalore",
+  "typeOfPercel": "Electronics",
+  "weight": 2.5,
+  "percelPrice": 450
+}
+###
+GET https://ready-backend-setup.onrender.com/api/personalPercels/getPersonalPercels
+
+###
+POST https://ready-backend-setup.onrender.com/api/personalPercels/deletePersonalPercel
+Content-Type: application/json
+
+{
+  "id": "68cbf3be291420f0022a1ce0"
+}

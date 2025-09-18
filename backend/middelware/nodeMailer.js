@@ -379,3 +379,103 @@ exports.sendUserDeactivationEmail = async (name, email, phone) => {
 };
 
 
+
+exports.sendParcelConfirmationEmail = async (customerName,
+    customerEmail,
+    customerPhone,
+    reciverName,
+    reciverEmail,
+    reciverPhone,
+    reciverAddress,
+    reciverPincode,
+    reciverCity,
+    reciverCountry,
+    typeOfPercel,
+    weight,
+    percelPrice,
+    customId,
+    status) => {
+  // recipients → both customer & receiver
+  const recipients = [customerEmail, reciverEmail].filter(Boolean); // remove empty/null
+
+  const mailOptions = {
+    from: '"Delivery Management India" <support@deliverymanagement.in>',
+    to: recipients,
+    subject: `📦 Parcel Placed Successfully – Tracking ID: ${customId}`,
+    html: `
+<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 20px auto; padding: 30px; background: linear-gradient(to right, #fdfbfb, #ebedee); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e6e6e6;">
+  
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 25px;">
+    <img src="[DELIVERY_LOGO_URL]" alt="Delivery Management India Logo" style="max-width: 140px; border-radius: 8px;">
+    <h2 style="color: #007ACC; font-size: 24px; margin-top: 15px;">
+      🎉 Your Parcel Has Been Successfully Placed!
+    </h2>
+    <p style="font-size: 16px; color: #333;">
+      Dear <strong>${customerName}</strong> & <strong>${reciverName}</strong>,  
+      We’re delighted to let you know that your parcel has been created successfully and will be delivered soon 🚚.  
+      Thank you for trusting <strong>Delivery Management India</strong>.
+      Customer Mobile Number :  <strong>${customerPhone} </strong>. 
+    </p>
+  </div>
+
+  <!-- Parcel Details -->
+  <div style="background-color: #f9fcff; padding: 20px; border-left: 5px solid #007ACC; border-radius: 8px; margin-bottom: 25px;">
+    <h3 style="margin: 0; color: #005a99;">📌 Parcel Information</h3>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Tracking ID:</strong> ${customId}</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Type of Parcel:</strong> ${typeOfPercel}</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Weight:</strong> ${weight} kg</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Price:</strong> ₹${percelPrice}</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Status:</strong> ${status}</p>
+  </div>
+
+  <!-- Receiver Details -->
+  <div style="background-color: #fffef8; padding: 20px; border-left: 5px solid #ffaa00; border-radius: 8px; margin-bottom: 25px;">
+    <h3 style="margin: 0; color: #b36b00;">📍 Delivery Information</h3>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Receiver:</strong> ${reciverName}</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Phone:</strong> ${reciverPhone}</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Email:</strong> ${reciverEmail || "N/A"}</p>
+    <p style="font-size: 16px; color: #333; margin: 6px 0;"><strong>Address:</strong> ${reciverAddress}, ${reciverCity}, ${reciverPincode}, ${reciverCountry}</p>
+  </div>
+
+  <!-- Call to Action -->
+  <div style="text-align: center; margin: 30px 0;">
+    <a href="https://deliverymanagement.in/track/${customId}" style="display: inline-block; background-color: #007ACC; color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px;">
+      Track Your Parcel 🚀
+    </a>
+  </div>
+
+  <!-- Message -->
+  <p style="font-size: 16px; color: #444; text-align: center; margin-top: 25px;">
+    ✨ “Great journeys begin with small parcels.  
+    We promise to handle yours with care until it reaches safely.” ✨
+  </p>
+
+  <!-- Footer -->
+  <div style="border-top: 1px solid #e1ecf4; margin-top: 30px; padding-top: 20px; font-size: 14px; color: #555;">
+    <p>📞 For support, call <a href="tel:+919876543210" style="color: #007ACC;">+91 98765 43210</a> or email <a href="mailto:support@deliverymanagement.in" style="color: #007ACC;">support@deliverymanagement.in</a></p>
+    <p>🌐 Visit: <a href="https://deliverymanagement.in" style="color: #007ACC;">deliverymanagement.in</a></p>
+  </div>
+
+  <p style="font-size: 16px; font-weight: bold; color: #007ACC; margin-top: 20px;">
+    With love,<br>The Delivery Management India Team 💙
+  </p>
+
+  <div style="margin-top: 40px; font-size: 12px; color: #888; text-align: center;">
+    <p>© ${new Date().getFullYear()} Delivery Management India. All rights reserved.</p>
+  </div>
+</div>
+`
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Parcel confirmation email sent:", info.response);
+    return true;
+  } catch (err) {
+    console.error("Error sending parcel confirmation email:", err);
+    return false;
+  }
+};
+
+
