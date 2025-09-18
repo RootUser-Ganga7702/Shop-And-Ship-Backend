@@ -307,3 +307,75 @@ exports.sendUserActivationEmail = async (name, email, phone) => {
   }
 };
 
+
+exports.sendUserDeactivationEmail = async (name, email, phone) => {
+  const mailOptions = {
+    from: '"Delivery Management India" <support@deliverymanagement.in>',
+    to: email,
+    subject: `⚠️ Account Deactivated – Delivery Management India`,
+    html: `
+<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 20px auto; padding: 30px; background: linear-gradient(to right, #fff1f1, #ffffff); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ffd6d6;">
+  
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 25px;">
+    <img src="[DELIVERY_LOGO_URL]" alt="Delivery Management India Logo" style="max-width: 140px; border-radius: 8px;">
+    <h2 style="color: #cc0000; font-size: 24px; margin-top: 15px;">
+      ❌ Dear ${name}, Your Account Has Been Deactivated
+    </h2>
+    <p style="font-size: 16px; color: #333;">
+      We regret to inform you that your <strong>Delivery Management India</strong> account has been deactivated.  
+      You will no longer be able to access our platform using your credentials.
+    </p>
+  </div>
+
+  <!-- User Info -->
+  <div style="background-color: #fff5f5; padding: 20px; border-left: 5px solid #cc0000; border-radius: 8px; margin-bottom: 25px;">
+    <h3 style="margin: 0; color: #a60000;">📌 Your Account Details</h3>
+    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>👤 Name:</strong> ${name}</p>
+    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>📧 Email:</strong> ${email}</p>
+    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>📱 Phone:</strong> ${phone}</p>
+  </div>
+
+  <!-- Next Steps -->
+  <div style="text-align: center; margin: 30px 0; font-size: 15px; color: #555;">
+    <p>If you believe this was a mistake or would like to reactivate your account,  
+    please contact our support team immediately.</p>
+  </div>
+
+  <!-- Support Info -->
+  <div style="border-top: 1px solid #f5c2c2; margin-top: 30px; padding-top: 20px;">
+    <p style="font-size: 15px; color: #555;">
+      📞 Need help? Call us at <a href="tel:+919876543210" style="color: #cc0000;">+91 98765 43210</a> or email <a href="mailto:support@deliverymanagement.in" style="color: #cc0000;">support@deliverymanagement.in</a>.
+    </p>
+    <p style="font-size: 15px; color: #555;">
+      🌐 Visit: <a href="https://deliverymanagement.in" style="color: #cc0000;">deliverymanagement.in</a> for more information.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <p style="font-size: 16px; font-weight: bold; color: #cc0000; margin-top: 20px;">
+    Regards,<br>The Delivery Management India Team 🚚
+  </p>
+
+  <div style="margin-top: 40px; font-size: 12px; color: #888; text-align: center;">
+    <p>© ${new Date().getFullYear()} Delivery Management India. All rights reserved.</p>
+    <p>
+      <a href="https://deliverymanagement.in/privacy-policy" style="color: #888;">Privacy Policy</a> |
+      <a href="https://deliverymanagement.in/unsubscribe" style="color: #888;">Unsubscribe</a>
+    </p>
+  </div>
+</div>
+`
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Deactivation email sent:", info.response);
+    return true;
+  } catch (err) {
+    console.error("Error sending deactivation email:", err);
+    return false;
+  }
+};
+
+

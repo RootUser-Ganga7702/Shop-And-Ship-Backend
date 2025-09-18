@@ -1,7 +1,7 @@
 const PersonalUser = require("../../models/AllUsersModels/personalUser");
 const bcrypt = require('bcryptjs');
 const { generateToken, validateCredentials } = require("../../middelware/adminMiddleware");
-const { sendUserRegistrationConfirmationEmail, sendUserActivationEmail } = require("../../middelware/nodeMailer");
+const { sendUserRegistrationConfirmationEmail, sendUserActivationEmail, sendUserDeactivationEmail } = require("../../middelware/nodeMailer");
 
 
 exports.createPersonalUser = async (req, res) => {
@@ -23,8 +23,7 @@ exports.createPersonalUser = async (req, res) => {
         if (!sendMail) {
             return res.status(500).json({ message: "Error sending email" });
         }
-        res.status(201).json({ message: "User created successfully", user: newUser
-        })
+        res.status(201).json({ message: "User created successfully", user: newUser, responseCode:201})
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
     }
@@ -40,6 +39,12 @@ exports.updatePersonalUserActive = async (req, res) => {
         user.active = active;
         if (active === true) {
             const sendMail = await sendUserActivationEmail(user.name, user.email, user.phone);
+            if (!sendMail) {
+                return res.status(500).json({ message: "Error sending email" });
+            }
+        }
+        if (active === false) {
+            const sendMail = await sendUserDeactivationEmail(user.name, user.email, user.phone);
             if (!sendMail) {
                 return res.status(500).json({ message: "Error sending email" });
             }
@@ -75,14 +80,11 @@ exports.loginPersonalUser = async (req, res) => {
     }
 }
 
-exports.getPersonalUser = async (req, res) => {
+exports.getAllPersonalUsers = async (req, res) => {
     try {
-        const user = await PersonalUser.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.status(200).json({ message: "User retrieved successfully", user });
+        const users = await PersonalUser.find();
+        res.status(200).json({ message: "Users retrieved successfully", users });
     } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 }
