@@ -44,7 +44,7 @@ app.use('/api/platform', platformRoutes);
 app.use('/api/personalPercels', personalPercelRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 4005;
+const PORT = process.env.PORT || 4009;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
