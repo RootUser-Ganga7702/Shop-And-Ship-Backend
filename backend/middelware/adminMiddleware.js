@@ -1,9 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/AllUsersModels/admin');
-const indiaAdmin = require('../models/AllUsersModels/indiaAdmin');
-const AfricaTransitAdmin = require('../models/AllUsersModels/africaTransitAdmin');
-const PersonalUser = require('../models/AllUsersModels/personalUser');
 
 const JWT_SECRET = "DeliveryAdminSecretToken!";
 
@@ -19,12 +16,6 @@ const validateCredentials = async (email, password,role) => {
   let user;
   if(role === 'admin'){
     user = await Admin.findOne({ email });
-  }else if(role === 'indiaAdmin'){
-    user = await indiaAdmin.findOne({ email });
-  }else if(role === 'africaTransitAdmin'){
-    user = await AfricaTransitAdmin.findOne({ email });
-  }else if(role === 'personalUser'){
-    user = await PersonalUser.findOne({ email });
   }
 
   if (!user) return null;

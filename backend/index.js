@@ -8,15 +8,7 @@ const cors = require("cors");
 // setupSocket(server);
 
 const mainRoute = require('./routes/route');
-
-const allUsersRoutes = require('./routes/allUsersRoutes');
-const ordersReciveRoutes = require('./routes/orderReciveRoutes');
-const parcelBagPackRotes = require('./routes/parcelBagPackRoutes');
-const palletPackingRoutes = require('./routes/countryPalletPackingRoutes');
-const countriesRoutes = require('./routes/countryRoutes');
-const airFlightRoutes = require('./routes/airCompanyRoutes');
-const platformRoutes = require('./routes/platformRoutes');
-const personalPercelRoutes = require('./routes/personalPercelsRoute');
+const allUserRoutes = require('./routes/allUsersRoutes');
 
 
 // Connect to the database
@@ -31,17 +23,8 @@ app.use(cors({
 }));
 
 app.use('/', mainRoute);
+app.use('/allUsers', allUserRoutes);
 
-
-// All user routes
-app.use('/api/users', allUsersRoutes);
-app.use('/api/orders', ordersReciveRoutes);
-app.use('/api/parcelBagPack', parcelBagPackRotes);
-app.use('/api/palletPacking', palletPackingRoutes);
-app.use('/api/countries', countriesRoutes);
-app.use('/api/flightCompany', airFlightRoutes);
-app.use('/api/platform', platformRoutes);
-app.use('/api/personalPercels', personalPercelRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 4009;
