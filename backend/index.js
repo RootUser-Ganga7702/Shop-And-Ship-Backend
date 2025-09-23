@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 app.use('/', mainRoute);
-app.use('/allUsers', allUserRoutes);
+app.use('/api/users', allUserRoutes);
 
 
 // Start the server

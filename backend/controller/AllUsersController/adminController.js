@@ -62,41 +62,54 @@ exports.registerAdmin = async (req, res) => {
 
 exports.adminLogin = async (req, res) => {
   try {
-    const { email, password, role} = req.body;
+    const { email, password } = req.body;
+    const role = "admin"
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(200).json({
+        responseCode: 401,
+        error: 'Please fill all fields'
+      });
+    }
+
+    // Allow only Admin role
+    if (role !== 'admin') {
+      return res.status(200).json({
+        responseCode: 401,
+        error: 'Invalid role. Only Admin login is allowed'
+      });
+    }
+
     // Validate credentials
-    if (!email || !password || !role) {
-      return res.status(200).json({ responseCode: 401, error: 'Please fill all fields' });
+    const user = await validateCredentials(email, password, 'admin');
+    if (!user) {
+      return res.status(200).json({
+        responseCode: 401,
+        error: 'Invalid credentials or not an admin'
+      });
     }
-    if( role === 'admin'){
-      const user = await validateCredentials(email, password,role);
-      if (!user) {
-        return res.status(200).json({ responseCode: 401, error: 'Invalid credentials or not an admin' });
-      }
-      // Generate token and respond
-      const token = generateToken(user);
-      res.status(200).json({ responseCode: 200, token, message: 'Admin logged in successfully', user });
-    }else if (role === 'indiaAdmin'){
-      const user = await validateCredentials(email, password,role);
-      if (!user) {
-        return res.status(200).json({ responseCode: 401, error: 'Invalid credentials or not an admin' });
-      }
-      // Generate token and respond
-      const token = generateToken(user);
-      res.status(200).json({ responseCode: 200, token, message: 'India Admin logged in successfully',user });
-    }else if (role === 'africaTransitAdmin'){
-      const user = await validateCredentials(email, password,role);
-      if (!user) {
-        return res.status(200).json({ responseCode: 401, error: 'Invalid credentials or not an admin' });
-      }
-      // Generate token and respond
-      const token = generateToken(user);
-      res.status(200).json({ responseCode: 200, token, message: 'Africa Admin logged in successfully',user });
-    }
+
+    // Generate token
+    const token = generateToken(user);
+
+    res.status(200).json({
+      responseCode: 200,
+      token,
+      message: 'Admin logged in successfully',
+      user
+    });
+
   } catch (error) {
     console.error('Error:', error);
-    res.status(200).json({ responseCode: 401, error: 'Failed to log in' });
+    res.status(500).json({
+      responseCode: 500,
+      error: 'Failed to log in',
+      message: error.message
+    });
   }
 };
+
 
 
 
