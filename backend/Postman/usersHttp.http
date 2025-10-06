@@ -54,3 +54,6 @@ Content-Type: application/json
 }
 ###
 GET https://shop-and-ship-backend.onrender.com/api/users/getAllUsers
+
+###
+GET https://auto-spare-parts-backend-gbsc.onrender.com/getProducts
