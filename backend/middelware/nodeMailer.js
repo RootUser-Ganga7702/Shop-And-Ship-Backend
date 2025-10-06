@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
         pass: "xmzm eacn kbax gbgf", // Your App Password (DO NOT share it publicly)
     },
     tls: {
-    rejectUnauthorized: false,  // <-- THIS LINE allows self-signed certs
+    rejectUnauthorized: true,  // <-- THIS LINE allows self-signed certs
   },
 });
 

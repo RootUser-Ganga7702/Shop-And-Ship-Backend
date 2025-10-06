@@ -53,4 +53,4 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-GET
+GET https://shop-and-ship-backend.onrender.com/api/users/getAllUsers
