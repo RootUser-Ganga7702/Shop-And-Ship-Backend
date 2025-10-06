@@ -1,4 +1,7 @@
 const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+
+const mailSender = new Resend("xmzm eacn kbax gbgf");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
