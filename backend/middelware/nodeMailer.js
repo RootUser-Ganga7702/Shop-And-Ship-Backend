@@ -11,61 +11,73 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendWarehouseCredentialsEmail = async (name, email, password) => {
+exports.sendShopAndShipWelcomeEmail = async (name, email, phone, country) => {
   const mailOptions = {
-    from: '"Delivery Management India" <support@deliverymanagement.in>',
-    to: email,
-    subject: `📦 Your Warehouse Shipping Panel Credentials – Delivery Management India`,
+    from: '"Shop & Ship Global" <support@shopandship.global>',
+    to: email, // replace this with actual user's email if available
+    subject: `🛍️ Welcome ${name}! Your Global Shopping Journey Begins – Shop & Ship 🌎`,
     html: `
-<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 20px auto; padding: 30px; background: linear-gradient(to right, #e8f7ff, #ffffff); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #cce7ff;">
-  
+<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 20px auto; padding: 30px; background: linear-gradient(to right, #fff8f0, #ffffff); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #ffe3c1;">
+
   <!-- Header -->
   <div style="text-align: center; margin-bottom: 25px;">
-    <img src="[DELIVERY_LOGO_URL]" alt="Delivery Management India Logo" style="max-width: 140px; border-radius: 8px;">
-    <h2 style="color: #007ACC; font-size: 24px; margin-top: 15px;">
-      🚚 Welcome ${name}!
+    <img src="[SHOPANDSHIP_LOGO_URL]" alt="Shop & Ship Logo" style="max-width: 150px; border-radius: 8px;">
+    <h2 style="color: #FF7A00; font-size: 24px; margin-top: 15px;">
+      🎉 Welcome, ${name}!
     </h2>
     <p style="font-size: 16px; color: #333;">
-      Your access to the <strong>Delivery Management India Warehouse Shipping Panel</strong> has been successfully created.  
-      Please find your login credentials below.
+      You're officially part of the <strong>Shop & Ship Global Family</strong> 🌍  
+      Shop from any platform — Amazon, Flipkart, eBay, AliExpress, or more — and let us handle the shipping.
     </p>
   </div>
 
-  <!-- Credentials -->
-  <div style="background-color: #f0f8ff; padding: 20px; border-left: 5px solid #007ACC; border-radius: 8px; margin-bottom: 25px;">
-    <h3 style="margin: 0; color: #005a99;">🔑 Login Credentials</h3>
-    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>📧 Email:</strong> ${email}</p>
-    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>🔐 Password:</strong> ${password}</p>
-    <p style="font-size: 14px; color: #777; margin-top: 10px;">For security reasons, please change your password after first login.</p>
+  <!-- User Info -->
+  <div style="background-color: #fff4e6; padding: 20px; border-left: 5px solid #FF7A00; border-radius: 8px; margin-bottom: 25px;">
+    <h3 style="margin: 0; color: #cc5a00;">👤 Your Registration Details</h3>
+    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>📞 Phone:</strong> ${phone}</p>
+    <p style="font-size: 16px; color: #333; margin: 8px 0;"><strong>🌍 Country:</strong> ${country}</p>
+    <p style="font-size: 14px; color: #777; margin-top: 10px;">Use this account to explore, shop, and ship across global stores.</p>
   </div>
 
   <!-- Call to Action -->
   <div style="text-align: center; margin: 30px 0;">
-    <a href="https://deliverymanagement.in/login" style="display: inline-block; background-color: #007ACC; color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px;">
-      Access Shipping Panel 🚀
+    <a href="https://shopandship.global/app" style="display: inline-block; background-color: #FF7A00; color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px;">
+      Start Shopping 🌐
     </a>
   </div>
 
+  <!-- Features Section -->
+  <div style="margin-top: 30px; padding: 20px; background: #fff9f3; border-radius: 10px; border: 1px dashed #ffbb75;">
+    <h3 style="text-align: center; color: #FF7A00; margin-bottom: 15px;">Why Shop & Ship? 🚀</h3>
+    <ul style="font-size: 15px; color: #555; line-height: 1.8;">
+      <li>🛍️ Shop from any e-commerce platform worldwide.</li>
+      <li>📦 Get fast and secure international shipping.</li>
+      <li>💰 Save on customs and shipping costs.</li>
+      <li>📱 Track your orders in real-time from our dashboard.</li>
+      <li>🌐 Seamless experience across devices.</li>
+    </ul>
+  </div>
+
   <!-- Support Info -->
-  <div style="border-top: 1px solid #e1ecf4; margin-top: 30px; padding-top: 20px;">
+  <div style="border-top: 1px solid #ffe3c1; margin-top: 30px; padding-top: 20px;">
     <p style="font-size: 15px; color: #555;">
-      📞 Need help? Call us at <a href="tel:+919876543210" style="color: #007ACC;">+91 98765 43210</a> or email <a href="mailto:support@deliverymanagement.in" style="color: #007ACC;">support@deliverymanagement.in</a>.
+      📞 Need help? Call us at <a href="tel:+918888888888" style="color: #FF7A00;">+91 88888 88888</a> or email <a href="mailto:support@shopandship.global" style="color: #FF7A00;">support@shopandship.global</a>.
     </p>
     <p style="font-size: 15px; color: #555;">
-      🌐 Visit: <a href="https://deliverymanagement.in" style="color: #007ACC;">deliverymanagement.in</a> for more information.
+      🌐 Visit: <a href="https://shopandship.global" style="color: #FF7A00;">shopandship.global</a>
     </p>
   </div>
 
   <!-- Footer -->
-  <p style="font-size: 16px; font-weight: bold; color: #007ACC;">
-    Happy Shipping,<br>The Delivery Management India Team 📦
+  <p style="font-size: 16px; font-weight: bold; color: #FF7A00;">
+    Happy Shopping,<br>The Shop & Ship Global Team 🛒
   </p>
 
   <div style="margin-top: 40px; font-size: 12px; color: #888; text-align: center;">
-    <p>© ${new Date().getFullYear()} Delivery Management India. All rights reserved.</p>
+    <p>© ${new Date().getFullYear()} Shop & Ship Global. All rights reserved.</p>
     <p>
-      <a href="https://deliverymanagement.in/privacy-policy" style="color: #888;">Privacy Policy</a> |
-      <a href="https://deliverymanagement.in/unsubscribe" style="color: #888;">Unsubscribe</a>
+      <a href="https://shopandship.global/privacy-policy" style="color: #888;">Privacy Policy</a> |
+      <a href="https://shopandship.global/unsubscribe" style="color: #888;">Unsubscribe</a>
     </p>
   </div>
 </div>
@@ -74,75 +86,76 @@ exports.sendWarehouseCredentialsEmail = async (name, email, password) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Warehouse credentials email sent:", info.response);
+    console.log("Shop & Ship welcome email sent:", info.response);
     return true;
   } catch (err) {
-    console.error("Error sending warehouse credentials email:", err);
+    console.error("Error sending Shop & Ship welcome email:", err);
     return false;
   }
 };
 
-exports.sendAfricaTransitCredentialsEmail = async (name, email, password) => {
+
+exports.sendUserOtpEmail = async (name, phone, email, country, OTP) => {
   const mailOptions = {
-    from: '"Africa Transit" <support@africatransit.com>',
+    from: '"Shop & Ship Global" <support@shopandship.global>',
     to: email,
-    subject: `🌍 Welcome Aboard, ${name}! – Your Africa Transit Panel Access 🚦`,
+    subject: `🔐 Your Shop & Ship Global Verification Code`,
     html: `
-<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 20px auto; padding: 30px; background: linear-gradient(to right, #fffbe6, #ffffff); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #ffefc1;">
-  
+<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 25px auto; padding: 30px; background: linear-gradient(to right, #fff8f3, #ffffff); border-radius: 12px; border: 1px solid #ffe0b2; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+
   <!-- Header -->
   <div style="text-align: center; margin-bottom: 25px;">
-    <img src="[AFRICA_TRANSIT_LOGO_URL]" alt="Africa Transit Logo" style="max-width: 140px; border-radius: 8px;">
-    <h2 style="color: #d4a017; font-size: 26px; margin-top: 15px;">
-      ✈️ Karibu (Welcome) ${name}!
+    <img src="[SHOPANDSHIP_LOGO_URL]" alt="Shop & Ship Global Logo" style="max-width: 140px; border-radius: 8px;">
+    <h2 style="color: #FF7A00; font-size: 24px; margin-top: 15px;">
+      Hello ${name}, 👋
     </h2>
-    <p style="font-size: 16px; color: #333;">
-      Your journey with <strong>Africa Transit</strong> begins now!  
-      Here are your secure login details for the 🚢 <strong>Transit Management Panel</strong>.
+    <p style="font-size: 16px; color: #333; line-height: 1.6;">
+      Welcome to <strong>Shop & Ship Global</strong> 🌍  
+      To verify your account and continue your global shopping journey, please use the One-Time Password (OTP) below.
     </p>
   </div>
 
-  <!-- Credentials -->
-  <div style="background-color: #fff9e6; padding: 20px; border-left: 5px solid #2e7d32; border-radius: 8px; margin-bottom: 25px;">
-    <h3 style="margin: 0; color: #2e7d32;">🔑 Your Login Credentials</h3>
-    <p style="font-size: 16px; color: #333; margin: 8px 0;">📧 <strong>Email:</strong> ${email}</p>
-    <p style="font-size: 16px; color: #333; margin: 8px 0;">🔐 <strong>Password:</strong> ${password}</p>
-    <p style="font-size: 14px; color: #777; margin-top: 10px;">⚠️ For your safety, please update your password after your first login.</p>
+  <!-- OTP Box -->
+  <div style="background-color: #fff3e0; padding: 25px; border-left: 5px solid #FF7A00; border-radius: 10px; text-align: center; margin: 25px 0;">
+    <h3 style="margin: 0; font-size: 18px; color: #cc5a00;">🔒 Your Verification Code</h3>
+    <p style="font-size: 32px; letter-spacing: 6px; font-weight: bold; color: #FF7A00; margin: 15px 0;">${OTP}</p>
+    <p style="font-size: 14px; color: #777;">This OTP is valid for the next <strong>10 minutes</strong>. Please do not share it with anyone.</p>
   </div>
 
-  <!-- Call to Action -->
+  <!-- User Details -->
+  <div style="background: #fffaf5; border: 1px dashed #ffc58a; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+    <h4 style="margin: 0 0 10px; color: #cc5a00;">👤 Your Account Details</h4>
+    <p style="font-size: 15px; color: #444; margin: 5px 0;"><strong>📧 Email:</strong> ${email}</p>
+    <p style="font-size: 15px; color: #444; margin: 5px 0;"><strong>📞 Phone:</strong> ${phone}</p>
+    <p style="font-size: 15px; color: #444; margin: 5px 0;"><strong>🌍 Country:</strong> ${country}</p>
+  </div>
+
+  <!-- CTA -->
   <div style="text-align: center; margin: 30px 0;">
-    <a href="https://africatransit.com/login" style="display: inline-block; background-color: #2e7d32; color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px;">
-      🚀 Access Africa Transit Panel
+    <a href="https://shopandship.global/verify" style="display: inline-block; background-color: #FF7A00; color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px;">
+      Verify My Account ✅
     </a>
   </div>
 
-  <!-- Extra Info -->
-  <p style="font-size: 16px; color: #333;">
-    From the bustling ports of Mombasa 🚢 to the deserts of Namibia 🏜, Africa Transit helps you track, manage, and deliver shipments with speed and security. Let’s move your business forward! 📦
-  </p>
-
-  <!-- Support Info -->
-  <div style="border-top: 1px solid #f4e2b6; margin-top: 30px; padding-top: 20px;">
+  <!-- Footer -->
+  <div style="border-top: 1px solid #ffe3c1; margin-top: 30px; padding-top: 20px;">
     <p style="font-size: 15px; color: #555;">
-      📞 Need assistance? Call us at <a href="tel:+254700000000" style="color: #d4a017;">+254 700 000 000</a>  
-      or email <a href="mailto:support@africatransit.com" style="color: #d4a017;">support@africatransit.com</a>.
+      ⚠️ If you didn’t request this OTP, please ignore this message or contact our support team immediately.
     </p>
     <p style="font-size: 15px; color: #555;">
-      🌐 Visit us: <a href="https://africatransit.com" style="color: #d4a017;">africatransit.com</a>
+      📞 Need help? Call <a href="tel:+918888888888" style="color: #FF7A00;">+91 88888 88888</a> or email <a href="mailto:support@shopandship.global" style="color: #FF7A00;">support@shopandship.global</a>.
     </p>
   </div>
 
-  <!-- Footer -->
-  <p style="font-size: 16px; font-weight: bold; color: #2e7d32;">
-    Safe travels,<br>The Africa Transit Team 🌍
+  <p style="font-size: 16px; font-weight: bold; color: #FF7A00;">
+    Happy Shopping,<br>The Shop & Ship Global Team 🛒
   </p>
 
   <div style="margin-top: 40px; font-size: 12px; color: #888; text-align: center;">
-    <p>© ${new Date().getFullYear()} Africa Transit. All rights reserved.</p>
+    <p>© ${new Date().getFullYear()} Shop & Ship Global. All rights reserved.</p>
     <p>
-      <a href="https://africatransit.com/privacy-policy" style="color: #888;">Privacy Policy</a> |
-      <a href="https://africatransit.com/unsubscribe" style="color: #888;">Unsubscribe</a>
+      <a href="https://shopandship.global/privacy-policy" style="color: #888;">Privacy Policy</a> |
+      <a href="https://shopandship.global/unsubscribe" style="color: #888;">Unsubscribe</a>
     </p>
   </div>
 </div>
@@ -151,13 +164,14 @@ exports.sendAfricaTransitCredentialsEmail = async (name, email, password) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Africa Transit credentials email sent:", info.response);
+    console.log("Shop & Ship OTP email sent:", info.response);
     return true;
   } catch (err) {
-    console.error("Error sending Africa Transit credentials email:", err);
+    console.error("Error sending Shop & Ship OTP email:", err);
     return false;
   }
 };
+
 
 
 exports.sendUserRegistrationConfirmationEmail = async (name, email, phone, password) => {

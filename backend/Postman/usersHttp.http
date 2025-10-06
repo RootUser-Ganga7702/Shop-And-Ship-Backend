@@ -17,3 +17,38 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
+POST http://localhost:4009/api/users/registerUser
+Content-Type: application/json
+
+{
+    "name": "Ganga",
+    "email": "gangafullstack963@gmail.com",
+    "phone": "7702441016",
+    "password": "ganga@123",
+    "country": "Somalia"
+}
+###
+POST http://localhost:4009/api/users/verifyUser
+Content-Type: application/json
+
+{
+    "email": "gangafullstack963@gmail.com",
+    "phone": "7702441016",
+    "otp": "133061"
+}
+###
+POST http://localhost:4009/api/users/resendOtp
+Content-Type: application/json
+
+{
+    "email": "gangafullstack963@gmail.com",
+    "phone": "7702441016"
+}
+###
+POST http://localhost:4009/api/users/userLogin
+Content-Type: application/json
+
+{
+    "emailOrPhone": "7702441016",
+    "password": "ganga@123"
+}
