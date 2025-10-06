@@ -17,24 +17,24 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/users/registerUser
+POST http://localhost:4009/api/users/registerUser
 Content-Type: application/json
 
 {
     "name": "Ganga",
-    "email": "gangafullstack963@gmail.com",
-    "phone": "7702441016",
+    "email": "imgayathri1234@gmail.com",
+    "phone": "7702441056",
     "password": "ganga@123",
     "country": "Somalia"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/users/verifyUser
+POST http://localhost:4009/api/users/verifyUser
 Content-Type: application/json
 
 {
-    "email": "gangafullstack963@gmail.com",
-    "phone": "7702441016",
-    "otp": "133061"
+    "email": "imgayathri1234@gmail.com",
+    "phone": "7702441056",
+    "otp": "195293"
 }
 ###
 POST https://shop-and-ship-backend.onrender.com/api/users/resendOtp
@@ -49,6 +49,8 @@ POST https://shop-and-ship-backend.onrender.com/api/users/userLogin
 Content-Type: application/json
 
 {
-    "emailOrPhone": "7702441016",
+    "emailOrPhone": "imgayathri1234@gmail.com",
     "password": "ganga@123"
 }
+###
+GET
