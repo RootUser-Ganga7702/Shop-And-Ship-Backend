@@ -1,4 +1,4 @@
-POST http://localhost:4009/api/cartOrders/addToCart
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/addToCart
 Content-Type: application/json
 
 {
@@ -8,10 +8,33 @@ Content-Type: application/json
   "productId": "P123",
   "productName": "Redmi Note 13",
   "productBrand": "Xiaomi",
-  "productWeight": 0.3,
+  "productWeight": 3,
   "productImage": "https://flipkart.com/redmi.jpg",
   "categoryPath": ["Mobiles", "Smartphones"],
   "attributes": {"color": "Blue", "RAM": "8GB"},
   "quantity": 1,
   "unitPrice": 15999
+}
+###
+POST http://localhost:4009/api/cartOrders/getCart
+Content-Type: application/json
+
+{
+  "userId": "68e48002ba1f09ca190d1f39"
+}
+###
+POST http://localhost:4009/api/cartOrders/removeFromCart
+Content-Type: application/json
+
+{
+  "userId": "68e48002ba1f09ca190d1f39",
+  "productId": "P123",
+  "platform": "flipkart"
+}
+###
+POST http://localhost:4009/api/cartOrders/clearCart
+Content-Type: application/json
+
+{
+  "userId": "68e48002ba1f09ca190d1f39"
 }

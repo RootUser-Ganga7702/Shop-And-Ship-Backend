@@ -70,12 +70,12 @@ exports.addToCart = async (req, res) => {
 // ✅ Get Cart by User
 exports.getCart = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.body;
 
     const cart = await Cart.findOne({ userId });
 
     if (!cart) {
-      return res.status(404).json({ message: "Cart not found" });
+      return res.status(404).json({ message: "Cart not found", cart });
     }
 
     res.status(200).json(cart);
@@ -89,7 +89,6 @@ exports.getCart = async (req, res) => {
 exports.removeFromCart = async (req, res) => {
   try {
     const { userId, productId, platform } = req.body;
-
     let cart = await Cart.findOne({ userId });
     if (!cart) return res.status(404).json({ message: "Cart not found" });
 
