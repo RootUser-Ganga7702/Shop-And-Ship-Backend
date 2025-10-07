@@ -1,0 +1,17 @@
+POST http://localhost:4009/api/cartOrders/addToCart
+Content-Type: application/json
+
+{
+  "userId": "68e48002ba1f09ca190d1f39",
+  "platform": "flipkart",
+  "vendorId": "V123",
+  "productId": "P123",
+  "productName": "Redmi Note 13",
+  "productBrand": "Xiaomi",
+  "productWeight": 0.3,
+  "productImage": "https://flipkart.com/redmi.jpg",
+  "categoryPath": ["Mobiles", "Smartphones"],
+  "attributes": {"color": "Blue", "RAM": "8GB"},
+  "quantity": 1,
+  "unitPrice": 15999
+}

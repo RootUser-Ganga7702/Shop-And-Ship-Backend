@@ -34,7 +34,7 @@ Content-Type: application/json
 {
     "email": "gangafullstack963@gmail.com",
     "phone": "7702441016",
-    "otp": "220756"
+    "otp": "626949"
 }
 ###
 POST https://shop-and-ship-backend.onrender.com/api/users/resendOtp

@@ -9,6 +9,7 @@ const cors = require("cors");
 
 const mainRoute = require('./routes/route');
 const allUserRoutes = require('./routes/allUsersRoutes');
+const cartOrdersRoute = require('./routes/cartOrdersRoutes');
 
 
 // Connect to the database
@@ -24,6 +25,8 @@ app.use(cors({
 
 app.use('/', mainRoute);
 app.use('/api/users', allUserRoutes);
+app.use('/api/cartOrders', cartOrdersRoute);
+
 
 
 // Start the server

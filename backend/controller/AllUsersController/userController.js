@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const { generateOtp } = require('../../middelware/userMiddleware');
 const { sendOtpByEmailPhone,sendUserOtpEmail, sendShopAndShipWelcomeEmail } = require('../../middelware/nodeMailer');
 const jwt = require('jsonwebtoken');
-// const Cart = require('../../models/cartOrderPaymentModels/cart');
+const Cart = require('../../models/CartOrdersModels/cart');
 // const Address = require('../../models/adressLocationsModels/userAddress');
 
 const JWT_SECRET = "MyShoAndShipSecretKey!";
@@ -63,12 +63,10 @@ exports.verifyUser = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
 
     // Create a cart for the user
-    // const newCart = new Cart({
-    //   userId: user._id,
-    //   productsList: [],
-    //   totalAmount: 0
-    // });
-    // await newCart.save();
+    const newCart = new Cart({
+      userId: user._id
+    });
+    await newCart.save();
 
     user.isVerified = true;
     // user.cartId = newCart._id;

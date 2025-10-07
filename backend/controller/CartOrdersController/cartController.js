@@ -1,0 +1,131 @@
+const Cart = require("../../models/CartOrdersModels/cart");
+
+// Helper function to recalculate total
+const calculateTotalAmount = (items) => {
+  return items.reduce((acc, item) => acc + item.totalPrice, 0);
+};
+
+// ✅ Add or Update Cart Item
+exports.addToCart = async (req, res) => {
+  try {
+    const { userId, platform, vendorId, productId, productName, productBrand, productWeight, productImage, categoryPath, attributes, quantity, unitPrice, currency } = req.body;
+
+    if (!userId || !productId) {
+      return res.status(400).json({ message: "userId and productId are required" });
+    }
+
+    // Find user’s existing cart
+    let cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      cart = new Cart({ userId, items: [] });
+    }
+
+    // Check if item already exists
+    const existingItemIndex = cart.items.findIndex(
+      (item) => item.productId === productId && item.platform === platform
+    );
+
+    if (existingItemIndex > -1) {
+      // If exists, update quantity
+      cart.items[existingItemIndex].quantity += quantity;
+      cart.items[existingItemIndex].totalPrice =
+        cart.items[existingItemIndex].quantity *
+        cart.items[existingItemIndex].unitPrice;
+    } else {
+      // Otherwise, push new item
+      cart.items.push({
+        platform,
+        vendorId,
+        productId,
+        productName,
+        productBrand,
+        productWeight,
+        productImage,
+        categoryPath,
+        attributes,
+        quantity,
+        unitPrice,
+        totalPrice: quantity * unitPrice,
+        currency,
+      });
+    }
+
+    // Recalculate total
+    cart.totalAmount = calculateTotalAmount(cart.items);
+    cart.updatedAt = new Date();
+
+    await cart.save();
+
+    res.status(200).json({
+      message: "Item added/updated successfully",
+      cart,
+    });
+  } catch (error) {
+    console.error("Add to Cart Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+// ✅ Get Cart by User
+exports.getCart = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    console.error("Get Cart Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+// ✅ Remove an Item
+exports.removeFromCart = async (req, res) => {
+  try {
+    const { userId, productId, platform } = req.body;
+
+    let cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    cart.items = cart.items.filter(
+      (item) => !(item.productId === productId && item.platform === platform)
+    );
+
+    cart.totalAmount = calculateTotalAmount(cart.items);
+    cart.updatedAt = new Date();
+
+    await cart.save();
+
+    res.status(200).json({ message: "Item removed successfully", cart });
+  } catch (error) {
+    console.error("Remove Cart Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+// ✅ Clear Cart
+exports.clearCart = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    let cart = await Cart.findOne({ userId });
+
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    cart.items = [];
+    cart.totalAmount = 0;
+    cart.updatedAt = new Date();
+
+    await cart.save();
+
+    res.status(200).json({ message: "Cart cleared successfully", cart });
+  } catch (error) {
+    console.error("Clear Cart Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
