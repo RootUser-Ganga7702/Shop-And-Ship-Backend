@@ -16,14 +16,14 @@ Content-Type: application/json
   "unitPrice": 15999
 }
 ###
-POST http://localhost:4009/api/cartOrders/getCart
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/getCart
 Content-Type: application/json
 
 {
   "userId": "68e48002ba1f09ca190d1f39"
 }
 ###
-POST http://localhost:4009/api/cartOrders/removeFromCart
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/removeFromCart
 Content-Type: application/json
 
 {
@@ -32,9 +32,19 @@ Content-Type: application/json
   "platform": "flipkart"
 }
 ###
-POST http://localhost:4009/api/cartOrders/clearCart
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/clearCart
 Content-Type: application/json
 
 {
   "userId": "68e48002ba1f09ca190d1f39"
+}
+###
+POST http://localhost:4009/api/cartOrders/updateQuantity
+Content-Type: application/json
+
+{
+  "userId": "68e48002ba1f09ca190d1f39",
+  "productId": "P123",
+  "platform": "flipkart",
+  "action": "decrease"
 }

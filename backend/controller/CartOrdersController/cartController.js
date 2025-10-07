@@ -67,6 +67,65 @@ exports.addToCart = async (req, res) => {
   }
 };
 
+
+exports.updateQuantity = async (req, res) => {
+  try {
+    const { userId, productId, platform, action } = req.body;
+
+    if (!userId || !productId || !platform || !action) {
+      return res.status(400).json({
+        message: "userId, productId, platform, and action are required",
+      });
+    }
+
+    // Find the user's cart
+    const cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    // Find item in cart
+    const itemIndex = cart.items.findIndex(
+      (i) => i.productId === productId && i.platform === platform
+    );
+    if (itemIndex === -1) return res.status(404).json({ message: "Item not found in cart" });
+
+    const item = cart.items[itemIndex];
+
+    // Handle increase or decrease
+    if (action === "increase") {
+      item.quantity += 1;
+      item.totalPrice = item.quantity * item.unitPrice;
+    } 
+    else if (action === "decrease") {
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+        item.totalPrice = item.quantity * item.unitPrice;
+      } else {
+        // Remove item if quantity becomes 0
+        cart.items.splice(itemIndex, 1);
+      }
+    } 
+    else {
+      return res.status(400).json({ message: "Invalid action. Use 'increase' or 'decrease'" });
+    }
+
+    // Recalculate total amount
+    cart.totalAmount = cart.items.reduce((acc, i) => acc + i.totalPrice, 0);
+    cart.updatedAt = new Date();
+
+    await cart.save();
+
+    res.status(200).json({
+      message: `Quantity ${action}d successfully`,
+      cart,
+    });
+  } catch (error) {
+    console.error("Update Quantity Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+
+
 // ✅ Get Cart by User
 exports.getCart = async (req, res) => {
   try {
