@@ -39,7 +39,7 @@ Content-Type: application/json
   "userId": "68e48002ba1f09ca190d1f39"
 }
 ###
-POST http://localhost:4009/api/cartOrders/updateQuantity
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/updateQuantity
 Content-Type: application/json
 
 {
