@@ -1,0 +1,33 @@
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/createPlatForm
+Content-Type: application/json
+
+{
+    "platFormName": "Flipkart",
+    "url": "http://flipkart.com",
+    "discription": "This is the first home slide",
+    "platFormImage": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+}
+
+###
+
+
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/updatePlatForm
+Content-Type: application/json
+
+{
+    "id": "613b5c8c9c4c6f0c7a8b7c6d",
+    "platFormName": "Flipkart",
+    "url": "http://flipkart.com",
+    "discription": "This is the first home slide",
+    "platFormImage": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+}
+###
+GET https://shop-and-ship-backend.onrender.com/api/userWeb/getAllPlatForms
+
+###
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/deletePlatForm
+Content-Type: application/json
+
+{
+    "id": "613b5c8c9c4c6f0c7a8b7c6d"
+}

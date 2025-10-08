@@ -5,7 +5,11 @@ const HomeSlides = require("../../models/UserWebModels/homeSlides");
 // ------------------------------
 exports.createHomeSlide = async (req, res) => {
   try {
-    const { bannerName, bannerImage, discription } = req.body;
+    const { bannerName, bannerImage, discription, device } = req.body;
+
+    if (!bannerName || !bannerImage || !discription || !device) {
+      return res.status(400).json({ message: "Please provide all required fields!" });
+    }
 
     // Check for existing slide with the same name
     const existingSlide = await HomeSlides.findOne({ bannerName });
@@ -17,6 +21,7 @@ exports.createHomeSlide = async (req, res) => {
       bannerName,
       bannerImage,
       discription,
+      device
     });
 
     const savedSlide = await newSlide.save();
@@ -71,12 +76,15 @@ exports.getHomeSlideById = async (req, res) => {
 // ------------------------------
 exports.updateHomeSlide = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { bannerName, bannerImage, discription } = req.body;
+    const { bannerName, bannerImage, discription, device, id } = req.body;
+
+    if (!bannerName || !bannerImage || !discription || !device) {
+      return res.status(400).json({ message: "Please provide all required fields!" });
+    }
 
     const updatedSlide = await HomeSlides.findByIdAndUpdate(
       id,
-      { bannerName, bannerImage, discription },
+      { bannerName, bannerImage, discription, device },
       { new: true, runValidators: true }
     );
 
@@ -98,7 +106,7 @@ exports.updateHomeSlide = async (req, res) => {
 // ------------------------------
 exports.deleteHomeSlide = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
     const deletedSlide = await HomeSlides.findByIdAndDelete(id);
 
     if (!deletedSlide) {

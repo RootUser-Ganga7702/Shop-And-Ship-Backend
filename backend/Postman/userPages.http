@@ -1,0 +1,33 @@
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/createHomeSlides
+Content-Type: application/json
+
+{
+    "bannerName": "Home Slide 1",
+    "device": "mobile",
+    "discription": "This is the first home slide",
+    "bannerImage": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+}
+
+###
+
+
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/updateHomeSlides
+Content-Type: application/json
+
+{
+    "id": "613b5c8c9c4c6f0c7a8b7c6d",
+    "bannerName": "Home Slide 1",
+    "device": "mobile",
+    "discription": "This is the first home slide",
+    "bannerImage": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+}
+###
+GET https://shop-and-ship-backend.onrender.com/api/userWeb/getAllHomeSlides
+
+###
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/deleteHomeSlides
+Content-Type: application/json
+
+{
+    "id": "613b5c8c9c4c6f0c7a8b7c6d"
+}

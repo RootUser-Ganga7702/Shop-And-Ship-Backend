@@ -21,10 +21,10 @@ POST http://localhost:4009/api/users/registerUser
 Content-Type: application/json
 
 {
-    "name": "Ganga",
-    "email": "gangafullstack963@gmail.com",
-    "phone": "7702441016",
-    "password": "ganga@123",
+    "name": "gayaz",
+    "email": "mohammed.gayaz@afri-trading.com",
+    "phone": "7702441010",
+    "password": "gayaz@123",
     "country": "Somalia"
 }
 ###
@@ -32,9 +32,9 @@ POST http://localhost:4009/api/users/verifyUser
 Content-Type: application/json
 
 {
-    "email": "gangafullstack963@gmail.com",
-    "phone": "7702441016",
-    "otp": "626949"
+    "email": "mohammed.gayaz@afri-trading.com",
+    "phone": "7702441010",
+    "otp": "288518"
 }
 ###
 POST https://shop-and-ship-backend.onrender.com/api/users/resendOtp
