@@ -226,53 +226,51 @@ exports.userLogin = async (req, res) => {
 //   }
 // }
 
-// exports.restPassword = async (req, res) => {
-//   try {
-//     const { phone,email, password } = req.body;
-//     if(!password || !phone || !email){
-//       return res.status(400).json({ responseCode: 400, message: "Password is required" });
-//     }
+exports.restPassword = async (req, res) => {
+  try {
+    const { phone,email, password } = req.body;
+    if(!password || !phone || !email){
+      return res.status(400).json({ responseCode: 400, message: "Password is required" });
+    }
 
-//     const user = await User.findOne({ phone });
+    const user = await User.findOne({ phone });
 
-//     if (!user) {
-//       return res.status(400).json({ responseCode: 400, message: "User not found" });
-//     }
+    if (!user) {
+      return res.status(400).json({ responseCode: 400, message: "User not found" });
+    }
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = password;
+    await user.save();
 
-//     user.password = hashedPassword;
-//     await user.save();
-
-//     res.status(200).json({ responseCode: 200, message: "Password Reset Successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// }
+    res.status(200).json({ responseCode: 200, message: "Password Reset Successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().sort({ createdAt: -1 });
     res.status(200).json({ responseCode: 200, message: "Users fetched successfully", users });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 }
 
-// exports.userStatusUpdate = async (req, res) => {
-//   try {
-//     const { userId, status } = req.body;
+exports.userStatusUpdate = async (req, res) => {
+  try {
+    const { userId, status } = req.body;
 
-//     const user = await User.findById(userId);
+    const user = await User.findById(userId);
 
-//     if (!user) {
-//       return res.status(400).json({ responseCode: 400, message: "User not found" });
-//     }
+    if (!user) {
+      return res.status(400).json({ responseCode: 400, message: "User not found" });
+    }
 
-//     user.status = status;
-//     await user.save();
-//     res.status(200).json({ responseCode: 200, message: "User status updated successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// }
+    user.status = status;
+    await user.save();
+    res.status(200).json({ responseCode: 200, message: "User status updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}

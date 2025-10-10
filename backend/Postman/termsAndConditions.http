@@ -1,0 +1,42 @@
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/createTermsAndConditions
+Content-Type: application/json
+
+{
+  "heading": "Terms for Product Usage",
+  "content": "Please read all terms carefully before using our services.",
+  "points": [
+    "Users must be 18 years or older",
+    "Refunds are subject to approval",
+    "Service can be suspended for misuse"
+  ],
+  "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60"
+}
+
+
+###
+
+
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/updateTermsAndConditions
+Content-Type: application/json
+
+{
+  "id": "67078a67d67fdf6e2c17e821",
+  "heading": "Updated Terms for Online Shopping",
+  "content": "Updated content: Please read carefully before checkout.",
+  "points": [
+    "Updated policy applies to all users",
+    "All refunds are processed within 7 days"
+  ],
+  "image": "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=60"
+}
+
+###
+GET https://shop-and-ship-backend.onrender.com/api/userWeb/getAllTermsAndConditions
+
+###
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/deleteTermsAndConditions
+Content-Type: application/json
+
+{
+    "id": "613b5c8c9c4c6f0c7a8b7c6d"
+}
