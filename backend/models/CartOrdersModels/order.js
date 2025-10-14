@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema({
   productPrice: { type: Number, required: true },
   totalProductPrice: { type: Number, required: true },
   discountPrice: { type: Number },
-  currency: { type: String, default: 'INR' },
+  currency: { type: String, default: 'USD' },
 
   // 🔹 Platform and integration tracking
   platform: {

@@ -1,0 +1,10 @@
+POST http://localhost:4009/api/cartOrders/createPayment
+Content-Type: application/json
+
+{
+    "totalAmount": 4000,
+    "userId": "jkhajsdf76834jhjhjdhfs",
+    "paymentMethod": "CARD"
+}
+
+###

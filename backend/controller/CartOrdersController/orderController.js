@@ -3,7 +3,7 @@ const Address = require('../../models/CountriesAndLocations/userAddress');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const Cart = require('../../models/CartOrdersModels/cart');
-const UserPayment = require('../../models/cartOrderPaymentModels/payment');
+const UserPayment = require('../../models/CartOrdersModels/paymentOrder');
 // const { sendOrderPlacedEmail } = require('../../middleware/nodeMailer');
 
 // const { generateBarcodeBase64, generateQRCodeBase64 } = require('../../middelware/barCodeGenarater');
@@ -14,8 +14,13 @@ const RAZORPAY_KEY_SECRET = "xnJhNbWZJnSdMQ9ORsBORsu6"
 const RAZORPAY_ID = "rzp_test_JwQ042Zb7tQVpW"
 
 // Initialize Razorpay instance
+// const razorpay = new Razorpay({
+//   key_id: "rzp_test_JwQ042Zb7tQVpW",
+//   key_secret: "xnJhNbWZJnSdMQ9ORsBORsu6"
+// });
+
 const razorpay = new Razorpay({
-  key_id: "rzp_test_JwQ042Zb7tQVpW",
+  key_id: "rzp_test_VxwhSQM4a1k8I3",
   key_secret: "xnJhNbWZJnSdMQ9ORsBORsu6"
 });
 
