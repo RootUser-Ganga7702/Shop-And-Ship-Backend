@@ -1,115 +1,122 @@
-const ReturnRefundPolicy = require("../../models/UserWebModels/returnAndRefund");
+const ReturnRefundPolicy = require("../models/ReturnRefundPolicy");
 
-// ✅ Create a new Return & Refund Policy
-exports.createPolicy = async (req, res) => {
+// ✅ Create Policy
+exports.createReturnRefundPolicy = async (req, res) => {
   try {
+    const {
+      heading,
+      description,
+      content,
+      points,
+      refundPeriod,
+      eligibilityCriteria,
+      nonReturnableItems,
+      processSteps,
+      contactEmail,
+      image,
+      status
+    } = req.body;
 
-    const policy = new ReturnRefundPolicy(req.body);
-    await policy.save();
+    const newPolicy = new ReturnRefundPolicy({
+      heading,
+      description,
+      content,
+      points,
+      refundPeriod,
+      eligibilityCriteria,
+      nonReturnableItems,
+      processSteps,
+      contactEmail,
+      image,
+      status
+    });
+
+    const savedPolicy = await newPolicy.save();
     res.status(201).json({
       success: true,
       message: "Return & Refund Policy created successfully",
-      data: policy,
+      data: savedPolicy
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error creating policy",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, message: "Error creating policy", error: error.message });
   }
 };
 
-// ✅ Get all policies
-exports.getAllPolicies = async (req, res) => {
+// ✅ Get All Policies
+exports.getAllReturnRefundPolicies = async (req, res) => {
   try {
     const policies = await ReturnRefundPolicy.find().sort({ createdAt: -1 });
-    res.status(200).json({
-      success: true,
-      count: policies.length,
-      data: policies,
-    });
+    res.status(200).json({ success: true, count: policies.length, data: policies });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching policies",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, message: "Error fetching policies", error: error.message });
   }
 };
 
-// ✅ Get single policy by ID
-exports.getPolicyById = async (req, res) => {
+// ✅ Get Single Policy by ID
+exports.getReturnRefundPolicyById = async (req, res) => {
   try {
-    const policy = await ReturnRefundPolicy.findById(req.params.id);
-    if (!policy) {
-      return res.status(404).json({
-        success: false,
-        message: "Policy not found",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: policy,
-    });
+    const { id } = req.params;
+    const policy = await ReturnRefundPolicy.findById(id);
+    if (!policy) return res.status(404).json({ success: false, message: "Policy not found" });
+    res.status(200).json({ success: true, data: policy });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching policy",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, message: "Error fetching policy", error: error.message });
   }
 };
 
-// ✅ Update policy by ID
-exports.updatePolicy = async (req, res) => {
+// ✅ Update Policy
+exports.updateReturnRefundPolicy = async (req, res) => {
   try {
+    const { id } = req.params;
+    const {
+      heading,
+      description,
+      content,
+      points,
+      refundPeriod,
+      eligibilityCriteria,
+      nonReturnableItems,
+      processSteps,
+      contactEmail,
+      image,
+      status
+    } = req.body;
+
     const updatedPolicy = await ReturnRefundPolicy.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
+      id,
+      {
+        heading,
+        description,
+        content,
+        points,
+        refundPeriod,
+        eligibilityCriteria,
+        nonReturnableItems,
+        processSteps,
+        contactEmail,
+        image,
+        status
+      },
+      { new: true }
     );
 
-    if (!updatedPolicy) {
-      return res.status(404).json({
-        success: false,
-        message: "Policy not found",
-      });
-    }
+    if (!updatedPolicy) return res.status(404).json({ success: false, message: "Policy not found" });
 
-    res.status(200).json({
-      success: true,
-      message: "Policy updated successfully",
-      data: updatedPolicy,
-    });
+    res.status(200).json({ success: true, message: "Policy updated successfully", data: updatedPolicy });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error updating policy",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, message: "Error updating policy", error: error.message });
   }
 };
 
-// ✅ Delete policy by ID
-exports.deletePolicy = async (req, res) => {
+// ✅ Delete Policy
+exports.deleteReturnRefundPolicy = async (req, res) => {
   try {
-    const deletedPolicy = await ReturnRefundPolicy.findByIdAndDelete(req.params.id);
-    if (!deletedPolicy) {
-      return res.status(404).json({
-        success: false,
-        message: "Policy not found",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      message: "Policy deleted successfully",
-    });
+    const { id } = req.params;
+    const deletedPolicy = await ReturnRefundPolicy.findByIdAndDelete(id);
+    if (!deletedPolicy) return res.status(404).json({ success: false, message: "Policy not found" });
+
+    res.status(200).json({ success: true, message: "Policy deleted successfully" });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error deleting policy",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, message: "Error deleting policy", error: error.message });
   }
 };
