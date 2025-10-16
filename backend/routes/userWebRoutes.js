@@ -5,6 +5,8 @@ const { createHomeSlide, getAllHomeSlides, updateHomeSlide, deleteHomeSlide } = 
 const { createPlatForm, getAllPlatForms, updatePlatForm, deletePlatForm } = require('../controller/UserWebController/platformController')
 const { createPaymentPartner, getAllPaymentPartners, updatePaymentPartner, deletePaymentPartner } = require('../controller/UserWebController/addPaymentController')
 const { createTermsAndConditions, getAllTermsAndConditions, updateTermsAndConditions, deleteTermsAndConditions } = require('../controller/UserWebController/termsAndConditionsController')
+const { createReturnRefundPolicy, getAllReturnRefundPolicies, updateReturnRefundPolicy, deleteReturnRefundPolicy } = require('../controller/UserWebController/returnAndRefundController')
+
 
 
 userWebRoutes.route('/createHomeSlides').post(createHomeSlide)
@@ -27,6 +29,12 @@ userWebRoutes.route('/createTermsAndConditions').post(createTermsAndConditions)
 userWebRoutes.route('/getAllTermsAndConditions').get(getAllTermsAndConditions)
 userWebRoutes.route('/updateTermsAndConditions').post(updateTermsAndConditions)
 userWebRoutes.route('/deleteTermsAndConditions').post(deleteTermsAndConditions)
+
+
+userWebRoutes.route('/createReturnRefundPolicy').post(createReturnRefundPolicy)
+userWebRoutes.route('/getAllReturnRefundPolicies').get(getAllReturnRefundPolicies)
+userWebRoutes.route('/updateReturnRefundPolicy').post(updateReturnRefundPolicy)
+userWebRoutes.route('/deleteReturnRefundPolicy').post(deleteReturnRefundPolicy)
 
 
 module.exports = userWebRoutes;

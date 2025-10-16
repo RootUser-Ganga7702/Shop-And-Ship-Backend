@@ -1,4 +1,4 @@
-const ReturnRefundPolicy = require("../models/ReturnRefundPolicy");
+const ReturnRefundPolicy = require("../../models/UserWebModels/returnAndRefund");
 
 // ✅ Create Policy
 exports.createReturnRefundPolicy = async (req, res) => {
@@ -55,7 +55,7 @@ exports.getAllReturnRefundPolicies = async (req, res) => {
 // ✅ Get Single Policy by ID
 exports.getReturnRefundPolicyById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
     const policy = await ReturnRefundPolicy.findById(id);
     if (!policy) return res.status(404).json({ success: false, message: "Policy not found" });
     res.status(200).json({ success: true, data: policy });
@@ -67,8 +67,8 @@ exports.getReturnRefundPolicyById = async (req, res) => {
 // ✅ Update Policy
 exports.updateReturnRefundPolicy = async (req, res) => {
   try {
-    const { id } = req.params;
     const {
+      id,
       heading,
       description,
       content,
@@ -111,7 +111,7 @@ exports.updateReturnRefundPolicy = async (req, res) => {
 // ✅ Delete Policy
 exports.deleteReturnRefundPolicy = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
     const deletedPolicy = await ReturnRefundPolicy.findByIdAndDelete(id);
     if (!deletedPolicy) return res.status(404).json({ success: false, message: "Policy not found" });
 

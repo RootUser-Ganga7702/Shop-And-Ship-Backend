@@ -1,40 +1,77 @@
-POST https://shop-and-ship-backend.onrender.com/api/userWeb/createTermsAndConditions
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/createReturnRefundPolicy
 Content-Type: application/json
 
 {
-  "heading": "Terms for Product Usage",
-  "content": "Please read all terms carefully before using our services.",
+  "heading": "Return & Refund Policy",
+  "description": "Our return and refund process ensures customer satisfaction.",
+  "content": "You can return eligible products within 7 days of delivery. Refunds will be processed within 3–5 business days after inspection.",
   "points": [
-    "Users must be 18 years or older",
-    "Refunds are subject to approval",
-    "Service can be suspended for misuse"
+    "Products must be unused and in original packaging.",
+    "Proof of purchase is required.",
+    "Certain items are non-returnable."
   ],
-  "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60"
+  "refundPeriod": "7 days",
+  "eligibilityCriteria": [
+    "Defective or damaged products",
+    "Incorrect product delivered"
+  ],
+  "nonReturnableItems": [
+    "Gift cards",
+    "Personal care items",
+    "Customized products"
+  ],
+  "processSteps": [
+    "Submit a return request via your account.",
+    "Wait for pickup confirmation.",
+    "Refund processed after inspection."
+  ],
+  "contactEmail": "support@shopandship.com",
+  "image": "https://images.unsplash.com/photo-1581091870622-8e0e0d4a1b0b?auto=format&fit=crop&w=800&q=60",
+  "status": "active"
+}
+
+
+
+###
+
+
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/updateReturnRefundPolicy
+Content-Type: application/json
+
+{
+  "id": "67079b9ed67fdf6e2c17f934",
+  "heading": "Updated Return & Refund Policy",
+  "description": "Revised policy to improve return process.",
+  "content": "You can return items within 10 days for eligible orders. Refunds processed within 5 business days.",
+  "points": [
+    "Product should be unused.",
+    "Return request must be initiated within 10 days."
+  ],
+  "refundPeriod": "10 days",
+  "eligibilityCriteria": [
+    "Damaged product on delivery",
+    "Wrong item delivered"
+  ],
+  "nonReturnableItems": [
+    "Perishable goods",
+    "Gift vouchers"
+  ],
+  "processSteps": [
+    "Login to your account and open Return Requests.",
+    "Upload product image and reason for return.",
+    "Wait for approval and pickup."
+  ],
+  "contactEmail": "returns@shopandship.com",
+  "image": "https://images.unsplash.com/photo-1605902711622-cfb43c4437b9?auto=format&fit=crop&w=800&q=60",
+  "status": "active"
 }
 
 
 ###
-
-
-POST https://shop-and-ship-backend.onrender.com/api/userWeb/updateTermsAndConditions
-Content-Type: application/json
-
-{
-  "id": "67078a67d67fdf6e2c17e821",
-  "heading": "Updated Terms for Online Shopping",
-  "content": "Updated content: Please read carefully before checkout.",
-  "points": [
-    "Updated policy applies to all users",
-    "All refunds are processed within 7 days"
-  ],
-  "image": "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=60"
-}
+GET https://shop-and-ship-backend.onrender.com/api/userWeb/getAllReturnRefundPolicies
 
 ###
-GET https://shop-and-ship-backend.onrender.com/api/userWeb/getAllTermsAndConditions
-
-###
-POST https://shop-and-ship-backend.onrender.com/api/userWeb/deleteTermsAndConditions
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/deleteReturnRefundPolicy
 Content-Type: application/json
 
 {
