@@ -48,3 +48,18 @@ Content-Type: application/json
   "platform": "flipkart",
   "action": "decrease"
 }
+###
+POST http://localhost:4009/api/cartOrders/paymentOrder
+Content-Type: application/json
+
+{
+  "amount": 1
+}
+
+###
+POST http://localhost:4009/api/cartOrders/capturePayment
+Content-Type: application/json
+
+{
+  "orderID" : "0J61033078371283E"
+}
