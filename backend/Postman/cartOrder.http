@@ -49,7 +49,8 @@ Content-Type: application/json
   "action": "decrease"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
+# POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
+POST http://localhost:4009/api/cartOrders/paymentOrder
 Content-Type: application/json
 
 {

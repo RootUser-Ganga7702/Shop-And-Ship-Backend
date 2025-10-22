@@ -59,7 +59,7 @@ exports.createPaypal = async (req, res) => {
     res.json({
       success: true,
       message: "PayPal order created successfully",
-      URL: response.data.links[1],
+      URL: response.data.links[1].href,
       data: response.data
     });
   } catch (error) {
