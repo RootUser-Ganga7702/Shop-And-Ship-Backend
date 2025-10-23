@@ -50,7 +50,8 @@ Content-Type: application/json
 }
 ###
 # POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
-POST http://localhost:4009/api/cartOrders/paymentOrder
+# POST http://localhost:4009/api/cartOrders/paymentOrder
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
 Content-Type: application/json
 
 {

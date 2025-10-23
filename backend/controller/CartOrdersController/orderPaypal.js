@@ -26,7 +26,7 @@ async function generateAccessToken() {
 // 🧾 Create Order (for frontend checkout)
 exports.createPaypal = async (req, res) => {
   try {
-    const { amount } = req.body;
+    const { totalAmount } = req.body;
     const accessToken = await generateAccessToken();
 
     // console.log(accessToken)
@@ -37,7 +37,7 @@ exports.createPaypal = async (req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: amount, // or req.body.amount
+            value: totalAmount, // or req.body.amount
           },
         },
       ]
