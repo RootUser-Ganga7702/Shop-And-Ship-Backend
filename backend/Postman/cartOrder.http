@@ -51,11 +51,11 @@ Content-Type: application/json
 ###
 # POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
 # POST http://localhost:4009/api/cartOrders/paymentOrder
-POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
+POST http://localhost:4009/api/cartOrders/paymentOrder
 Content-Type: application/json
 
 {
-  "amount": 1
+  "totalAmount": 1.0
 }
 
 ###
@@ -63,5 +63,5 @@ POST http://localhost:4009/api/cartOrders/capturePayment
 Content-Type: application/json
 
 {
-  "orderID" : "0J61033078371283E"
+  "orderID" : "30L90191BL686035V"
 }
