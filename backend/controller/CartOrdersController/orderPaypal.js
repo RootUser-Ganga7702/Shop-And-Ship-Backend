@@ -115,6 +115,7 @@ exports.capturePayment = async (req, res) => {
       success: false,
       error: "Something went wrong capturing PayPal order",
       details: error.response?.data || error.message,
+      message : error.message
     });
   }
 };
