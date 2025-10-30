@@ -3,6 +3,17 @@ const { Resend } = require("resend");
 
 const mailSender = new Resend("xmzm eacn kbax gbgf");
 
+// const transporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//         user: "gangadharalothula7702@gmail.com",  // Your Gmail address
+//         pass: "xmzm eacn kbax gbgf", // Your App Password (DO NOT share it publicly)
+//     },
+//     tls: {
+//     rejectUnauthorized: true,  // <-- THIS LINE allows self-signed certs
+//   },
+// });
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -10,7 +21,7 @@ const transporter = nodemailer.createTransport({
         pass: "xmzm eacn kbax gbgf", // Your App Password (DO NOT share it publicly)
     },
     tls: {
-    rejectUnauthorized: true,  // <-- THIS LINE allows self-signed certs
+    rejectUnauthorized: false,  // <-- THIS LINE allows self-signed certs
   },
 });
 
