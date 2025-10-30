@@ -55,7 +55,8 @@ POST http://localhost:4009/api/cartOrders/paymentOrder
 Content-Type: application/json
 
 {
-  "totalAmount": 1.0
+  "totalAmount": 1.0,
+  "userId": "68e48002ba1f09ca190d1f39"
 }
 
 ###

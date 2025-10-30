@@ -1,5 +1,6 @@
 const axios = require("axios");
 const PaypalTransaction = require("../../models/CartOrdersModels/paymentOrder");
+const Cart = require("../../models/CartOrdersModels/cart");
 
 // PayPal credentials
 const PAYPAL_CLIENT_ID = "AcqIhFteGZRBMs8FUG4e2eG3xRCvuzPdTAl0ZaSE4hd8QCQ1ARfmIOXCdNLZQpuPSpurpdwyLgBYs-ha";
@@ -24,7 +25,7 @@ async function generateAccessToken() {
 // 🟢 Create Order
 exports.createPaypal = async (req, res) => {
   try {
-    const { totalAmount } = req.body;
+    const { totalAmount, userId } = req.body;
     const accessToken = await generateAccessToken();
 
     const orderData = {
@@ -50,6 +51,12 @@ exports.createPaypal = async (req, res) => {
           "PayPal-Request-Id": `${Date.now()}-${Math.random()}`,
         },
       }
+    );
+
+    await Cart.findOneAndUpdate(
+      { userId},
+      { $set: { items: [], totalAmount: 0} },
+      { new: true }
     );
 
     res.json({
