@@ -50,3 +50,8 @@ Content-Type: application/json
   "discount": 400,
   "itemTotal": 2999
 }
+###
+GET http://localhost:4009/api/cartOrders/getOrdersByPlatform/INTERNAL
+
+###
+GET http://localhost:4009/api/cartOrders/getAllOrders
