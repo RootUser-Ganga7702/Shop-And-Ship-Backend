@@ -1,6 +1,10 @@
 const axios = require("axios");
 const PaypalTransaction = require("../../models/CartOrdersModels/paymentOrder");
 const Cart = require("../../models/CartOrdersModels/cart");
+const Order = require("../../models/CartOrdersModels/order");
+// const { default: paymentLink } = require("razorpay/dist/types/paymentLink");
+const { generateQRCodeBase64, generateBarcodeBase64 } = require("../../middelware/barCodeGenarater");
+const { v4: uuidv4 } = require('uuid');
 
 // PayPal credentials
 const PAYPAL_CLIENT_ID = "AcqIhFteGZRBMs8FUG4e2eG3xRCvuzPdTAl0ZaSE4hd8QCQ1ARfmIOXCdNLZQpuPSpurpdwyLgBYs-ha";
@@ -25,7 +29,7 @@ async function generateAccessToken() {
 // 🟢 Create Order
 exports.createPaypal = async (req, res) => {
   try {
-    const { totalAmount, userId } = req.body;
+    const { totalAmount, userId, addressId, productsList, email, phone, shippingCharges, discount, itemTotal   } = req.body;
     const accessToken = await generateAccessToken();
 
     const orderData = {
@@ -59,18 +63,75 @@ exports.createPaypal = async (req, res) => {
       { new: true }
     );
 
+    const updatedProductsList = [];
+
+for (const product of productsList || []) {
+  const uniqId = uuidv4().replace(/-/g, '').slice(-12); // 12-char ID
+  const barcodeBase64 = await generateBarcodeBase64(`${uniqId}`);
+  updatedProductsList.push({
+    ...product,
+    barcode: barcodeBase64
+  });
+}
+
+    // add order to database
+    const order = new Order({
+      userId,
+      addressId,
+      productsList : updatedProductsList,
+      email,
+      phone,
+      shippingCharges,
+      discount,
+      itemTotal,
+      totalAmount,
+      paymentMethod: "CARD",
+      paymentStatus: "Success",
+      paymentId: response.data.id,
+      receiptId: response.data.id
+    });
+
+    await order.save();
+
+    
+
+
+    // genare a qr code using order id
+    const qrCode = await generateQRCodeBase64(response.data.id);
+    // use the order createAt date and add 10 days to it and update estimated delivery date
+    const estimatedDeliveryDate = new Date(order.createdAt);
+    estimatedDeliveryDate.setDate(estimatedDeliveryDate.getDate() + 20);
+
+    await Order.findOneAndUpdate(
+      { _id: order._id },
+      { $set: { 
+        paymentLink: response.data.links[1].href,
+        qRcode: qrCode,
+        estimatedDelivery: "20 Days",
+        deliveredAt: estimatedDeliveryDate
+       } },
+      { new: true }
+    )
+
     res.json({
       success: true,
       message: "PayPal order created successfully",
       URL: response.data.links[1].href,
-      data: response.data,
-    });
+      data: response.data
+    })
+
+    // res.json({
+    //   success: true,
+    //   message: "PayPal order created successfully",
+    //   URL: response.data.links[1].href,
+    //   data: response.data,
+    // });
   } catch (error) {
-    console.error("PayPal Error:", error.response?.data || error.message);
+    console.error("PayPal Error:", error.response?.data, error.message);
     res.status(500).json({
       success: false,
       error: "Something went wrong creating PayPal order",
-      details: error.response?.data || error.message,
+      details: error.message,
     });
   }
 };

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // ✅ Universal Product Schema (suitable for all platforms)
 const productSchema = new mongoose.Schema({
   // 🔹 Common product info
+  barcode: { type: String },
   productName: { type: String, required: true },
   productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
   vendorId: { type: String },
@@ -40,21 +41,7 @@ const productSchema = new mongoose.Schema({
   currency: { type: String, default: 'USD' },
 
   // 🔹 Platform and integration tracking
-  platform: {
-    type: String,
-    enum: [
-      'INTERNAL',
-      'AMAZON',
-      'FLIPKART',
-      'SHOPIFY',
-      'MEESHO',
-      'MYNTRA',
-      'EBAY',
-      'NOON',
-      'OTHERS'
-    ],
-    default: 'INTERNAL'
-  },
+  platform: { type: String},
   platformProductId: { type: String }, // product ID from marketplace
   platformOrderId: { type: String },   // order ID from marketplace
   platformMetadata: { type: Object },  // full response or metadata from API
@@ -109,6 +96,7 @@ const orderSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
 
   // 🔹 Payment details
+  paymentLink: { type: String },
   paymentMethod: {
     type: String,
     enum: ['COD', 'UPI', 'CARD', 'WALLET', 'NETBANKING'],
@@ -131,7 +119,7 @@ const orderSchema = new mongoose.Schema({
   },
   deliveryPartner: { type: String },
   deliveryTrackingId: { type: String },
-  estimatedDelivery: { type: Date },
+  estimatedDelivery: { type: String },
   deliveredAt: { type: Date },
 
   // 🔹 Admin controls

@@ -8,3 +8,45 @@ Content-Type: application/json
 }
 
 ###
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
+Content-Type: application/json
+
+{
+  "totalAmount": 2599,
+  "userId": "68e359f9a4575fb168d33214",
+  "addressId": "6720e8a2b8d45a7b12f56789",
+  "productsList": [
+    {
+      "productName": "Wireless Bluetooth Headphones",
+      "productId": "671f4f87b8c0e15b947d9999",
+      "vendorId": "VEND123",
+      "sku": "BT-HEAD-001",
+      "image": "https://example.com/images/headphone.jpg",
+      "images": [
+        "https://example.com/images/headphone1.jpg",
+        "https://example.com/images/headphone2.jpg"
+      ],
+      "categoryId": "electronics",
+      "subCategoryId": "audio",
+      "childCategoryId": null,
+      "attributes": {
+        "brand": "Sony",
+        "color": "Black",
+        "batteryLife": "30 Hours"
+      },
+      "quantity": 1,
+      "productPrice": 2999,
+      "discountPrice": 400,
+      "totalProductPrice": 2599,
+      "currency": "USD",
+      "platform": "INTERNAL",
+      "vendorStatus": "Pending",
+      "warehouseStatus": "Awaiting"
+    }
+  ],
+  "email": "john.doe@example.com",
+  "phone": "+15551234567",
+  "shippingCharges": 0,
+  "discount": 400,
+  "itemTotal": 2999
+}
