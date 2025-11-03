@@ -2,6 +2,7 @@ const axios = require("axios");
 const PaypalTransaction = require("../../models/CartOrdersModels/paymentOrder");
 const Cart = require("../../models/CartOrdersModels/cart");
 const Order = require("../../models/CartOrdersModels/order");
+const Users = require("../../models/AllUsersModels/user");
 // const { default: paymentLink } = require("razorpay/dist/types/paymentLink");
 const { generateQRCodeBase64, generateBarcodeBase64 } = require("../../middelware/barCodeGenarater");
 const { v4: uuidv4 } = require('uuid');
@@ -31,6 +32,12 @@ exports.createPaypal = async (req, res) => {
   try {
     const { totalAmount, userId, addressId, productsList, email, phone, shippingCharges, discount, itemTotal   } = req.body;
     const accessToken = await generateAccessToken();
+
+    // check if user exist in database
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     const orderData = {
       intent: "CAPTURE",
@@ -112,6 +119,19 @@ for (const product of productsList || []) {
        } },
       { new: true }
     )
+
+    const newTransaction = new PaypalTransaction({
+      payerName: user.name,
+      payerEmail: user.email,
+      transactionId: response.data.id,
+      amount: totalAmount,
+      currency: "USD",
+      status: "Success",
+      orderID: order._id,
+    });
+
+    await newTransaction.save();
+
 
     res.json({
       success: true,
