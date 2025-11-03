@@ -30,29 +30,12 @@ const userAddressSchema = new mongoose.Schema({
   // Address classification
   addressType: {
     type: String,
-    enum: ['Home', 'Work', 'Warehouse', 'Pickup Point', 'Other'],
+    enum: ['Home', 'Office', 'Warehouse', 'Pickup Point', 'Other'],
     default: 'Home',
   },
 
   // To identify if this is the primary address
   isDefault: { type: Boolean, default: false },
-
-  // For platform-based tagging (if order came from Amazon, Shopify, etc.)
-  platform: {
-    type: String,
-    enum: [
-      'INTERNAL',
-      'AMAZON',
-      'FLIPKART',
-      'SHOPIFY',
-      'MEESHO',
-      'MYNTRA',
-      'EBAY',
-      'NOON',
-      'OTHERS'
-    ],
-    default: 'INTERNAL'
-  },
 
   platformMetadata: { type: Object },
 

@@ -291,3 +291,23 @@ exports.getUserOrders = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
+// get all payments from payment database
+exports.getAllPayments = async (req, res) => {
+  try {
+    const payments = await PaypalTransaction.find()
+      .sort({ createdAt: -1 })
+
+    if (!payments.length) {
+      return res.status(404).json({ success: false, message: "No payments found" });
+    }
+    res.status(200).json({
+      success: true,
+      count: payments.length,
+      payments,
+    })
+  } catch (error) {
+    console.error("Error fetching payments:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
