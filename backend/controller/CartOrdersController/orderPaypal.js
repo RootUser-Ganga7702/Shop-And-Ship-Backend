@@ -137,7 +137,8 @@ for (const product of productsList || []) {
       success: true,
       message: "PayPal order created successfully",
       URL: response.data.links[1].href,
-      data: response.data
+      data: response.data,
+      transactionDetails: newTransaction,
     })
 
     // res.json({
