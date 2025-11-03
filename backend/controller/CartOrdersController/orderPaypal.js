@@ -260,3 +260,34 @@ exports.getAllOrders = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
+// get user orders
+exports.getUserOrders = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User or Orders not placed" });
+    }
+
+    const orders = await Order.find({ userId })
+      .sort({ createdAt: -1 })
+      .populate("userId", "name email")
+      .lean();
+
+    if (!orders.length) {
+      return res.status(404).json({ success: false, message: "No orders found for this user" });
+    }
+
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}

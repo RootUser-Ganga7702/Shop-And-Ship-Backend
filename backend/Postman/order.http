@@ -51,7 +51,11 @@ Content-Type: application/json
   "itemTotal": 2999
 }
 ###
-GET http://localhost:4009/api/cartOrders/getOrdersByPlatform/INTERNAL
+GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getOrdersByPlatform/INTERNAL
 
 ###
-GET http://localhost:4009/api/cartOrders/getAllOrders
+GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getAllOrders
+###
+GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getUserOrders/68e359f9a4575fb168d33214
+
+
