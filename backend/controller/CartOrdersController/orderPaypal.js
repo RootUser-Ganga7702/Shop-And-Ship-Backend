@@ -135,10 +135,10 @@ for (const product of productsList || []) {
 
     res.json({
       success: true,
+       transactionDetails: newTransaction,
       message: "PayPal order created successfully",
       URL: response.data.links[1].href,
       data: response.data,
-      transactionDetails: newTransaction,
     })
 
     // res.json({
