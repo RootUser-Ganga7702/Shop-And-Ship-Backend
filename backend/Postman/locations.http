@@ -1,15 +1,52 @@
-POST http://localhost:4009/api/locations/addAddress
+POST https://shop-and-ship-backend.onrender.com/api/locations/addAddress
 Content-Type: application/json
 
 {
   "userId": "68e359f9a4575fb168d33214",
-  "fullName": "Gangadhara Lothula",
-  "phone": "9876543210",
-  "email": "ganga@gmail.com",
-  "addressLine1": "123 Main Street",
+  "fullName": "Nagamani Devi",
+  "phone": "9123456789",
+  "email": "nagamani@example.com",
+  "addressLine1": "Plot No. 45, Tech Hub Park",
+  "addressLine2": "Near Mindspace",
+  "landmark": "Opposite Hitech Theatre",
   "city": "Hyderabad",
   "state": "Telangana",
-  "pincode": "500001",
-  "addressType": "Home",
-  "isDefault": true
+  "country": "India",
+  "pincode": "500081",
+  "addressType": "Office",
+  "isDefault": false,
+  "platformMetadata": {
+    "device": "Laptop",
+    "ipAddress": "192.168.0.10",
+    "platform": "WebApp"
+  }
 }
+
+###
+POST http://localhost:4009/api/locations/updateAddress/690ae0ee9c785bec7366562c
+Content-Type: application/json
+
+{
+  "userId": "68e359f9a4575fb168d33214",
+  "fullName": "Nagamani Devi",
+  "phone": "9876501234",
+  "email": "nagamani.updated@example.com",
+  "addressLine1": "Plot No. 45, Tech Hub Park",
+  "addressLine2": "2nd Floor, Block B",
+  "landmark": "Opposite Hitech Theatre",
+  "city": "Hyderabad",
+  "state": "Telangana",
+  "country": "India",
+  "pincode": "500081",
+  "addressType": "Office",
+  "isDefault": true,
+  "platformMetadata": {
+    "device": "Desktop",
+    "ipAddress": "192.168.0.11",
+    "platform": "Admin Panel"
+  }
+}
+
+
+###
+GET https://shop-and-ship-backend.onrender.com/api/locations/getUserAddresses/68e359f9a4575fb168d33214
