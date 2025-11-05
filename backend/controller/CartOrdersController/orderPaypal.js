@@ -312,3 +312,5 @@ exports.getAllPayments = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
+// get all productsLists in the order

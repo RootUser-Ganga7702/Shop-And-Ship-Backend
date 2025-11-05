@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // ✅ Universal Product Schema (suitable for all platforms)
 const productSchema = new mongoose.Schema({
   // 🔹 Common product info
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserData', required: true },
   barcode: { type: String },
   productName: { type: String, required: true },
   productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
@@ -94,7 +95,6 @@ const orderSchema = new mongoose.Schema({
   shippingCharges: { type: Number, default: 0 },
   discount: { type: Number, default: 0 },
   totalAmount: { type: Number, required: true },
-
   // 🔹 Payment details
   paymentLink: { type: String },
   paymentMethod: {
