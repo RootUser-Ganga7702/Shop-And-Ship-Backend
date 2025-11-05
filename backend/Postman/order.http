@@ -57,5 +57,6 @@ GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getOrdersByPlatfor
 GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getAllOrders
 ###
 GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getUserOrders/68e359f9a4575fb168d33214
-
+###
+GET http://localhost:4009/api/cartOrders/getAllProductsLists
 

@@ -314,3 +314,22 @@ exports.getAllPayments = async (req, res) => {
 }
 
 // get all productsLists in the order
+exports.getAllProductsLists = async (req, res) => {
+  try {
+     // Fetch only the productsList field from all orders
+    const orders = await Order.find({}, { productsList: 1, _id: 0 });
+
+    // Flatten all products into a single array
+    const allProducts = orders.flatMap(order => order.productsList);
+
+    res.status(200).json({
+      success: true,
+      totalProducts: allProducts.length,
+      data: allProducts
+    });
+  } catch (error) {
+    console.error("Error fetching productsLists:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+

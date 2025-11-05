@@ -4,7 +4,7 @@ const cartOrdersRoute = express.Router();
 const { addToCart, getCart, removeFromCart, clearCart, updateQuantity } = require('../controller/CartOrdersController/cartController');
 const { createPayment } = require('../controller/CartOrdersController/orderController');
 
-const { createPaypal, capturePayment, getOrdersByPlatform, getAllOrders, getUserOrders, getAllPayments } = require('../controller/CartOrdersController/orderPaypal');
+const { createPaypal, capturePayment, getOrdersByPlatform, getAllOrders, getUserOrders, getAllPayments, getAllProductsLists } = require('../controller/CartOrdersController/orderPaypal');
 
 
 cartOrdersRoute.post('/addToCart', addToCart);
@@ -22,6 +22,7 @@ cartOrdersRoute.get("/getOrdersByPlatform/:platform", getOrdersByPlatform)
 cartOrdersRoute.get("/getAllOrders", getAllOrders)
 cartOrdersRoute.get("/getUserOrders/:userId", getUserOrders)
 cartOrdersRoute.get("/getAllPayments", getAllPayments)
+cartOrdersRoute.get("/getAllProductsLists", getAllProductsLists)
 
 
 module.exports = cartOrdersRoute;

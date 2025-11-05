@@ -11,6 +11,7 @@ const mainRoute = require('./routes/route');
 const allUserRoutes = require('./routes/allUsersRoutes');
 const cartOrdersRoute = require('./routes/cartOrdersRoutes');
 const userWebRoutes = require('./routes/userWebRoutes');
+const locationsAddressRoutes = require('./routes/addressLocations');
 
 
 // Connect to the database
@@ -28,7 +29,7 @@ app.use('/', mainRoute);
 app.use('/api/users', allUserRoutes);
 app.use('/api/cartOrders', cartOrdersRoute);
 app.use('/api/userWeb', userWebRoutes);
-
+app.use('/api/locations', locationsAddressRoutes);
 
 
 // Start the server

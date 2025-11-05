@@ -1,0 +1,15 @@
+POST http://localhost:4009/api/locations/addAddress
+Content-Type: application/json
+
+{
+  "userId": "68e359f9a4575fb168d33214",
+  "fullName": "Gangadhara Lothula",
+  "phone": "9876543210",
+  "email": "ganga@gmail.com",
+  "addressLine1": "123 Main Street",
+  "city": "Hyderabad",
+  "state": "Telangana",
+  "pincode": "500001",
+  "addressType": "Home",
+  "isDefault": true
+}

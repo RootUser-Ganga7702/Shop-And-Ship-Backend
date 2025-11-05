@@ -21,12 +21,6 @@ const userAddressSchema = new mongoose.Schema({
   country: { type: String, default: 'India' },
   pincode: { type: String, required: true },
 
-  // Geo coordinates (useful for delivery APIs or map view)
-  location: {
-    latitude: { type: Number },
-    longitude: { type: Number },
-  },
-
   // Address classification
   addressType: {
     type: String,
