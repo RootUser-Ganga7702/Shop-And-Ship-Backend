@@ -333,3 +333,32 @@ exports.getAllProductsLists = async (req, res) => {
   }
 }
 
+// cancel product in the order productsList and minus the price in the order totalAmount
+exports.cancelProductInOrder = async (req, res) => {
+  try {
+    const { orderId, productId } = req.params;
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    const productIndex = order.productsList.findIndex(product => product._id.toString() === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({ success: false, message: "Product not found in order" });
+    }
+    order.productsList.splice(productIndex, 1);
+    order.totalAmount -= order.productsList[productIndex].price;
+    order.productOrderStatus = "Cancelled"
+
+    await order.save();
+
+    res.status(200).json({ success: true, message: "Product cancelled successfully" });
+  } catch (error) {
+    console.error("Error cancelling product in order:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+

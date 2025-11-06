@@ -17,14 +17,14 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/users/registerUser
+POST http://localhost:4009/api/users/registerUser
 Content-Type: application/json
 
 {
-    "name": "gayaz",
-    "email": "gangafullstack963@gmail.com",
-    "phone": "7702441019",
-    "password": "12345",
+    "name": "Gayatri",
+    "email": "imgayathri1234@gmail.com",
+    "phone": "7702441012",
+    "password": "123456",
     "country": "Somalia"
 }
 ###
@@ -32,12 +32,12 @@ POST http://localhost:4009/api/users/verifyUser
 Content-Type: application/json
 
 {
-    "email": "mohammed.gayaz@afri-trading.com",
-    "phone": "7702441010",
-    "otp": "288518"
+    "email": "imgayathri1234@gmail.com",
+    "phone": "7702441012",
+    "otp": "491080"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/users/resendOtp
+POST http://localhost:4009/api/users/resendOtp
 Content-Type: application/json
 
 {
@@ -45,12 +45,12 @@ Content-Type: application/json
     "phone": "7702441016"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/users/userLogin
+POST http://localhost:4009/api/users/userLogin
 Content-Type: application/json
 
 {
-    "emailOrPhone": "gangafullstack963@gmail.com",
-    "password": "ganga@123"
+    "emailOrPhone": "imgayathri1234@gmail.com",
+    "password": "123456"
 }
 ###
 GET https://shop-and-ship-backend.onrender.com/api/users/getAllUsers

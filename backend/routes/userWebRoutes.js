@@ -6,7 +6,12 @@ const { createPlatForm, getAllPlatForms, updatePlatForm, deletePlatForm } = requ
 const { createPaymentPartner, getAllPaymentPartners, updatePaymentPartner, deletePaymentPartner } = require('../controller/UserWebController/addPaymentController')
 const { createTermsAndConditions, getAllTermsAndConditions, updateTermsAndConditions, deleteTermsAndConditions } = require('../controller/UserWebController/termsAndConditionsController')
 const { createReturnRefundPolicy, getAllReturnRefundPolicies, updateReturnRefundPolicy, deleteReturnRefundPolicy } = require('../controller/UserWebController/returnAndRefundController')
+const { createHowToReturn, getAllHowToReturns, updateHowToReturn, deleteHowToReturn } = require('../controller/UserWebController/howToReturnController')
 
+userWebRoutes.route('/createHowToReturn').post(createHowToReturn)
+userWebRoutes.route('/getAllHowToReturns').get(getAllHowToReturns)
+userWebRoutes.route('/updateHowToReturn').post(updateHowToReturn)
+userWebRoutes.route('/deleteHowToReturn').post(deleteHowToReturn)
 
 
 userWebRoutes.route('/createHomeSlides').post(createHomeSlide)

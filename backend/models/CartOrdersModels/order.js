@@ -59,6 +59,11 @@ const productSchema = new mongoose.Schema({
     default: 'Awaiting'
   },
 
+    productOrderStatus: {
+    type: String,
+    enum: ['Pending', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered', 'Cancelled', 'Returned'],
+    default: 'Pending'
+  },
   // 🔹 Logistics and delivery tracking
   trackingId: { type: String },
   courierPartner: { type: String },
@@ -67,6 +72,11 @@ const productSchema = new mongoose.Schema({
   shippedAt: { type: Date },
   deliveredAt: { type: Date },
 
+  // 🔹 Cancellation and refund
+  cancellationReason: { type: String },
+  cancellationRequestedAt: { type: Date },
+  cancellationApproveStatus: { type: String, enum: ['Pending', 'Approved', 'Rejected'], default: 'Pending' },
+  cancellationApprovedAt: { type: Date },
   // 🔹 Refunds / Returns
   returnStatus: {
     type: String,

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const ReferAndEarnSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "UserData" },
   name: { type: String},
   email: { type: String, unique: true },
   referralCode: { type: String, unique: true },

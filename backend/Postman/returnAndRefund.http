@@ -1,0 +1,40 @@
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/createHowToReturn
+Content-Type: application/json
+
+{
+  "heading": "How to Return a Product",
+  "content": "Follow the steps below to return a product.",
+  "points": [
+    { "steps": "Step 1", "description": "Go to your orders page." },
+    { "steps": "Step 2", "description": "Select the item you want to return." },
+    { "steps": "Step 3", "description": "Click on Return and follow the instructions." }
+  ],
+  "image": "https://example.com/return-guide.jpg"
+}
+
+###
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/updateHowToReturn
+Content-Type: application/json
+
+{
+  "id": "kjjha765783hjhajf7873745",
+  "heading": "How to Return a Product",
+  "content": "Follow the steps below to return a product.",
+  "points": [
+    { "steps": "Step 1", "description": "Go to your orders page." },
+    { "steps": "Step 2", "description": "Select the item you want to return." },
+    { "steps": "Step 3", "description": "Click on Return and follow the instructions." }
+  ],
+  "image": "https://example.com/return-guide.jpg"
+}
+
+###
+GET https://shop-and-ship-backend.onrender.com/api/userWeb/getAllHowToReturns
+
+###
+POST https://shop-and-ship-backend.onrender.com/api/userWeb/deleteHowToReturn
+Content-Type: application/json
+
+{
+  "id": "kjjha765783hjhajf7873745"
+}
