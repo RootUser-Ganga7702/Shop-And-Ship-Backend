@@ -247,10 +247,6 @@ exports.getAllOrders = async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("userId", "name email")
       .lean();
-
-    if (!orders.length) {
-      return res.status(404).json({ success: false, message: "No orders found" });
-    }
     res.status(200).json({
       success: true,
       count: orders.length,
