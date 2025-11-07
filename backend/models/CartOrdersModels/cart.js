@@ -4,7 +4,7 @@ const cartItemSchema = new mongoose.Schema({
   platform: {
     type: String,
     required: true,
-    enum: ['flipkart', 'amazon', 'meesho', 'mintra', 'others'], // define your supported platforms
+    enum: ['flipkart', 'amazon', 'meesho', 'mintra', 'others', "SpareParts"], // define your supported platforms
   },
   vendorId: {
     type: String,

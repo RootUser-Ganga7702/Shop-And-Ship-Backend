@@ -10,7 +10,7 @@ const { createHowToReturn, getAllHowToReturns, updateHowToReturn, deleteHowToRet
 const { createDashboard, getAllDashboards, updateDashboard, deleteDashboard } = require('../controller/UserWebController/dashboardController')
 
 userWebRoutes.route('/createDashboard').post(createDashboard)
-userWebRoutes.route('getAllDashboards').get(getAllDashboards)
+userWebRoutes.route('/getAllDashboards').get(getAllDashboards)
 userWebRoutes.route('/updateDashboard').post(updateDashboard)
 userWebRoutes.route('/deleteDashboard').post(deleteDashboard)
 
