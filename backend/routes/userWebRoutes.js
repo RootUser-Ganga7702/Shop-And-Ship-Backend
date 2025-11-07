@@ -7,6 +7,13 @@ const { createPaymentPartner, getAllPaymentPartners, updatePaymentPartner, delet
 const { createTermsAndConditions, getAllTermsAndConditions, updateTermsAndConditions, deleteTermsAndConditions } = require('../controller/UserWebController/termsAndConditionsController')
 const { createReturnRefundPolicy, getAllReturnRefundPolicies, updateReturnRefundPolicy, deleteReturnRefundPolicy } = require('../controller/UserWebController/returnAndRefundController')
 const { createHowToReturn, getAllHowToReturns, updateHowToReturn, deleteHowToReturn } = require('../controller/UserWebController/howToReturnController')
+const { createDashboard, getAllDashboards, updateDashboard, deleteDashboard } = require('../controller/UserWebController/dashboardController')
+
+userWebRoutes.route('/createDashboard').post(createDashboard)
+userWebRoutes.route('getAllDashboards').get(getAllDashboards)
+userWebRoutes.route('/updateDashboard').post(updateDashboard)
+userWebRoutes.route('/deleteDashboard').post(deleteDashboard)
+
 
 userWebRoutes.route('/createHowToReturn').post(createHowToReturn)
 userWebRoutes.route('/getAllHowToReturns').get(getAllHowToReturns)
