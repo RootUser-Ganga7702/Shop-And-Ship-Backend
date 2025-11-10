@@ -346,7 +346,7 @@ exports.cancelProductInOrder = async (req, res) => {
       return res.status(404).json({ success: false, message: "Product not found in order" });
     }
     order.productsList.splice(productIndex, 1);
-    order.totalAmount -= order.productsList[productIndex].price;
+    order.totalAmount -= order.productsList[productIndex].productPrice;
     order.productOrderStatus = "Cancelled"
 
     await order.save();
