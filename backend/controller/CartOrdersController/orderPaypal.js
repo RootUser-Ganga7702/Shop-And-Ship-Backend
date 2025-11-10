@@ -346,11 +346,11 @@ exports.cancelProductInOrder = async (req, res) => {
       return res.status(404).json({ success: false, message: "Product not found in order" });
     }
     order.totalAmount -= order.productsList[productIndex].productPrice;
-    order.productOrderStatus = "Cancelled"
+    order.productsList[productIndex].productOrderStatus = "Cancelled"
 
     await order.save();
 
-    res.status(200).json({ success: true, message: "Product cancelled successfully" });
+    res.status(200).json({ success: true, message: "Product cancelled successfully", productIndex });
   } catch (error) {
     console.error("Error cancelling product in order:", error);
     res.status(500).json({ success: false, message: "Internal Server Error", msg:error.message });
