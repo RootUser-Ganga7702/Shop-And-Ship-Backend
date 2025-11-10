@@ -354,7 +354,7 @@ exports.cancelProductInOrder = async (req, res) => {
     res.status(200).json({ success: true, message: "Product cancelled successfully" });
   } catch (error) {
     console.error("Error cancelling product in order:", error);
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "Internal Server Error", msg:error.message });
   }
 }
 
