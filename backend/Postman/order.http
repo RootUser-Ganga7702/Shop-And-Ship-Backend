@@ -60,3 +60,12 @@ GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getUserOrders/68e3
 ###
 GET http://localhost:4009/api/cartOrders/getAllProductsLists
 
+###
+POST https://shop-and-ship-backend.onrender.com/api/cartOrders/cancelProductInOrder
+Content-Type: application/json
+
+{
+  "orderId": "6720e8a2b8d45a7b12f56789",
+  "productId": "671f4f87b8c0e15b947d9999"
+}
+
