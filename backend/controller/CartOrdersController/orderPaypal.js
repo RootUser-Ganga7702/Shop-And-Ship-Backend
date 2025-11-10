@@ -332,7 +332,7 @@ exports.getAllProductsLists = async (req, res) => {
 // cancel product in the order productsList and minus the price in the order totalAmount
 exports.cancelProductInOrder = async (req, res) => {
   try {
-    const { orderId, productId } = req.params;
+    const { orderId, productId } = req.body;
 
     const order = await Order.findById(orderId);
 
