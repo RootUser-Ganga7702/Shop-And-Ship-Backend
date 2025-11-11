@@ -6,6 +6,7 @@ const Users = require("../../models/AllUsersModels/user");
 // const { default: paymentLink } = require("razorpay/dist/types/paymentLink");
 const { generateQRCodeBase64, generateBarcodeBase64 } = require("../../middelware/barCodeGenarater");
 const { v4: uuidv4 } = require('uuid');
+const Address = require("../../models/CountriesAndLocations/userAddress");
 
 // PayPal credentials
 const PAYPAL_CLIENT_ID = "AcqIhFteGZRBMs8FUG4e2eG3xRCvuzPdTAl0ZaSE4hd8QCQ1ARfmIOXCdNLZQpuPSpurpdwyLgBYs-ha";
@@ -131,7 +132,7 @@ for (const product of productsList || []) {
     });
 
     await newTransaction.save();
-
+    const address = await Address.findById(addressId);
 
     res.json({
       success: true,
@@ -139,6 +140,8 @@ for (const product of productsList || []) {
       message: "PayPal order created successfully",
       URL: response.data.links[1].href,
       data: response.data,
+      order: order,
+      address: address
     })
 
     // res.json({
