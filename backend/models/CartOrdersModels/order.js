@@ -36,6 +36,7 @@ const productSchema = new mongoose.Schema({
 
   // 🔹 Price and quantity
   quantity: { type: Number, required: true, default: 1 },
+  productWeight: { type: String },
   productPrice: { type: Number, required: true },
   totalProductPrice: { type: Number, required: true },
   discountPrice: { type: Number },
