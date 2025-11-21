@@ -2,7 +2,7 @@ const express = require('express');
 const userWebRoutes = express.Router();
 
 const { createHomeSlide, getAllHomeSlides, updateHomeSlide, deleteHomeSlide } = require('../controller/UserWebController/homeSlidesController')
-const { createPlatForm, getAllPlatForms, updatePlatForm, deletePlatForm } = require('../controller/UserWebController/platformController')
+const { createPlatForm, getCountryBasedPlatForms, getAllPlatForms, updatePlatForm, deletePlatForm } = require('../controller/UserWebController/platformController')
 const { createPaymentPartner, getAllPaymentPartners, updatePaymentPartner, deletePaymentPartner } = require('../controller/UserWebController/addPaymentController')
 const { createTermsAndConditions, getAllTermsAndConditions, updateTermsAndConditions, deleteTermsAndConditions } = require('../controller/UserWebController/termsAndConditionsController')
 const { createReturnRefundPolicy, getAllReturnRefundPolicies, updateReturnRefundPolicy, deleteReturnRefundPolicy } = require('../controller/UserWebController/returnAndRefundController')
@@ -28,6 +28,7 @@ userWebRoutes.route('/deleteHomeSlides').post(deleteHomeSlide)
 
 
 userWebRoutes.route('/createPlatForm').post(createPlatForm)
+userWebRoutes.route('/getCountryBasedPlatForms/:country').get(getCountryBasedPlatForms)
 userWebRoutes.route('/getAllPlatForms').get(getAllPlatForms)
 userWebRoutes.route('/updatePlatForm').post(updatePlatForm)
 userWebRoutes.route('/deletePlatForm').post(deletePlatForm)

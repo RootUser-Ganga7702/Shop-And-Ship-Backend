@@ -41,6 +41,18 @@ exports.createPlatForm = async (req, res) => {
   }
 };
 
+// get country based platforms
+exports.getCountryBasedPlatForms = async (req, res) => {
+  try {
+    const { country } = req.params;
+    const platforms = await PlatForms.find({ country }).sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: platforms });
+  } catch (error) {
+    console.error("Error fetching platforms:", error);
+    res.status(500).json({ success: false, message: "Server error", error });
+  }
+}
+
 // ✅ Get all platforms
 exports.getAllPlatForms = async (req, res) => {
   try {
