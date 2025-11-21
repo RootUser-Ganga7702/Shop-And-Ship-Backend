@@ -3,7 +3,13 @@ const PlatForms = require("../../models/UserWebModels/platforms");
 // ✅ Create a new platform
 exports.createPlatForm = async (req, res) => {
   try {
-    const { platFormName, platFormImage, discription, url } = req.body;
+    const { platFormName, platFormImage, discription,country, url } = req.body;
+
+    if (!platFormName || !platFormImage || !country || !url) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
+    }
 
     // Check for duplicates
     const existing = await PlatForms.findOne({
@@ -19,6 +25,7 @@ exports.createPlatForm = async (req, res) => {
       platFormName,
       platFormImage,
       discription,
+      country,
       url,
     });
 
@@ -62,11 +69,17 @@ exports.getPlatFormById = async (req, res) => {
 // ✅ Update platform
 exports.updatePlatForm = async (req, res) => {
   try {
-    const { platFormName, platFormImage, discription, url, id } = req.body;
+    const { platFormName, platFormImage, discription, country, url, id } = req.body;
+
+    if (!platFormName || !platFormImage || !country || !url) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
+    }
 
     const updatedPlatform = await PlatForms.findByIdAndUpdate(
       id,
-      { platFormName, platFormImage, discription, url },
+      { platFormName, platFormImage, discription, url, country },
       { new: true, runValidators: true }
     );
 

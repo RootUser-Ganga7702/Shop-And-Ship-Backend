@@ -17,14 +17,14 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-POST http://localhost:4009/api/users/registerUser
+POST https://shop-and-ship-backend.onrender.com/api/users/registerUser
 Content-Type: application/json
 
 {
-    "name": "Gayatri",
-    "email": "imgayathri1234@gmail.com",
-    "phone": "7702441012",
-    "password": "123456",
+    "name": "Hayan",
+    "email": "hayanganga@gmail.com",
+    "phone": "9949584283",
+    "password": "7702",
     "country": "Somalia"
 }
 ###

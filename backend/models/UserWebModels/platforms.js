@@ -4,6 +4,7 @@ const PlatFormsSchema = new mongoose.Schema({
   platFormName : { type: String, required: true, unique: true },
   platFormImage: { type: String, required: true, },
   discription: { type: String },
+  country: { type: String, required: true },
   url: { type: String, required: true, unique: true }
 } , { timestamps: true });
 
