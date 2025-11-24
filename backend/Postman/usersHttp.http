@@ -21,10 +21,10 @@ POST http://localhost:4009/api/users/registerUser
 Content-Type: application/json
 
 {
-    "name": "Hayanga",
-    "email": "hayanganga@gmail.com",
-    "phone": "9949584283",
-    "password": "7702",
+    "name": "Surendra",
+    "email": "gangalothula@gmail.com",
+    "phone": "0987656789",
+    "password": "0987",
     "country": "Somalia"
 }
 ###

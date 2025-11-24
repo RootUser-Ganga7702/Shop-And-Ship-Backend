@@ -1,7 +1,11 @@
 const nodemailer = require("nodemailer");
 const { Resend } = require("resend");
+const sgMail = require("@sendgrid/mail");
 
-const mailSender = new Resend("xmzm eacn kbax gbgf");
+// Load API key
+sgMail.setApiKey("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");
+
+const resend = new Resend("re_RgUxBHnD_5689ebBhp4nm3yxKD1jNwWRs");
 
 // const transporter = nodemailer.createTransport({
 //     service: "gmail",
