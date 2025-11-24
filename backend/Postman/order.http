@@ -68,4 +68,10 @@ Content-Type: application/json
   "orderId": "690c7cca1352a47078f58452",
   "productId": "690c7cca1352a47078f58454"
 }
+###
+POST http://localhost:4009/api/cartOrders/shippedProductInOrder
+Content-Type: application/json
 
+{
+  "barcodeId": "d683cbf67ca4"
+}

@@ -361,3 +361,21 @@ exports.cancelProductInOrder = async (req, res) => {
   }
 }
 
+
+// using barcodeId get one product in the productsList order and update the productOrderStatus to Shipped
+exports.shippedProductInOrder = async (req, res) => {
+  try {
+    const { barcodeId } = req.body;
+
+    const order = await Order.findOneAndUpdate
+      ({ "productsList.barcodeId": barcodeId }, { $set: { "productsList.$.productOrderStatus": "Shipped" } }, { new: true });
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+    res.status(200).json({ success: true, message: "Product shipped successfully", order });
+    }catch (error) {
+    console.error("Error shipping product in order:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error", msg:error.message });
+    }
+}

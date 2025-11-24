@@ -4,7 +4,7 @@ const cartOrdersRoute = express.Router();
 const { addToCart, getCart, removeFromCart, clearCart, updateQuantity } = require('../controller/CartOrdersController/cartController');
 const { createPayment } = require('../controller/CartOrdersController/orderController');
 
-const { createPaypal, capturePayment, getOrdersByPlatform, getAllOrders, getUserOrders, getAllPayments, getAllProductsLists, cancelProductInOrder } = require('../controller/CartOrdersController/orderPaypal');
+const { shippedProductInOrder, createPaypal, capturePayment, getOrdersByPlatform, getAllOrders, getUserOrders, getAllPayments, getAllProductsLists, cancelProductInOrder } = require('../controller/CartOrdersController/orderPaypal');
 
 
 cartOrdersRoute.post('/addToCart', addToCart);
@@ -16,6 +16,7 @@ cartOrdersRoute.post('/updateQuantity', updateQuantity);
 cartOrdersRoute.post('/createPayment', createPayment); // create payment route
 
 cartOrdersRoute.post("/paymentOrder", createPaypal)
+cartOrdersRoute.post("/shippedProductInOrder", shippedProductInOrder)
 cartOrdersRoute.post("/capturePayment", capturePayment)
 // user params for the getOrdersByPlatform route
 cartOrdersRoute.get("/getOrdersByPlatform/:platform", getOrdersByPlatform)
