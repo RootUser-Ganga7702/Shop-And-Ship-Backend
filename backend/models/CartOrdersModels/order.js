@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema({
   // 🔹 Common product info
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserData', required: true },
   barcode: { type: String },
+  barcodeId: { type: String },
   productName: { type: String, required: true },
   productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
   vendorId: { type: String },

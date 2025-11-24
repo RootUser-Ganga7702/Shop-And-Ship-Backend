@@ -78,7 +78,8 @@ for (const product of productsList || []) {
   const barcodeBase64 = await generateBarcodeBase64(`${uniqId}`);
   updatedProductsList.push({
     ...product,
-    barcode: barcodeBase64
+    barcode: barcodeBase64,
+    barcodeId: uniqId
   });
 }
 
