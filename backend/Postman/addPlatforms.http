@@ -10,7 +10,6 @@ Content-Type: application/json
 
 ###
 
-
 POST https://shop-and-ship-backend.onrender.com/api/userWeb/updatePlatForm
 Content-Type: application/json
 
