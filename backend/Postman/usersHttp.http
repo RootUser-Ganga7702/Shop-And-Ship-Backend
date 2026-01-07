@@ -1,4 +1,4 @@
-POST https://shop-and-ship-backend.onrender.com/api/users/registerAdmin
+POST http://localhost:4009/api/users/registerAdmin
 Content-Type: application/json
 
 {
@@ -32,9 +32,9 @@ POST http://localhost:4009/api/users/verifyUser
 Content-Type: application/json
 
 {
-    "email": "imgayathri1234@gmail.com",
-    "phone": "7702441012",
-    "otp": "491080"
+    "email": "gangalothula@gmail.com",
+    "phone": "0987656789",
+    "otp": "593121"
 }
 ###
 POST http://localhost:4009/api/users/resendOtp
@@ -49,8 +49,8 @@ POST http://localhost:4009/api/users/userLogin
 Content-Type: application/json
 
 {
-    "emailOrPhone": "imgayathri1234@gmail.com",
-    "password": "123456"
+    "emailOrPhone": "gangalothula@gmail.com",
+    "password": "0987"
 }
 ###
 GET https://shop-and-ship-backend.onrender.com/api/users/getAllUsers
