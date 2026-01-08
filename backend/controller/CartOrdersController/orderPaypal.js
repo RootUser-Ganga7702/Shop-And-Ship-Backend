@@ -336,7 +336,7 @@ exports.getAllProductsLists = async (req, res) => {
 // cancel product in the order productsList and minus the price in the order totalAmount
 exports.cancelProductInOrder = async (req, res) => {
   try {
-    const { orderId, productId } = req.body;
+    const { orderId, productId, cancellationReason } = req.body;
 
     const order = await Order.findById(orderId);
 
@@ -351,6 +351,7 @@ exports.cancelProductInOrder = async (req, res) => {
     }
     order.totalAmount -= order.productsList[productIndex].productPrice;
     order.productsList[productIndex].productOrderStatus = "Cancelled"
+    order.productsList[productIndex].cancellationReason = cancellationReason || "No reason provided";
 
     await order.save();
 
