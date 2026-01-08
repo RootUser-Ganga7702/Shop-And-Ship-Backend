@@ -31,7 +31,7 @@ async function generateAccessToken() {
 // 🟢 Create Order
 exports.createPaypal = async (req, res) => {
   try {
-    const { totalAmount, userId, addressId, productsList, email, phone, shippingCharges, discount, itemTotal   } = req.body;
+    const { totalAmount, userId, addressId, productsList, email, phone, shippingCharges, discount, itemTotal, serviceCharge   } = req.body;
     const accessToken = await generateAccessToken();
 
     // check if user exist in database
@@ -94,6 +94,7 @@ for (const product of productsList || []) {
       discount,
       itemTotal,
       totalAmount,
+      serviceCharge,
       paymentMethod: "CARD",
       paymentStatus: "Success",
       paymentId: response.data.id,

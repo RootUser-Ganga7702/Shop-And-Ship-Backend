@@ -104,6 +104,7 @@ const orderSchema = new mongoose.Schema({
 
   // 🔹 Price summary
   itemTotal: { type: Number, required: true },
+  serviceCharge: { type: Number, required: true },
   shippingCharges: { type: Number, default: 0 },
   discount: { type: Number, default: 0 },
   totalAmount: { type: Number, required: true },
