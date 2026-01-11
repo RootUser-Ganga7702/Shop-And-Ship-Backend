@@ -3,6 +3,7 @@ name: Build & Push Docker Image to ECR
 on:
   push:
     branches:
+      - dev
       - main
 
 jobs:
@@ -23,20 +24,48 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push Docker image
+      - name: Select ECR repo based on branch
+        run: |
+          echo "Branch: $GITHUB_REF_NAME"
+          if [ "$GITHUB_REF_NAME" = "dev" ]; then
+            echo "ECR_REPOSITORY=${{ secrets.ECR_DEV_REPO }}" >> $GITHUB_ENV
+          elif [ "$GITHUB_REF_NAME" = "main" ]; then
+            echo "ECR_REPOSITORY=${{ secrets.ECR_PROD_REPO }}" >> $GITHUB_ENV
+          else
+            echo "❌ Unsupported branch: $GITHUB_REF_NAME"
+            exit 1
+          fi
+
+      - name: Build, tag, and push Docker image (SHA + latest)
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          if [ -z "$ECR_REPOSITORY" ]; then
+            echo "❌ ERROR: ECR_REPOSITORY is empty. Check GitHub secrets."
+            exit 1
+          fi
+
           ECR_REGISTRY=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-          IMAGE_URI=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_URI_SHA=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_URI_LATEST=$ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-          echo "Building image: $IMAGE_URI"
-          docker build -t $IMAGE_URI -f backend/Dockerfile backend
+          echo "ECR_REPOSITORY=$ECR_REPOSITORY"
+          echo "Building image: $IMAGE_URI_SHA"
 
-          echo "Pushing image to ECR..."
-          docker push $IMAGE_URI
+          # Build from backend folder
+          docker build -t $IMAGE_URI_SHA -f backend/Dockerfile backend
 
-          echo "✅ Image pushed: $IMAGE_URI"
+          echo "Tagging as latest: $IMAGE_URI_LATEST"
+          docker tag $IMAGE_URI_SHA $IMAGE_URI_LATEST
+
+          echo "Pushing SHA tag..."
+          docker push $IMAGE_URI_SHA
+
+          echo "Pushing latest tag..."
+          docker push $IMAGE_URI_LATEST
+
+          echo "✅ Pushed images:"
+          echo " - $IMAGE_URI_SHA"
+          echo " - $IMAGE_URI_LATEST"
