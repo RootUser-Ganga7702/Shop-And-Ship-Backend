@@ -36,36 +36,30 @@ jobs:
             exit 1
           fi
 
-      - name: Build, tag, and push Docker image (SHA + latest)
+      - name: Build and push Docker image (SHA only - immutable safe)
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          set -e
+
           if [ -z "$ECR_REPOSITORY" ]; then
             echo "❌ ERROR: ECR_REPOSITORY is empty. Check GitHub secrets."
             exit 1
           fi
 
           ECR_REGISTRY=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-          IMAGE_URI_SHA=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          IMAGE_URI_LATEST=$ECR_REGISTRY/$ECR_REPOSITORY:latest
+          IMAGE_URI=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo "ECR_REPOSITORY=$ECR_REPOSITORY"
-          echo "Building image: $IMAGE_URI_SHA"
+          echo "Building image: $IMAGE_URI"
 
           # Build from backend folder
-          docker build -t $IMAGE_URI_SHA -f backend/Dockerfile backend
+          docker build -t $IMAGE_URI -f backend/Dockerfile backend
 
-          echo "Tagging as latest: $IMAGE_URI_LATEST"
-          docker tag $IMAGE_URI_SHA $IMAGE_URI_LATEST
+          echo "Pushing image to ECR..."
+          docker push $IMAGE_URI
 
-          echo "Pushing SHA tag..."
-          docker push $IMAGE_URI_SHA
-
-          echo "Pushing latest tag..."
-          docker push $IMAGE_URI_LATEST
-
-          echo "✅ Pushed images:"
-          echo " - $IMAGE_URI_SHA"
-          echo " - $IMAGE_URI_LATEST"
+          echo "✅ Image pushed successfully:"
+          echo "IMAGE_URI=$IMAGE_URI"
