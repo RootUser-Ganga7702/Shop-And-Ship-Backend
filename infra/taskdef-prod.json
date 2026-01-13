@@ -7,7 +7,7 @@
   "executionRoleArn": "arn:aws:iam::128031759073:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "backend",
+      "name": "backend-prod",
       "image": "REPLACE_IMAGE",
       "essential": true,
       "portMappings": [{ "containerPort": 4009, "protocol": "tcp" }],
