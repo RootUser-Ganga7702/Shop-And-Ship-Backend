@@ -2,7 +2,7 @@ const express = require('express');
 const allUsersRoutes = express.Router();
 
 const { registerAdmin, adminLogin } = require('../controller/AllUsersController/adminController');
-const { registerUser, verifyUser, resendOtp, userLogin, getAllUsers, userStatusUpdate } = require('../controller/AllUsersController/userController');
+const { registerUser, verifyUser, resendOtp, userLogin, getAllUsers, userStatusUpdate, resetPassword, forgetPassword, forgotPasswordOtpVerify } = require('../controller/AllUsersController/userController');
 
 allUsersRoutes.route('/registerAdmin').post(registerAdmin);
 allUsersRoutes.route('/adminLogin').post(adminLogin);
@@ -13,6 +13,10 @@ allUsersRoutes.route('/resendOtp').post(resendOtp);
 allUsersRoutes.route('/userLogin').post(userLogin);
 allUsersRoutes.route('/getAllUsers').get(getAllUsers);
 allUsersRoutes.route('/userStatusUpdate').post(userStatusUpdate);
+
+allUsersRoutes.route('/resetPassword').post(resetPassword);
+allUsersRoutes.route('/forgetPassword').post(forgetPassword);
+allUsersRoutes.route('/forgotPasswordOtpVerify').post(forgotPasswordOtpVerify);
 
 
 module.exports = allUsersRoutes;

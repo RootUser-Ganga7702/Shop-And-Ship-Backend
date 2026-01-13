@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-POST https://shop-and-ship-backend.onrender.com/api/cartOrders/paymentOrder
+POST https://api.atmship.com/api/cartOrders/paymentOrder
 Content-Type: application/json
 
 {
@@ -48,7 +48,8 @@ Content-Type: application/json
   "phone": "+15551234567",
   "shippingCharges": 0,
   "discount": 400,
-  "itemTotal": 2999
+  "itemTotal": 2999,
+  "serviceCharge": 200,
 }
 ###
 GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getOrdersByPlatform/INTERNAL

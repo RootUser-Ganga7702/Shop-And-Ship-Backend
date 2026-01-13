@@ -17,27 +17,27 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
-POST https://shop-and-ship-backend.onrender.com/api/users/registerUser
+POST https://api.atmship.com/api/users/registerUser
 Content-Type: application/json
 
 {
-    "name": "Mani",
+    "name": "Ganga Gangadhara",
     "email": "hayanganga@gmail.com",
-    "phone": "6642867236",
+    "phone": "9703388970",
     "password": "7890",
     "country": "Somalia"
 }
 ###
-POST http://localhost:4009/api/users/verifyUser
+POST https://api.atmship.com/api/users/verifyUser
 Content-Type: application/json
 
 {
-    "email": "gangalothula@gmail.com",
-    "phone": "0987656789",
-    "otp": "593121"
+    "email": "hayanganga@gmail.com",
+    "phone": "9703388970",
+    "otp": "275991"
 }
 ###
-POST http://localhost:4009/api/users/resendOtp
+POST https://api.atmship.com/api/users/resendOtp
 Content-Type: application/json
 
 {
@@ -49,11 +49,35 @@ POST http://localhost:4009/api/users/userLogin
 Content-Type: application/json
 
 {
-    "emailOrPhone": "gangalothula@gmail.com",
-    "password": "0987"
+    "emailOrPhone": "hayanganga@gmail.com",
+    "password": "G@na7702"
 }
 ###
 GET https://shop-and-ship-backend.onrender.com/api/users/getAllUsers
 
 ###
-GET https://auto-spare-parts-backend-gbsc.onrender.com/getProducts
+POST http://localhost:4009/api/users/resetPassword
+Content-Type: application/json
+
+{
+    "email": "hayanganga@gmail.com",
+    "password": "G@na7702",
+    "phone": "+25377024410"
+}
+###
+POST http://localhost:4009/api/users/forgetPassword
+Content-Type: application/json
+
+{
+    "email": "hayanganga@gmail.com",
+    "phone": "+25377024410"
+}
+###
+POST http://localhost:4009/api/users/forgotPasswordOtpVerify
+Content-Type: application/json
+
+{
+    "email": "hayanganga@gmail.com",
+    "phone": "+25377024410",
+    "otp": "407361"
+}

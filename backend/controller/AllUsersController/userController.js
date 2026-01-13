@@ -1,7 +1,7 @@
 const User = require('../../models/AllUsersModels/user');
 const bcrypt = require('bcryptjs');
 const { generateOtp } = require('../../middelware/userMiddleware');
-const { sendOtpByEmailPhone,sendUserOtpEmail, sendShopAndShipWelcomeEmail } = require('../../middelware/nodeMailer');
+const { sendForgotOtp ,sendUserOtpEmail, sendShopAndShipWelcomeEmail } = require('../../middelware/nodeMailer');
 const jwt = require('jsonwebtoken');
 const Cart = require('../../models/CartOrdersModels/cart');
 // const Address = require('../../models/adressLocationsModels/userAddress');
@@ -12,7 +12,6 @@ const JWT_SECRET = "MyShoAndShipSecretKey!";
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, phone, password, country  } = req.body;
-
     if (!name || !email || !phone || !password || !country) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -177,60 +176,36 @@ exports.userLogin = async (req, res) => {
   }
 };
 
-// exports.forgetPassword = async (req, res) => {
-//   try {
-//     const { phone,email } = req.body;
-
-//     const user = await User.findOne({ phone });
-
-//     if (!user) {
-//       return res.status(400).json({ responseCode: 400, message: "User not found" });
-//     }
-
-//     const OTP = generateOtp();
-//     const mail = await sendOtpByEmailPhone(email, phone, OTP);
-//     if(!mail){
-//       return res.status(400).json({ message: "OTP not sent" });
-//     }
-
-//     user.OTP = OTP;
-//     await user.save();
-
-//     res.status(200).json({ responseCode: 200, message: "OTP Sent Successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// }
-
-// exports.forgotPasswordOtpVerify = async (req, res) => {
-//   try {
-//     const { phone,email, otp } = req.body;
-//     if(!otp || !phone || !email){
-//       return res.status(400).json({ responseCode: 400, message: "OTP is required" });
-//     }
-
-//     const user = await User.findOne({ phone });
-
-//     if (!user) {
-//       return res.status(400).json({ responseCode: 400, message: "User not found" });
-//     }
-
-//     if (user.OTP !== otp) {
-//       return res.status(400).json({ responseCode: 400, message: "Invalid or Expired OTP" });
-//     }
-//     user.isVerified = true;
-//     user.OTP = undefined;
-//     res.status(200).json({ responseCode: 200, message: "OTP Verified Successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// }
-
-exports.restPassword = async (req, res) => {
+exports.forgetPassword = async (req, res) => {
   try {
-    const { phone,email, password } = req.body;
-    if(!password || !phone || !email){
-      return res.status(400).json({ responseCode: 400, message: "Password is required" });
+    const { phone,email } = req.body;
+
+    const user = await User.findOne({ phone, email });
+
+    if (!user) {
+      return res.status(400).json({ responseCode: 400, message: "User not found" });
+    }
+
+    const OTP = generateOtp();
+    const mail = await sendForgotOtp(email, phone, OTP);
+    if(!mail){
+      return res.status(400).json({ message: "OTP not sent" });
+    }
+
+    user.OTP = OTP;
+    await user.save();
+
+    res.status(200).json({ responseCode: 200, message: "OTP Sent Successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+exports.forgotPasswordOtpVerify = async (req, res) => {
+  try {
+    const { phone,email, otp } = req.body;
+    if(!otp || !phone || !email){
+      return res.status(400).json({ responseCode: 400, message: "OTP is required" });
     }
 
     const user = await User.findOne({ phone });
@@ -239,7 +214,34 @@ exports.restPassword = async (req, res) => {
       return res.status(400).json({ responseCode: 400, message: "User not found" });
     }
 
-    user.password = password;
+    if (user.OTP !== otp) {
+      return res.status(400).json({ responseCode: 400, message: "Invalid or Expired OTP" });
+    }
+    user.isVerified = true;
+    user.OTP = undefined;
+    res.status(200).json({ responseCode: 200, message: "OTP Verified Successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { phone,email, password } = req.body;
+    if(!password || !phone || !email){
+      return res.status(400).json({ responseCode: 400, message: "Password is required" });
+    }
+
+    const user = await User.findOne({ phone, email });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!user) {
+      return res.status(400).json({ responseCode: 400, message: "User not found" });
+    }
+
+    
+
+    user.password = hashedPassword;
     await user.save();
 
     res.status(200).json({ responseCode: 200, message: "Password Reset Successfully" });

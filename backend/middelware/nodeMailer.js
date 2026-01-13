@@ -190,6 +190,86 @@ exports.sendUserOtpEmail = async (name, phone, email, country, OTP) => {
   }
 };
 
+exports.sendForgotOtp = async (email, phone, OTP) => {
+  const mailOptions = {
+    from: '"Shop & Ship Global" <support@shopandship.global>',
+    to: email,
+    subject: `🔐 Reset Your Shop & Ship Global Password`,
+    html: `
+<div style="font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 25px auto; padding: 30px; background: linear-gradient(to right, #fff8f3, #ffffff); border-radius: 12px; border: 1px solid #ffe0b2; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 25px;">
+    <img src="[SHOPANDSHIP_LOGO_URL]" alt="Shop & Ship Global Logo" style="max-width: 140px; border-radius: 8px;">
+    <h2 style="color: #FF7A00; font-size: 24px; margin-top: 15px;">
+      Forgot Your Password? 🔑
+    </h2>
+    <p style="font-size: 16px; color: #333; line-height: 1.6;">
+      We received a request to reset your <strong>Shop & Ship Global</strong> account password.  
+      Please use the One-Time Password (OTP) below to continue.
+    </p>
+  </div>
+
+  <!-- OTP Box -->
+  <div style="background-color: #fff3e0; padding: 25px; border-left: 5px solid #FF7A00; border-radius: 10px; text-align: center; margin: 25px 0;">
+    <h3 style="margin: 0; font-size: 18px; color: #cc5a00;">🔒 Password Reset Code</h3>
+    <p style="font-size: 32px; letter-spacing: 6px; font-weight: bold; color: #FF7A00; margin: 15px 0;">${OTP}</p>
+    <p style="font-size: 14px; color: #777;">
+      This OTP is valid for the next <strong>10 minutes</strong>.  
+      Do not share it with anyone.
+    </p>
+  </div>
+
+  <!-- User Info -->
+  <div style="background: #fffaf5; border: 1px dashed #ffc58a; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+    <h4 style="margin: 0 0 10px; color: #cc5a00;">👤 Account Information</h4>
+    <p style="font-size: 15px; color: #444; margin: 5px 0;"><strong>📧 Email:</strong> ${email}</p>
+    <p style="font-size: 15px; color: #444; margin: 5px 0;"><strong>📞 Phone:</strong> ${phone}</p>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align: center; margin: 30px 0;">
+    <a href="https://shopandship.global/reset-password" style="display: inline-block; background-color: #FF7A00; color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px;">
+      Reset Password 🔄
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div style="border-top: 1px solid #ffe3c1; margin-top: 30px; padding-top: 20px;">
+    <p style="font-size: 15px; color: #555;">
+      ⚠️ If you did not request a password reset, please ignore this email or contact our support team immediately.
+    </p>
+    <p style="font-size: 15px; color: #555;">
+      📞 Need help? Call <a href="tel:+918888888888" style="color: #FF7A00;">+91 88888 88888</a> or email
+      <a href="mailto:support@shopandship.global" style="color: #FF7A00;">support@shopandship.global</a>.
+    </p>
+  </div>
+
+  <p style="font-size: 16px; font-weight: bold; color: #FF7A00;">
+    Regards,<br>The Shop & Ship Global Team 🛒
+  </p>
+
+  <div style="margin-top: 40px; font-size: 12px; color: #888; text-align: center;">
+    <p>© ${new Date().getFullYear()} Shop & Ship Global. All rights reserved.</p>
+    <p>
+      <a href="https://shopandship.global/privacy-policy" style="color: #888;">Privacy Policy</a> |
+      <a href="https://shopandship.global/unsubscribe" style="color: #888;">Unsubscribe</a>
+    </p>
+  </div>
+</div>
+`
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Shop & Ship Forgot OTP email sent:", info.response);
+    return true;
+  } catch (err) {
+    console.error("Error sending Shop & Ship Forgot OTP email:", err);
+    return false;
+  }
+};
+
 
 
 exports.sendUserRegistrationConfirmationEmail = async (name, email, phone, password) => {
