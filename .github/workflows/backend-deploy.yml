@@ -1,4 +1,4 @@
-name: Build & Push Docker Image to ECR
+name: Build → Push to ECR → Deploy to ECS
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,13 +24,22 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Select ECR repo based on branch
+      - name: Select config based on branch (ECR + ECS)
         run: |
           echo "Branch: $GITHUB_REF_NAME"
+
           if [ "$GITHUB_REF_NAME" = "dev" ]; then
             echo "ECR_REPOSITORY=${{ secrets.ECR_DEV_REPO }}" >> $GITHUB_ENV
+            echo "ECS_SERVICE=${{ secrets.ECS_SERVICE_DEV }}" >> $GITHUB_ENV
+            echo "TASKDEF_TEMPLATE=infra/taskdef-dev.json" >> $GITHUB_ENV
+            echo "CONTAINER_NAME=backend" >> $GITHUB_ENV
+
           elif [ "$GITHUB_REF_NAME" = "main" ]; then
             echo "ECR_REPOSITORY=${{ secrets.ECR_PROD_REPO }}" >> $GITHUB_ENV
+            echo "ECS_SERVICE=${{ secrets.ECS_SERVICE_PROD }}" >> $GITHUB_ENV
+            echo "TASKDEF_TEMPLATE=infra/taskdef-prod.json" >> $GITHUB_ENV
+            echo "CONTAINER_NAME=backend-prod" >> $GITHUB_ENV
+
           else
             echo "❌ Unsupported branch: $GITHUB_REF_NAME"
             exit 1
@@ -63,3 +72,22 @@ jobs:
 
           echo "✅ Image pushed successfully:"
           echo "IMAGE_URI=$IMAGE_URI"
+
+          # Export image uri for next steps
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+
+      - name: Render ECS task definition (inject new image)
+        id: render
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.TASKDEF_TEMPLATE }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ env.IMAGE_URI }}
+
+      - name: Deploy ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          wait-for-service-stability: true
