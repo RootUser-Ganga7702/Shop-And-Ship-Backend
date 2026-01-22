@@ -62,12 +62,13 @@ GET https://shop-and-ship-backend.onrender.com/api/cartOrders/getUserOrders/68e3
 GET http://localhost:4009/api/cartOrders/getAllProductsLists
 
 ###
-POST http://localhost:4009/api/cartOrders/cancelProductInOrder
+POST https://api.atmship.com/api/cartOrders/cancelProductInOrder
 Content-Type: application/json
 
 {
   "orderId": "690c7cca1352a47078f58452",
-  "productId": "690c7cca1352a47078f58454"
+  "productId": "690c7cca1352a47078f58454",
+  "cancellationReason": "Changed my mind"
 }
 ###
 POST http://localhost:4009/api/cartOrders/shippedProductInOrder
@@ -76,3 +77,6 @@ Content-Type: application/json
 {
   "barcodeId": "d683cbf67ca4"
 }
+
+###
+GET http://localhost:4009/api/cartOrders/getOutForDeliveryOrders

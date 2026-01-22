@@ -1,0 +1,41 @@
+POST https://api.atmship.com/api/userWeb/createCancellationReason
+Content-Type: application/json
+
+{
+  "reason": "Order delayed",
+  "description": "Customer cancelled the order due to late delivery"
+}
+###
+
+POST https://api.atmship.com/api/userWeb/updateCancellationReason
+Content-Type: application/json
+
+{
+  "id": "613b5c8c9c4c6f0c7a8b7c6d",
+  "reason": "Changed Mind",
+  "description": "Customer decided not to proceed with the purchase"
+}
+###
+GET https://api.atmship.com/api/userWeb/getAllCancellationReasons
+###
+POST https://api.atmship.com/api/userWeb/deleteCancellationReason
+Content-Type: application/json
+
+{
+  "id": "613b5c8c9c4c6f0c7a8b7c6d"
+}
+
+
+###
+POST https://api.atmship.com/api/userWeb/createLogo
+Content-Type: application/json
+
+{
+  "image": "https://example.com/logo.png",
+  "name": "ATMSHIP"
+}
+
+###
+GET https://api.atmship.com/api/userWeb/getAllLogos
+###
+GET https://api.atmship.com/api/userWeb/getLastLogo

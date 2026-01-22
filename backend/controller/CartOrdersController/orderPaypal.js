@@ -382,3 +382,115 @@ exports.shippedProductInOrder = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal Server Error", msg:error.message });
     }
 }
+
+
+// get all orders where orderStatus is pending
+exports.getPendingOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Pending" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching pending orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+// get all orders where orderStatus is delivered
+exports.getDeliveredOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Delivered" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching delivered orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+// get all orders where orderStatus is cancelled
+exports.getCancelledOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Cancelled" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching cancelled orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+// get all orders where orderStatus is shipped
+exports.getShippedOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Shipped" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching shipped orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+// get all orders where orderStatus is Returned
+exports.getReturnedOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Returned" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching returned orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+// get all orders where orderStatus is Out for Out for Delivery
+exports.getOutForDeliveryOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Out for Delivery" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching out for delivery orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+// get all orders where orderStatus is Processing
+exports.getProcessingOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ orderStatus: "Processing" })
+      .sort({ createdAt: -1 })
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    })
+  } catch (error) {
+    console.error("Error fetching processing orders:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}

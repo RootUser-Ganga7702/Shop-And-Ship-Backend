@@ -17,6 +17,17 @@ Content-Type: application/json
     "password": "ganga@123"
 }
 ###
+POST http://localhost:4009/api/users/registerAdmin
+Content-Type: application/json
+
+{
+    "name": "Mohammad Hassan",
+    "email": "mohamed.hassan@afri-trading.com",
+    "phone": "8121927536",
+    "password": "med@@1702",
+    "role": "admin"
+}
+###
 POST https://api.atmship.com/api/users/registerUser
 Content-Type: application/json
 
@@ -56,7 +67,7 @@ Content-Type: application/json
 GET https://shop-and-ship-backend.onrender.com/api/users/getAllUsers
 
 ###
-POST http://localhost:4009/api/users/resetPassword
+POST https://api.atmship.com/api/users/resetPassword
 Content-Type: application/json
 
 {
@@ -65,7 +76,7 @@ Content-Type: application/json
     "phone": "+25377024410"
 }
 ###
-POST http://localhost:4009/api/users/forgetPassword
+POST https://api.atmship.com/api/users/forgetPassword
 Content-Type: application/json
 
 {
@@ -73,7 +84,7 @@ Content-Type: application/json
     "phone": "+25377024410"
 }
 ###
-POST http://localhost:4009/api/users/forgotPasswordOtpVerify
+POST https://api.atmship.com/api/users/forgotPasswordOtpVerify
 Content-Type: application/json
 
 {

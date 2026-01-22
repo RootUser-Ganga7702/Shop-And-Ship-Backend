@@ -8,6 +8,20 @@ const { createTermsAndConditions, getAllTermsAndConditions, updateTermsAndCondit
 const { createReturnRefundPolicy, getAllReturnRefundPolicies, updateReturnRefundPolicy, deleteReturnRefundPolicy } = require('../controller/UserWebController/returnAndRefundController')
 const { createHowToReturn, getAllHowToReturns, updateHowToReturn, deleteHowToReturn } = require('../controller/UserWebController/howToReturnController')
 const { createDashboard, getAllDashboards, updateDashboard, deleteDashboard } = require('../controller/UserWebController/dashboardController')
+const { createLogo, getAllLogos, getLastLogo } = require('../controller/UserWebController/logoController')
+const { createCancellationReason, getAllCancellationReasons, updateCancellationReason, deleteCancellationReason } = require('../controller/UserWebController/cancellationReasonController')
+
+
+// cancellation reason routes
+userWebRoutes.route('/createCancellationReason').post(createCancellationReason)
+userWebRoutes.route('/getAllCancellationReasons').get(getAllCancellationReasons)
+userWebRoutes.route('/updateCancellationReason').post(updateCancellationReason)
+userWebRoutes.route('/deleteCancellationReason').post(deleteCancellationReason)
+
+
+userWebRoutes.route('/createLogo').post(createLogo)
+userWebRoutes.route('/getAllLogos').get(getAllLogos)
+userWebRoutes.route('/getLastLogo').get(getLastLogo)
 
 userWebRoutes.route('/createDashboard').post(createDashboard)
 userWebRoutes.route('/getAllDashboards').get(getAllDashboards)
