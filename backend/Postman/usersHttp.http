@@ -13,8 +13,8 @@ POST http://localhost:4009/api/users/adminLogin
 Content-Type: application/json
 
 {
-    "email": "gangafullstack963@gmail.com",
-    "password": "ganga@123"
+    "email": "mohamed.hassan@afri-trading.com",
+    "password": "med@@1702"
 }
 ###
 POST http://localhost:4009/api/users/registerAdmin
