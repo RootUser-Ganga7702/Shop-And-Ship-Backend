@@ -10,6 +10,13 @@ const { createHowToReturn, getAllHowToReturns, updateHowToReturn, deleteHowToRet
 const { createDashboard, getAllDashboards, updateDashboard, deleteDashboard } = require('../controller/UserWebController/dashboardController')
 const { createLogo, getAllLogos, getLastLogo } = require('../controller/UserWebController/logoController')
 const { createCancellationReason, getAllCancellationReasons, updateCancellationReason, deleteCancellationReason } = require('../controller/UserWebController/cancellationReasonController')
+const { addCountry, updateCountry, deleteCountry, getAllCountries } = require('../controller/UserWebController/countriesAddController')
+
+// country routes
+userWebRoutes.route('/addCountry').post(addCountry)
+userWebRoutes.route('/updateCountry').post(updateCountry)
+userWebRoutes.route('/deleteCountry').post(deleteCountry)
+userWebRoutes.route('/getAllCountries').get(getAllCountries)
 
 
 // cancellation reason routes

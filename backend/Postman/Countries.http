@@ -1,0 +1,40 @@
+GET https://api.atmship.com/api/userWeb/getAllCountries
+
+###
+POST https://api.atmship.com/api/userWeb/addCountry
+Content-Type: application/json
+
+{
+  "countryName": "India",
+  "countryCode": "IN",
+  "countryFlag": "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png",
+  "countryCurrency": "INR",
+  "countryLanguage": "Hindi",
+  "countryTimeZone": "Asia/Kolkata",
+  "countryCallingCode": "+91",
+  "countryCapital": "New Delhi"
+}
+
+###
+POST https://api.atmship.com/api/userWeb/updateCountry
+Content-Type: application/json
+
+{
+  "id": "64a7f0e2b4d1c2a5f8e4d123",
+  "countryName": "India",
+  "countryCode": "IN",
+  "countryFlag": "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png",
+  "countryCurrency": "INR",
+  "countryLanguage": "Hindi",
+  "countryTimeZone": "Asia/Kolkata",
+  "countryCallingCode": "+91",
+  "countryCapital": "New Delhi"
+}
+
+###
+POST https://api.atmship.com/api/userWeb/deleteCountry
+Content-Type: application/json
+
+{
+  "id": "64a7f0e2b4d1c2a5f8e4d123"
+}
