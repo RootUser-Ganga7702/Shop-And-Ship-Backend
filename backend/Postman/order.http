@@ -7,7 +7,7 @@ Content-Type: application/json
     "paymentMethod": "CARD"
 }
 
-###
+### 
 POST https://api.atmship.com/api/cartOrders/paymentOrder
 Content-Type: application/json
 
@@ -17,6 +17,7 @@ Content-Type: application/json
   "addressId": "6720e8a2b8d45a7b12f56789",
   "productsList": [
     {
+      "countryCode": "IN",
       "productName": "Wireless Bluetooth Headphones",
       "productId": "671f4f87b8c0e15b947d9999",
       "vendorId": "VEND123",

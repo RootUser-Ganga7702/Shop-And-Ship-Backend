@@ -80,14 +80,14 @@ for (const product of productsList || []) {
   updatedProductsList.push({
     ...product,
     barcode: barcodeBase64,
-    barcodeId: uniqId
+    barcodeId: uniqId,
+    countryCode: countryCode
   });
 }
 
     // add order to database
     const order = new Order({
       userId,
-      countryCode,
       addressId,
       productsList : updatedProductsList,
       email,
