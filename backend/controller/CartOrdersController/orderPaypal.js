@@ -81,7 +81,7 @@ for (const product of productsList || []) {
     ...product,
     barcode: barcodeBase64,
     barcodeId: uniqId,
-    countryCode: countryCode
+    countryCode: countryCode + "-" + uniqId // e.g., US-1a2b3c4d5e6f7g8h9i0
   });
 }
 
@@ -163,6 +163,7 @@ for (const product of productsList || []) {
     });
   }
 };
+
 
 // 🟢 Capture Payment and Save to DB
 exports.capturePayment = async (req, res) => {
