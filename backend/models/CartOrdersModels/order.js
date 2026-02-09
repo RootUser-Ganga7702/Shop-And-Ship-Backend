@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   // 🔹 Common product info
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserData', required: true },
   productOrderUniqueId: { type: String, unique: true },
-  countryCode: { type: String, required: true },
+  countryOrderId: { type: String, required: true },
   barcode: { type: String },
   barcodeId: { type: String },
   productName: { type: String, required: true },
