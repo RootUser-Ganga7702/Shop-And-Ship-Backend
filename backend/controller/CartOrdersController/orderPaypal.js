@@ -81,7 +81,7 @@ for (const product of productsList || []) {
     ...product,
     barcode: barcodeBase64,
     barcodeId: uniqId,
-    countryOrderId: countryCode + "-" + uniqId // e.g., US-1a2b3c4d5e6f7g8h9i0
+    countryOrderId: countryCode + "-000" // eg: US-000, IN-000
   });
 }
 
