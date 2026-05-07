@@ -17,8 +17,12 @@ exports.registerUser = async (req, res) => {
     }
 
     const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
+    // remove the old user if user status is deactive and create new user with same email and phone number
+    if (existingUser && existingUser.status === "deactive") {
+      await User.deleteOne({ _id: existingUser._id });
+    }
 
-    if (existingUser) {
+    if (existingUser.status === "active") {
       return res.status(400).json({ message: "User already exists" });
     }
 
