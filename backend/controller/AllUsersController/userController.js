@@ -45,7 +45,7 @@ exports.registerUser = async (req, res) => {
     res.status(201).json({ responseCode: 200, message: "OTP Sent to Phone Number, Please Verify" });
   } catch (error) {
     console.error("Error creating user:", error);
-    res.status(500).json({ message: "Server error. Please try again later." });
+    res.status(500).json({ message: "Server error. Please try again later.", errMessage: error.message });
   }
 };
 
