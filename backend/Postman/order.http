@@ -81,3 +81,12 @@ Content-Type: application/json
 
 ###
 GET http://localhost:4009/api/cartOrders/getOutForDeliveryOrders
+
+
+###
+POST http://localhost:4009/api/cartOrders/getUserDetails
+Content-Type: application/json
+
+{
+  "orderId": "6a09ae82236927901a5de01e"
+}

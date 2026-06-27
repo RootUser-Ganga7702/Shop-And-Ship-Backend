@@ -4,7 +4,7 @@ const cartOrdersRoute = express.Router();
 const { addToCart, getCart, removeFromCart, clearCart, updateQuantity } = require('../controller/CartOrdersController/cartController');
 // const { createPayment } = require('../controller/CartOrdersController/orderController');
 
-const { getPendingOrders, getDeliveredOrders, getCancelledOrders, getShippedOrders, getReturnedOrders, getOutForDeliveryOrders, getProcessingOrders, shippedProductInOrder, createPaypal, capturePayment, getOrdersByPlatform, getAllOrders, getUserOrders, getAllPayments, getAllProductsLists, cancelProductInOrder } = require('../controller/CartOrdersController/orderPaypal');
+const { getPendingOrders, getUserDetails, getDeliveredOrders, getCancelledOrders, getShippedOrders, getReturnedOrders, getOutForDeliveryOrders, getProcessingOrders, shippedProductInOrder, createPaypal, capturePayment, getOrdersByPlatform, getAllOrders, getUserOrders, getAllPayments, getAllProductsLists, cancelProductInOrder } = require('../controller/CartOrdersController/orderPaypal');
 
 // get orders by status routes
 cartOrdersRoute.get('/getPendingOrders', getPendingOrders);
@@ -35,5 +35,7 @@ cartOrdersRoute.get("/getUserOrders/:userId", getUserOrders)
 cartOrdersRoute.get("/getAllPayments", getAllPayments)
 cartOrdersRoute.get("/getAllProductsLists", getAllProductsLists)
 cartOrdersRoute.post("/cancelProductInOrder", cancelProductInOrder)
+
+cartOrdersRoute.post("/getUserDetails", getUserDetails)
 
 module.exports = cartOrdersRoute;

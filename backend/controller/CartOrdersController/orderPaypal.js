@@ -496,3 +496,23 @@ exports.getProcessingOrders = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
+// use order id to get user details
+exports.getUserDetails = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    const order = await Order.findById(orderId);
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+    const userDetails = await Users.findById(order.userId);
+    // remove that password in the user details object and send remaining user details
+    const { password, ...userData } = userDetails.toObject();
+    res.status(200).json({
+      success: true,
+      userData,
+    })
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
