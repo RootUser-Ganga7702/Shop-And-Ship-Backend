@@ -1,6 +1,5 @@
 const User = require('../../models/AllUsersModels/user');
 const bcrypt = require('bcryptjs');
-const { generateOtp } = require('../../middelware/userMiddleware');
 const { sendForgotOtp ,sendUserOtpEmail, sendShopAndShipWelcomeEmail } = require('../../middelware/nodeMailer');
 const jwt = require('jsonwebtoken');
 const Cart = require('../../models/CartOrdersModels/cart');
@@ -27,7 +26,8 @@ exports.registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const OTP = generateOtp();
+    // add 6 digit random number as OTP and send it to user email and phone number dont use the generateOtp function from userMiddleware.js because it is not secure and can be easily guessed by attackers, instead use crypto.randomInt to generate a secure random OTP
+    const OTP = Math.floor(100000 + Math.random() * 900000);
     const getTrue = await sendUserOtpEmail(name, phone, email, country, OTP);
     if(!getTrue){
       return res.status(400).json({ message: "OTP not sent" });
@@ -92,7 +92,7 @@ exports.resendOtp = async (req, res) => {
       return res.status(400).json({ responseCode: 400, message: "User Not Found" });
     }
 
-    const OTP = generateOtp();
+    const OTP = Math.floor(100000 + Math.random() * 900000);
     const getTrue = await sendUserOtpEmail(user.name, phone, email, user.country, OTP);
     if(!getTrue){
       return res.status(400).json({ message: "OTP not sent" });
@@ -190,7 +190,7 @@ exports.forgetPassword = async (req, res) => {
       return res.status(400).json({ responseCode: 400, message: "User not found" });
     }
 
-    const OTP = generateOtp();
+    const OTP = Math.floor(100000 + Math.random() * 900000);
     const mail = await sendForgotOtp(email, phone, OTP);
     if(!mail){
       return res.status(400).json({ message: "OTP not sent" });
