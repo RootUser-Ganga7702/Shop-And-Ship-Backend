@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const { sendForgotOtp ,sendUserOtpEmail, sendShopAndShipWelcomeEmail } = require('../../middelware/nodeMailer');
 const jwt = require('jsonwebtoken');
 const Cart = require('../../models/CartOrdersModels/cart');
+const { generateOtp } = require('../../middelware/userMiddleware');
 // const Address = require('../../models/adressLocationsModels/userAddress');
 
 const JWT_SECRET = "MyShoAndShipSecretKey!";
@@ -16,18 +17,20 @@ exports.registerUser = async (req, res) => {
     }
 
     const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
-    // remove the old user if user status is deactive and create new user with same email and phone number
-    if (existingUser && existingUser.status === "deactive") {
-      await User.deleteOne({ _id: existingUser._id });
-    }
 
-    if (existingUser.status === "active") {
-      return res.status(400).json({ message: "User already exists" });
+    if (existingUser) {
+        if (existingUser.status === "deactive") {
+            await User.deleteOne({ _id: existingUser._id });
+        } else {
+            return res.status(400).json({
+                message: "User already exists"
+            });
+        }
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     // add 6 digit random number as OTP and send it to user email and phone number dont use the generateOtp function from userMiddleware.js because it is not secure and can be easily guessed by attackers, instead use crypto.randomInt to generate a secure random OTP
-    const OTP = Math.floor(100000 + Math.random() * 900000);
+    const OTP = await generateOtp();
     const getTrue = await sendUserOtpEmail(name, phone, email, country, OTP);
     if(!getTrue){
       return res.status(400).json({ message: "OTP not sent" });
@@ -92,7 +95,7 @@ exports.resendOtp = async (req, res) => {
       return res.status(400).json({ responseCode: 400, message: "User Not Found" });
     }
 
-    const OTP = Math.floor(100000 + Math.random() * 900000);
+    const OTP = await generateOtp();
     const getTrue = await sendUserOtpEmail(user.name, phone, email, user.country, OTP);
     if(!getTrue){
       return res.status(400).json({ message: "OTP not sent" });
@@ -190,7 +193,7 @@ exports.forgetPassword = async (req, res) => {
       return res.status(400).json({ responseCode: 400, message: "User not found" });
     }
 
-    const OTP = Math.floor(100000 + Math.random() * 900000);
+    const OTP = await generateOtp();
     const mail = await sendForgotOtp(email, phone, OTP);
     if(!mail){
       return res.status(400).json({ message: "OTP not sent" });
