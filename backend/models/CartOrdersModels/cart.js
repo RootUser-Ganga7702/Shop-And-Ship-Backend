@@ -4,7 +4,6 @@ const cartItemSchema = new mongoose.Schema({
   platform: {
     type: String,
     required: true,
-    enum: ['flipkart', 'amazon', 'meesho', 'mintra', 'others', "SpareParts"], // define your supported platforms
   },
   vendorId: {
     type: String,
@@ -46,12 +45,16 @@ const cartItemSchema = new mongoose.Schema({
     required: true
   },
   totalPrice: {
-    type: Number,
-    required: true
+    type: Number
   },
   currency: {
     type: String,
     default: 'INR'  // or based on platform / region
+  },
+  others: {
+    // you can store arbitrary key-value pairs from external listing (color, size, specs)
+    type: Map,
+    of: String
   },
   addedAt: {
     type: Date,
